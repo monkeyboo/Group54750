@@ -1,0 +1,156 @@
+﻿/* styles for the header */
+header, body, form {
+	display:block;
+}
+
+header {
+    width: 1700px;
+    height: 200px;
+    background-color: #BE9D80 ;
+}
+
+body {
+   margin: 4em auto;
+    width: auto;
+    height: auto;
+	background-color: #A99583;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+form {
+    margin: auto;
+    width: 1500px;
+    height: auto;
+    border: 3px solid black;
+    box-shadow: 4px 4px 6px 0 black;
+	background-color: #7a695a;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.container1 {
+    width: 1500px;
+    height: 115px;
+    background-color: #43382e;
+}
+.contaier2 {
+    width: 1500px;
+    height: auto;
+}
+.container {
+    width: 1500px;
+    height: 115px;
+    background-color: #43382e;
+
+}
+/* the styles for the div tags that divide the page into sections */
+#logo {
+    float: left;
+    padding-left: 30px;
+    padding-top: 25px;
+}
+#title {
+    width: auto;
+    padding-top: 35px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+#logoutbutton {
+    float: right;
+    padding-top: 25px;
+    padding-right: 140px;
+    padding-bottom: 20px;
+}
+table {
+    align-content: center;
+    width: auto;
+    height: auto;
+    margin-top: 0;
+    padding-right: 10px;
+    padding-left: 10px;
+
+}
+#table1 {
+    align-content: center;
+    width: auto;
+    margin-left: 200px;
+    margin-right: 150px;
+}
+
+.navButtons {
+    text-align: center;
+    height: auto;
+    width: 1100px;
+    padding-top: 10px;
+}
+#table2 {
+    width: auto;
+    margin-left: 200px;
+    margin-right: 150px;
+    
+}
+.nameLabel {
+    align-content: center;
+    text-align: right;
+    width: 345px;
+    height: auto;
+}
+.nameTextBox {
+    width: auto;
+    height: auto;
+        }
+.FnDD {
+    width: auto;
+    height: auto;
+}
+.nameLabel2 {
+    width: auto;
+    text-align: right;
+    height: auto;
+}
+#EntNameLabel {
+    text-align: center;
+}
+#table4 {
+    width: 65%;
+    margin-left: 170px;
+    margin-right: 25px;
+}
+#table5 {
+    align-content: center;
+    text-align: left;
+   
+}
+#table3 {
+    width: 65%;
+    margin-left: 170px;
+    margin-right: 25px;
+}
+#table6 {
+    align-content: center;
+    text-align: left;
+   
+}
+#table7 {
+    width: 95%;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+#table8 {
+    align-content: center;
+    text-align: left;
+   
+}
+#table5, td {
+    width: 800px;
+    align-self: center;
+}
+#WorkLabel {
+    width: auto;
+    height: 50px;
+    align-content: center;
+    text-align: center;
+}
+#WorkLabel2 {
+    width: auto;
+    height: 50px;
+    align-content: center;
+    text-align: center;
+}

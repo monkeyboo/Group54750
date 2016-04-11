@@ -1,0 +1,61 @@
+﻿/* styles for the header */
+header, body, form {
+	display:block;
+}
+
+header {
+    width: 1700px;
+    height: 200px;
+    background-color: #BE9D80 ;
+}
+
+body {
+    margin: 4 auto;
+    width: auto;
+    height: auto;
+	background-color: #A99583;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+form {
+    margin: auto;
+    width: 1200px;
+    height: 600px;
+    border: 3px solid black;
+    box-shadow: 4px 4px 6px 0 black;
+	background-color: #7a695a;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.container {
+    width: 1200px;
+    height: 115px;
+    background-color: #43382e;
+
+}
+/* the styles for the div tags that divide the page into sections */
+#logo {
+    float: left;
+    padding-left: 30px;
+    padding-top: 25px;
+}
+#title {
+    width: auto;
+    padding-top: 35px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+#logoutbutton {
+    float: right;
+    padding-top: 25px;
+    padding-right: 140px;
+    padding-bottom: 20px;
+}
+table {
+    width: 1000px;
+    height: 400px;
+    margin-top: 2em;
+    padding: 30px;
+
+}
+
+
+

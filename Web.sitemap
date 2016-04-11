@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="~/Default.aspx" title="Home Page "  description="Home Page">
+      <siteMapNode url="~/ManagerMainMenu.aspx" title="Manager Menu"  description="Manager's Main Menu" >
+        <siteMapNode url="~/ManagerCustomer.aspx" title="Customers" description="Customer's Details" />
+        <siteMapNode url="~/Employee.aspx" title="Employees" description="Employee's Details">
+          <siteMapNode url="~/Availability.aspx" title="Availability" description ="Availability Details" />
+        </siteMapNode>
+      </siteMapNode>
+      <siteMapNode url="~/EmployeeMainMenu.aspx" title="Employee Menu"  description="Employee's Main Menu" >
+        <siteMapNode url="~/EmployeeCustomer.aspx" title="Customers" description ="Customer's Details" />
+      </siteMapNode>
+    </siteMapNode>
+</siteMap>
