@@ -14,44 +14,50 @@
     'New Report Button Event 
     Protected Sub reportButton_Click(sender As Object, e As EventArgs)
         CustDetails.Visible = True
-        ' CustDetails0.Visible = False
-        'GridView1.Visible = False
+        CustDetails0.Visible = False
+        DetailsView1.Visible = False
+        GridView1.Visible = False
         FnDD.Visible = True
         FnameLabel.Visible = True
         PhoneLabel.Visible = True
         PhoneTextBox.Visible = True
         DigitLabel.Visible = True
-        'GridView1.DataBind()
-        'FnDD.DataBind()
-        
+        GridView1.DataBind()
+          
     End Sub
     
     'View All Report Button Event           
     Protected Sub viewAllButton_Click(sender As Object, e As EventArgs)
-        'GridView1.Visible = True
+        GridView1.Visible = True
         CustDetails.Visible = False
-        'CustDetails0.Visible = False
+        CustDetails0.Visible = False
+        DetailsView1.Visible = False
         PhoneTextBox.Visible = False
         PhoneLabel.Visible = False
         FnameLabel.Visible = False
         FnDD.Visible = False
         DigitLabel.Visible = False
-        ' GridView1.DataBind()
+        GridView1.DataBind()
     End Sub
     
     'Add New Customer Button Event
     Protected Sub NewCustBT_Click(sender As Object, e As EventArgs)
-        'CustDetails0.Visible = True
+        CustDetails0.Visible = True
         CustDetails.Visible = False
-        ' GridView1.Visible = False
+        DetailsView1.Visible = False
+        GridView1.Visible = False
         PhoneTextBox.Visible = False
         PhoneLabel.Visible = False
         FnameLabel.Visible = False
         FnDD.Visible = False
         DigitLabel.Visible = False
-        ' GridView1.DataBind()
+        GridView1.DataBind()
     End Sub
 
+    Protected Sub EditVendorBT_Click(sender As Object, e As EventArgs)
+        DetailsView1.Visible = True
+        CustDetails.Visible = False
+    End Sub
     Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
@@ -72,12 +78,16 @@
 
     <style type="text/css">
         .auto-style1 {
-            text-align: right;
+            text-align: left;
+        }
+        .auto-style2 {
+            margin-left: 400px;
+            text-align: left;
         }
     </style>
 
 
-</head>
+    </head>
 <body>
 <!--Focus cursor to textbox and button-->
     <form id="form1" runat="server" defaultfocus="PhoneTextBox" >
@@ -114,6 +124,7 @@
                     <asp:Button ID="reportButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Search" Width="150px" OnClick="reportButton_Click" CausesValidation="False" Font-Bold="True" />
                     <asp:Button ID="viewAllButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="*View All" Width="150px" OnClick="viewAllButton_Click" Font-Bold="True" Font-Size="Small" Font-Underline="False" CausesValidation="False" />
                     <asp:Button ID="NewVendorBT" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="New Vendor" Width="150px" OnClick="NewCustBT_Click" CausesValidation="False" Font-Bold="True" />
+                    <asp:Button ID="EditVendorBT" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Edit" Width="150px" OnClick="EditVendorBT_Click" CausesValidation="False" Font-Bold="True" />
                     <asp:Button ID="printButton0" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Print" Width="150px" onclientclick="javascript:window.print();" xmlns:asp="#unknown" CausesValidation="False" Font-Bold="True" />
                     <asp:Button ID="homeBT" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Home" Width="150px" PostBackUrl="~/Default.aspx" CausesValidation="False" Font-Bold="True" />
                 </td>
@@ -138,7 +149,7 @@
                     </td>
                     <td class="FnDD">
                         <br />
-                    <asp:DropDownList ID="FnDD" runat="server" Width="180px" DataSourceID="SqlDataSource1" DataTextField="VendName" DataValueField="VendName" BackColor="#F3EDE7" AutoPostBack="True" OnSelectedIndexChanged="FnDD_SelectedIndexChanged">
+                    <asp:DropDownList ID="FnDD" runat="server" Width="180px" DataSourceID="SqlDataSource1" DataTextField="VendName" DataValueField="VendName" BackColor="#F3EDE7" OnSelectedIndexChanged="FnDD_SelectedIndexChanged">
                         <asp:ListItem Value="name">Search</asp:ListItem>
                     </asp:DropDownList>
                     </td>
@@ -146,29 +157,153 @@
             </table>
 
 <!--Details View For Customer Search-->
-           <table id="table4">
+           <table id="table10">
             <tr>
                <td>
                   <table id="table5" style="width:100%;">
                       <tr>
                         <td>
-                        <asp:DetailsView ID="CustDetails" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" Height="50px" Width="1100px" ForeColor="Black" GridLines="None">
+                        <asp:DetailsView ID="CustDetails" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" Height="50px" Width="800px" ForeColor="Black" GridLines="None">
                             <AlternatingRowStyle BackColor="#E6D9CC" />
                             <CommandRowStyle BackColor="#A99583" Font-Bold="True" />
                             <EditRowStyle BackColor="#43382E" />
                             <FieldHeaderStyle BackColor="#A99583" Font-Bold="True" />
                             <Fields>
                                 <asp:BoundField DataField="VendID" HeaderText="VendID" InsertVisible="False" ReadOnly="True" SortExpression="VendID" />
-                                <asp:BoundField DataField="VendName" HeaderText="VendName" SortExpression="VendName" />
-                                <asp:BoundField DataField="ContactFname" HeaderText="ContactFname" SortExpression="ContactFname" />
-                                <asp:BoundField DataField="ContactLname" HeaderText="ContactLname" SortExpression="ContactLname" />
-                                <asp:BoundField DataField="street" HeaderText="street" SortExpression="street" />
-                                <asp:BoundField DataField="city" HeaderText="city" SortExpression="city" />
-                                <asp:BoundField DataField="zip" HeaderText="zip" SortExpression="zip" />
-                                <asp:BoundField DataField="country" HeaderText="country" SortExpression="country" />
-                                <asp:BoundField DataField="phone" HeaderText="phone" SortExpression="phone" />
-                                <asp:BoundField DataField="State" HeaderText="State" SortExpression="State" />
-                                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowInsertButton="True" />
+                                <asp:TemplateField HeaderText="Vendor" SortExpression="VendName">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="vendor" runat="server" ValidationGroup="VG1" Text='<%# Bind("VendName") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="vendValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="vendor" ForeColor="#CC3300"/>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="vendor" runat="server" ValidationGroup="VG1" Text='<%# Bind("VendName") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="vendValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="vendor" ForeColor="#CC3300"/>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("VendName") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Contact First Name" SortExpression="ContactFname">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="contactName" runat="server" ValidationGroup="VG1" Text='<%# Bind("ContactFname") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="nameValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="contactName" ForeColor="#CC3300"/>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="contactName" runat="server" ValidationGroup="VG1" Text='<%# Bind("ContactFname") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="nameValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="contactName" ForeColor="#CC3300"/>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("ContactFname") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Contact Last Name" SortExpression="ContactLname">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="lastName" runat="server" ValidationGroup="VG1" Text='<%# Bind("ContactLname") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="LnameValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="lastName" ForeColor="#CC3300"/>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="lastName" runat="server" ValidationGroup="VG1" Text='<%# Bind("ContactLname") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="LnameValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="lastName" ForeColor="#CC3300"/>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("ContactLname") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Street" SortExpression="street">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="Street" runat="server" ValidationGroup="VG1" Text='<%# Bind("street") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="streetValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Street" ForeColor="#CC3300"/>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="Street" runat="server" ValidationGroup="VG1" Text='<%# Bind("street") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="streetValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Street" ForeColor="#CC3300"/>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("street") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="City" SortExpression="city">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="City" runat="server" ValidationGroup="VG1" Text='<%# Bind("city") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="cityValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="City" ForeColor="#CC3300"/>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="City" runat="server" ValidationGroup="VG1" Text='<%# Bind("city") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="cityValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="City" ForeColor="#CC3300"/>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("city") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="State" SortExpression="State">
+                                    <EditItemTemplate>
+                                        <asp:DropDownList ID="StateDropDownList" runat="server" 
+                                                      Text='<%# Bind("State") %>' DataSourceID="SqlDataSource4" DataTextField="state" DataValueField="state" Width="100px" />
+                                                      <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT [state] FROM [statelist] ORDER BY [state]"></asp:SqlDataSource>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:DropDownList ID="StateDropDownList" runat="server" 
+                                                      Text='<%# Bind("State") %>' DataSourceID="SqlDataSource4" DataTextField="state" DataValueField="state" Width="100px" />
+                                                      <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT [state] FROM [statelist] ORDER BY [state]"></asp:SqlDataSource>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("State") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Zip" SortExpression="zip">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="Zip" runat="server" ValidationGroup="VG1" Text='<%# Bind("zip") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="zipValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Zip" ForeColor="#CC3300"/>
+                                        <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit Zip Required" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="Zip" runat="server" ValidationGroup="VG1" Text='<%# Bind("zip") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="zipValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Zip" ForeColor="#CC3300"/>
+                                        <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit Zip Required" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("zip") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Country" SortExpression="country">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="TextBox7" runat="server" ValidationGroup="VG1" Text='<%# Bind("country") %>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="TextBox7" runat="server" ValidationGroup="VG1" Text='<%# Bind("country") %>'></asp:TextBox>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label8" runat="server" Text='<%# Bind("country") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Phone" SortExpression="phone">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="Phone" runat="server" ValidationGroup="VG1" Text='<%# Bind("phone") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="phoneValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Phone" ForeColor="#CC3300"/>
+                                        <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000 Required" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="Phone" runat="server" ValidationGroup="VG1" Text='<%# Bind("phone") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="phoneValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Phone" ForeColor="#CC3300"/>
+                                        <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000 Required" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label9" runat="server" Text='<%# Bind("phone") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            <asp:TemplateField ShowHeader="False">
+                                    <EditItemTemplate>
+                                        <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Update" Text="Update" BackColor="#E6D9CC" Width="75px"/>
+                                        &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" BackColor="#E6D9CC" Width="75px"/>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Insert" Text="Insert"  BackColor="#E6D9CC" Width="75px"/>
+                                        &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Clear" BackColor="#E6D9CC" Width="75px"/>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Button ID="Button1" runat="server" CausesValidation="False" ValidatonGroup="VG1" CommandName="Edit" Text="Edit" BackColor="#E6D9CC" Width="75px"/>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Fields>
                             <FooterStyle BackColor="#A99583" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#A99583" Font-Bold="True" ForeColor="White" />
@@ -182,128 +317,246 @@
                         </tr>
                         </table>
 <!--Details View For New Vendor Insert-->
- <table id="table3">
+ <table id="table9">
             <tr>
                <td>
                   <table id="table6" style="width:100%;">
                       <tr>
-                        <td class="auto-style1">
+                        <td class="formview">
 
-                            <asp:FormView ID="FormView1" runat="server" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" ForeColor="Black" GridLines="Vertical">
-                                <EditItemTemplate>
-                                    VendID:
-                                    <asp:Label ID="VendIDLabel1" runat="server" Text='<%# Eval("VendID") %>' />
-                                    <br />
-                                    VendName:
-                                    <asp:TextBox ID="VendNameTextBox" runat="server" Text='<%# Bind("VendName") %>' />
-                                    <br />
-                                    ContactFname:
-                                    <asp:TextBox ID="ContactFnameTextBox" runat="server" Text='<%# Bind("ContactFname") %>' />
-                                    <br />
-                                    ContactLname:
-                                    <asp:TextBox ID="ContactLnameTextBox" runat="server" Text='<%# Bind("ContactLname") %>' />
-                                    <br />
-                                    street:
-                                    <asp:TextBox ID="streetTextBox" runat="server" Text='<%# Bind("street") %>' />
-                                    <br />
-                                    city:
-                                    <asp:TextBox ID="cityTextBox" runat="server" Text='<%# Bind("city") %>' />
-                                    <br />
-                                    zip:
-                                    <asp:TextBox ID="zipTextBox" runat="server" Text='<%# Bind("zip") %>' />
-                                    <br />
-                                    country:
-                                    <asp:TextBox ID="countryTextBox" runat="server" Text='<%# Bind("country") %>' />
-                                    <br />
-                                    phone:
-                                    <asp:TextBox ID="phoneTextBox" runat="server" Text='<%# Bind("phone") %>' />
-                                    <br />
-                                    State:
-                                    <asp:DropDownList ID="StateTextBox" runat="server" 
-                                                      Text='<%# Bind("State") %>' DataSourceID="SqlDataSource4" DataTextField="state" DataValueField="state" />
-                                       
-                                    
-                                    <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT [state] FROM [statelist]"></asp:SqlDataSource>
-                                       
-                                    
-                                    <br />
-                                    <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
-                                    &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                                </EditItemTemplate>
-                                <EditRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-                                <FooterStyle BackColor="#CCCC99" />
-                                <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-                                <InsertItemTemplate>
-                                    VendName:
-                                    <asp:TextBox ID="VendNameTextBox" runat="server" Text='<%# Bind("VendName") %>' />
-                                    <br />
-                                    ContactFname:
-                                    <asp:TextBox ID="ContactFnameTextBox" runat="server" Text='<%# Bind("ContactFname") %>' />
-                                    <br />
-                                    ContactLname:
-                                    <asp:TextBox ID="ContactLnameTextBox" runat="server" Text='<%# Bind("ContactLname") %>' />
-                                    <br />
-                                    street:
-                                    <asp:TextBox ID="streetTextBox" runat="server" Text='<%# Bind("street") %>' />
-                                    <br />
-                                    city:
-                                    <asp:TextBox ID="cityTextBox" runat="server" Text='<%# Bind("city") %>' />
-                                    <br />
-                                    zip:
-                                    <asp:TextBox ID="zipTextBox" runat="server" Text='<%# Bind("zip") %>' />
-                                    <br />
-                                    country:
-                                    <asp:TextBox ID="countryTextBox" runat="server" Text='<%# Bind("country") %>' />
-                                    <br />
-                                    phone:
-                                    <asp:TextBox ID="phoneTextBox" runat="server" Text='<%# Bind("phone") %>' />
-                                    <br />
-                                    State:
-                                    <asp:TextBox ID="StateTextBox" runat="server" Text='<%# Bind("State") %>' />
-                                    <br />
-                                    <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
-                                    &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                                </InsertItemTemplate>
-                                <ItemTemplate>
-                                    VendID:
-                                    <asp:Label ID="VendIDLabel" runat="server" Text='<%# Eval("VendID") %>' />
-                                    <br />
-                                    VendName:
-                                    <asp:Label ID="VendNameLabel" runat="server" Text='<%# Bind("VendName") %>' />
-                                    <br />
-                                    ContactFname:
-                                    <asp:Label ID="ContactFnameLabel" runat="server" Text='<%# Bind("ContactFname") %>' />
-                                    <br />
-                                    ContactLname:
-                                    <asp:Label ID="ContactLnameLabel" runat="server" Text='<%# Bind("ContactLname") %>' />
-                                    <br />
-                                    street:
-                                    <asp:Label ID="streetLabel" runat="server" Text='<%# Bind("street") %>' />
-                                    <br />
-                                    city:
-                                    <asp:Label ID="cityLabel" runat="server" Text='<%# Bind("city") %>' />
-                                    <br />
-                                    zip:
-                                    <asp:Label ID="zipLabel" runat="server" Text='<%# Bind("zip") %>' />
-                                    <br />
-                                    country:
-                                    <asp:Label ID="countryLabel" runat="server" Text='<%# Bind("country") %>' />
-                                    <br />
-                                    phone:
-                                    <asp:Label ID="phoneLabel" runat="server" Text='<%# Bind("phone") %>' />
-                                    <br />
-                                    State:
-                                    <asp:Label ID="StateLabel" runat="server" Text='<%# Bind("State") %>' />
-                                    <br />
-                                    <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit" />
-                                    &nbsp;<asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete" />
-                                    &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New" Text="New" />
-                                </ItemTemplate>
-                                <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-                                <RowStyle BackColor="#F7F7DE" />
-                            </asp:FormView>
+                            <div class="auto-style1">
 
-                        </td>
+                        <asp:DetailsView ID="CustDetails0" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" Height="50px" Width="800px" ForeColor="Black" GridLines="None" DefaultMode="Insert" Visible="False">
+                            <AlternatingRowStyle BackColor="#E6D9CC" />
+                            <CommandRowStyle BackColor="#A99583" Font-Bold="True" />
+                            <EditRowStyle BackColor="#43382E" />
+                            <FieldHeaderStyle BackColor="#A99583" Font-Bold="True" />
+                            <Fields>
+                                <asp:BoundField DataField="VendID" HeaderText="VendID" InsertVisible="False" ReadOnly="True" SortExpression="VendID" />
+                                <asp:TemplateField HeaderText="Vendor" SortExpression="VendName">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="vendor" runat="server" ValidationGroup="VG1" Text='<%# Bind("VendName") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="vendValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="vendor" ForeColor="#CC3300"/>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="vendor" runat="server" ValidationGroup="VG1" Text='<%# Bind("VendName") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="vendValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="vendor" ForeColor="#CC3300"/>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("VendName") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Contact First Name" SortExpression="ContactFname">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="contactName" runat="server" ValidationGroup="VG1" Text='<%# Bind("ContactFname") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="nameValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="contactName" ForeColor="#CC3300"/>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="contactName" runat="server" ValidationGroup="VG1" Text='<%# Bind("ContactFname") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="nameValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="contactName" ForeColor="#CC3300"/>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("ContactFname") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Contact Last Name" SortExpression="ContactLname">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="lastName" runat="server" ValidationGroup="VG1" Text='<%# Bind("ContactLname") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="LnameValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="lastName" ForeColor="#CC3300"/>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="lastName" runat="server" ValidationGroup="VG1" Text='<%# Bind("ContactLname") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="LnameValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="lastName" ForeColor="#CC3300"/>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("ContactLname") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Street" SortExpression="street">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="Street" runat="server" ValidationGroup="VG1" Text='<%# Bind("street") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="streetValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Street" ForeColor="#CC3300"/>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="Street" runat="server" ValidationGroup="VG1" Text='<%# Bind("street") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="streetValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Street" ForeColor="#CC3300"/>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("street") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="City" SortExpression="city">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="City" runat="server" ValidationGroup="VG1" Text='<%# Bind("city") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="cityValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="City" ForeColor="#CC3300"/>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="City" runat="server" ValidationGroup="VG1" Text='<%# Bind("city") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="cityValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="City" ForeColor="#CC3300"/>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("city") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="State" SortExpression="State">
+                                    <EditItemTemplate>
+                                        <asp:DropDownList ID="StateDropDownList" runat="server" 
+                                                      Text='<%# Bind("State") %>' DataSourceID="SqlDataSource4" DataTextField="state" DataValueField="state" Width="100px" />
+                                                      <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT [state] FROM [statelist] ORDER BY [state]"></asp:SqlDataSource>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:DropDownList ID="StateDropDownList" runat="server" 
+                                                      Text='<%# Bind("State") %>' DataSourceID="SqlDataSource4" DataTextField="state" DataValueField="state" Width="100px" />
+                                                      <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT [state] FROM [statelist] ORDER BY [state]"></asp:SqlDataSource>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("State") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Zip" SortExpression="zip">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="Zip" runat="server" ValidationGroup="VG1" Text='<%# Bind("zip") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="zipValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Zip" ForeColor="#CC3300"/>
+                                        <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit Zip Required" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="Zip" runat="server" ValidationGroup="VG1" Text='<%# Bind("zip") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="zipValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Zip" ForeColor="#CC3300"/>
+                                        <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit Zip Required" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("zip") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Country" SortExpression="country">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="TextBox7" runat="server" ValidationGroup="VG1" Text='<%# Bind("country") %>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="TextBox7" runat="server" ValidationGroup="VG1" Text='<%# Bind("country") %>'></asp:TextBox>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label8" runat="server" Text='<%# Bind("country") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Phone" SortExpression="phone">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="Phone" runat="server" ValidationGroup="VG1" Text='<%# Bind("phone") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="phoneValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Phone" ForeColor="#CC3300"/>
+                                        <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000 Required" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:TextBox ID="Phone" runat="server" ValidationGroup="VG1" Text='<%# Bind("phone") %>'></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ID="phoneValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Phone" ForeColor="#CC3300"/>
+                                        <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000 Required" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label9" runat="server" Text='<%# Bind("phone") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            <asp:TemplateField ShowHeader="False">
+                                    <EditItemTemplate>
+                                        <asp:Button ID="Button3" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Update" Text="Update" BackColor="#E6D9CC" Width="75px"/>
+                                        &nbsp;<asp:Button ID="Button4" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" BackColor="#E6D9CC" Width="75px"/>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <asp:Button ID="Button5" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Insert" Text="Insert"  BackColor="#E6D9CC" Width="75px"/>
+                                        &nbsp;<asp:Button ID="Button6" runat="server" CausesValidation="False" CommandName="Cancel" Text="Clear" BackColor="#E6D9CC" Width="75px"/>
+                                    </InsertItemTemplate>
+                                    <ItemTemplate>
+                                        &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="New" Text="New" BackColor="#A99583" Width="75px"/>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Fields>
+                            <FooterStyle BackColor="#A99583" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#A99583" Font-Bold="True" ForeColor="White" />
+                            <PagerStyle BackColor="#A99583" ForeColor="White" HorizontalAlign="Center" />
+                            <RowStyle BackColor="#A99583" />
+                        </asp:DetailsView>
+                            </div>
+                          </td>
+                      </tr>
+                   </table>
+               </td>
+            </tr>
+</table>                                              
+<table id="table12">
+            <tr>
+               <td>
+                  <table id="table13" style="width:100%;">
+                      <tr>
+                        <td class="leftColumn">
+                            <asp:Label ID="Label10" runat="server" Font-Bold="True" Text="Vendor:"></asp:Label>
+                          </td>
+                        <td class="rightColumn">
+                            <asp:TextBox ID="TextBox8" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
+                          </td>
+                      </tr>
+                      <tr>
+                        <td class="leftColumn">
+                            <asp:Label ID="Label11" runat="server" Font-Bold="True" Text="Contact First Name:"></asp:Label>
+                          </td>
+                        <td class="rightColumn">
+                            <asp:TextBox ID="TextBox9" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
+                          </td>
+                      </tr>
+                      <tr>
+                        <td class="leftColumn">
+                            <asp:Label ID="Label12" runat="server" Font-Bold="True" Text="Contact Last Name:"></asp:Label>
+                          </td>
+                        <td class="rightColumn">
+                            <asp:TextBox ID="TextBox10" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
+                          </td>
+                      </tr>
+                      <tr>
+                        <td class="leftColumn">
+                            <asp:Label ID="Label13" runat="server" Font-Bold="True" Text="Street:"></asp:Label>
+                          </td>
+                        <td class="rightColumn">
+                            <asp:TextBox ID="TextBox11" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
+                          </td>
+                      </tr>
+                      <tr>
+                        <td class="leftColumn">
+                            <asp:Label ID="Label14" runat="server" Font-Bold="True" Text="City:"></asp:Label>
+                          </td>
+                        <td class="rightColumn">
+                            <asp:TextBox ID="TextBox12" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
+                          </td>
+                      </tr>
+                      <tr>
+                        <td class="leftColumn">
+                            <asp:Label ID="Label15" runat="server" Font-Bold="True" Text="State:"></asp:Label>
+                          </td>
+                        <td class="rightColumn">
+                            <asp:DropDownList ID="DropDownList1" runat="server" BackColor="#F3EDE7" Width="150px">
+                            </asp:DropDownList>
+                          </td>
+                      </tr>
+                      <tr>
+                        <td class="leftColumn">
+                            <asp:Label ID="Label16" runat="server" Font-Bold="True" Text="Zip:"></asp:Label>
+                          </td>
+                        <td class="rightColumn">
+                            <asp:TextBox ID="TextBox14" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
+                          </td>
+                      </tr>
+                      <tr>
+                        <td class="leftColumn">
+                            <asp:Label ID="Label17" runat="server" Font-Bold="True" Text="Country:"></asp:Label>
+                          </td>
+                        <td class="rightColumn">
+                            <asp:DropDownList ID="DropDownList2" runat="server" BackColor="#F3EDE7" Width="150px">
+                            </asp:DropDownList>
+                          </td>
+                      </tr>
+                      <tr>
+                        <td class="leftColumn">
+                            <asp:Label ID="Label18" runat="server" Font-Bold="True" Text="Phone:"></asp:Label>
+                          </td>
+                        <td class="rightColumn">
+                            <asp:TextBox ID="TextBox13" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
+                          </td>
                       </tr>
                    </table>
                </td>
@@ -311,32 +564,31 @@
 </table>                                              
 
 <!--GridView For View All Vendors-->
-<table id="table7">
+<table id="table11">
             <tr>
                <td>
                   <table id="table8" style="width:100%;">
                       <tr>
                         <td>  
                             
-                            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource3" ForeColor="Black" GridLines="Vertical">
-                                <AlternatingRowStyle BackColor="White" />
+                            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource3" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small">
+                                <AlternatingRowStyle BackColor="#A99583" />
                                 <Columns>
-                                    <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                                     <asp:BoundField DataField="VendID" HeaderText="VendID" InsertVisible="False" ReadOnly="True" SortExpression="VendID" />
                                     <asp:BoundField DataField="VendName" HeaderText="VendName" SortExpression="VendName" />
                                     <asp:BoundField DataField="ContactFname" HeaderText="ContactFname" SortExpression="ContactFname" />
                                     <asp:BoundField DataField="ContactLname" HeaderText="ContactLname" SortExpression="ContactLname" />
                                     <asp:BoundField DataField="street" HeaderText="street" SortExpression="street" />
                                     <asp:BoundField DataField="city" HeaderText="city" SortExpression="city" />
+                                    <asp:BoundField DataField="State" HeaderText="State" SortExpression="State" />
                                     <asp:BoundField DataField="zip" HeaderText="zip" SortExpression="zip" />
                                     <asp:BoundField DataField="country" HeaderText="country" SortExpression="country" />
                                     <asp:BoundField DataField="phone" HeaderText="phone" SortExpression="phone" />
-                                    <asp:BoundField DataField="State" HeaderText="State" SortExpression="State" />
                                 </Columns>
-                                <FooterStyle BackColor="#CCCC99" />
-                                <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle ForeColor="Black" HorizontalAlign="Right" BackColor="#F7F7DE" />
-                                <RowStyle BackColor="#F7F7DE" />
+                                <FooterStyle BackColor="#43382E" />
+                                <HeaderStyle BackColor="#A99583" Font-Bold="True" ForeColor="Black" Width="10px" />
+                                <PagerStyle BackColor="#E6D9CC" ForeColor="Black" HorizontalAlign="Right" />
+                                <RowStyle BackColor="#E6D9CC" />
                                 <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
                                 <SortedAscendingCellStyle BackColor="#FBFBF2" />
                                 <SortedAscendingHeaderStyle BackColor="#848384" />
