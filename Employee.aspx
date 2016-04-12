@@ -705,7 +705,7 @@
                   <table id="table8" style="width:100%;">
                       <tr>
                         <td>
-                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="EmpID" DataSourceID="SqlDataSource3" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="1400px" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small" PageSize="20" Font-Bold="False">
+                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="EmpID" DataSourceID="SqlDataSource3" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="1200px" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small" Font-Bold="False">
                             <AlternatingRowStyle BackColor="#A99583" />
                             <Columns>
                                 <asp:BoundField DataField="EmpID" HeaderText="EmpID" InsertVisible="False" ReadOnly="True" SortExpression="EmpID">
@@ -744,17 +744,14 @@
                             <SortedDescendingHeaderStyle BackColor="#575357" />
                         </asp:GridView>
                         </td>
-                  </tr>
-                </table>
-                   <br />
-              </td> 
-            </tr>
-          </table>
-                    <td class="auto-style77">
+                        </tr>
+                        </table>
+                        <br />
+                        </td> 
+                        </tr>
+                        </table>
                         <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="VG1" ShowMessageBox="True" />
-                    </td>                    
-                
-        </div>
+                        </div>
 
 <!--DataSource 1 For DropDownList Control-->
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Employees  WHERE ([Fname] LIKE '%' + @Fname + '%')ORDER BY Lname ASC">

@@ -18,9 +18,6 @@
         ListView1.DataBind()
         
     End Sub
-    
-      
-
 </script>
 
 
@@ -29,11 +26,7 @@
     <title>Availability</title>
     <link href="Report.css" rel="stylesheet" type="text/css" />
 
-<!--Auto Styles for table cells -->
-    
-   
-    
-    </head>
+</head>
 <body>
 <!--Focus cursor to textbox and button-->
     <form id="form1" runat="server" defaultfocus="NameTextBox" >
@@ -104,7 +97,7 @@
                     <tr>
                        <td><table id="table5" style="width:100%;">
                             <tr>
-                                <td class="auto-style1"><asp:DetailsView ID="EmpDetails" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="EmpID" DataSourceID="SqlDataSource2" Height="150px" Width="800px" ForeColor="Black" GridLines="None" EnableTheming="False">
+                                <td><asp:DetailsView ID="EmpDetails" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="EmpID" DataSourceID="SqlDataSource2" Height="150px" Width="800px" ForeColor="Black" GridLines="None" EnableTheming="False">
                             <AlternatingRowStyle BackColor="#E6D9CC" />
                             <CommandRowStyle BackColor="#A99583" Font-Bold="True" />
                             <EditRowStyle BackColor="#43382E" />
@@ -132,7 +125,7 @@
                                 </tr>
                                 
                                 <tr>
-                                    <td><table id="table6" style="width:100%;">
+                                    <td><table id="table3" style="width:100%;">
                                         <tr>
                                             <td><asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource3" Visible="False" DataKeyNames="EmpID">
                                         <AlternatingItemTemplate>
@@ -273,59 +266,51 @@
                                             </tr>
                                         </SelectedItemTemplate>
                                     </asp:ListView>
-                                                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="VG1" ShowMessageBox="True" ShowSummary="False" />
-                                                <br />
                                 </td>
                                 </tr>
                                 </table>
                                 </td>
                                 </tr>
-                                <tr>
-                                    <td id="WorkLabel2">
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Employees  WHERE ([Fname] LIKE '%' + @Fname + '%')ORDER BY Lname ASC">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="NameTextBox" Name="Fname" PropertyName="Text" Type="String" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>
-                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT * FROM [Employees] WHERE (Fname + ' ' + Lname)= @fulllnamedropdown">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="FnDD" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>
-                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
-                        SelectCommand="SELECT empavil.empid, [description], FORMAT(CAST(starttime AS DATETIME),'hh:mm tt') as starttime, FORMAT(CAST(endtime AS DATETIME),'hh:mm tt') as endtime
-                                        FROM empavil, employees, [dayofweek]
-                                        WHERE empavil.empid = employees.empid
-                                        and empavil.dayid = [dayofweek].dayid
-                                        and (fname + ' ' + lname) = @fulllnamedropdown" UpdateCommand="UPDATE [EmpAvil] 
-                                SET [EmpID] = @EmpID, [DayID] = (select dayid from [dayofweek] where [description] = @description), 
-                                [Starttime] = @Starttime, 
-                                [Endtime] = @Endtime  
-                                WHERE [EmpID] = @EmpID
-                                AND [DayID] = (select dayid from [dayofweek] where [description] = @description)">
-                        <SelectParameters>
-                            <asp:ControlParameter ControlID="FnDD" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
-                        </SelectParameters>
-                        <UpdateParameters>
-                            <asp:Parameter Name="EmpID" />
-                            <asp:Parameter Name="description" />
-                            <asp:Parameter Name="Starttime" />
-                            <asp:Parameter Name="Endtime" />
-                        </UpdateParameters>
-                    </asp:SqlDataSource>
-                                    </td>
-                                </tr>
                                 </table>
-                            <br />
-                        </div>
-                        <br />
-                    </td>                    
-                </tr>               
-                </table>
-        </div>
-       <br />
-    </form>
-</body>
+                                </div>  
+                                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="VG1" ShowMessageBox="True" ShowSummary="False" />
+                                <br />
+                                
+<!--DataSource 1 For DropDownList Control-->
+          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Employees  WHERE ([Fname] LIKE '%' + @Fname + '%')ORDER BY Lname ASC">
+                 <SelectParameters>
+                     <asp:ControlParameter ControlID="NameTextBox" Name="Fname" PropertyName="Text" Type="String" />
+                 </SelectParameters>
+          </asp:SqlDataSource>
+          <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT * FROM [Employees] WHERE (Fname + ' ' + Lname)= @fulllnamedropdown">
+                 <SelectParameters>
+                     <asp:ControlParameter ControlID="FnDD" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
+          </SelectParameters>
+          </asp:SqlDataSource>
+          <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
+          SelectCommand="SELECT empavil.empid, [description], FORMAT(CAST(starttime AS DATETIME),'hh:mm tt') as starttime, FORMAT(CAST(endtime AS DATETIME),'hh:mm tt') as endtime
+                         FROM empavil, employees, [dayofweek]
+                         WHERE empavil.empid = employees.empid
+                         and empavil.dayid = [dayofweek].dayid
+                         and (fname + ' ' + lname) = @fulllnamedropdown" UpdateCommand="UPDATE [EmpAvil] 
+                         SET [EmpID] = @EmpID, [DayID] = (select dayid from [dayofweek] where [description] = @description), 
+                         [Starttime] = @Starttime, 
+                         [Endtime] = @Endtime  
+                         WHERE [EmpID] = @EmpID
+                         AND [DayID] = (select dayid from [dayofweek] where [description] = @description)">
+          <SelectParameters>
+          <asp:ControlParameter ControlID="FnDD" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
+          </SelectParameters>
+              <UpdateParameters>
+                  <asp:Parameter Name="EmpID" />
+                  <asp:Parameter Name="description" />
+                  <asp:Parameter Name="Starttime" />
+                  <asp:Parameter Name="Endtime" />
+              </UpdateParameters>
+          </asp:SqlDataSource>
+          <br />
+       </form>
+ </body>
 </html>
 
 

@@ -59,54 +59,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Customers</title>
-    <link href="Report.css" rel="stylesheet" type="text/css" />
+    <link href="EmployeeReport.css" rel="stylesheet" type="text/css" />
 
-<!--Auto Styles for table cells -->
-    <style type="text/css">
-        .auto-style60 {
-            height: auto;
-        }
-        .auto-style61 {
-            height: auto;
-            width: 1182px;
-        }
-        .auto-style73 {
-            width: 95%;
-        }
-        
-        .auto-style76 {
-            width: 1000px;
-        }
-        .auto-style77 {
-            
-            text-align: right;
-            width: 1000px;
-        }        
-        .auto-style78 {
-            height: 67px;
-            text-align: center;
-        }
-        .auto-style79 {
-            text-align: left;
-        }
-        .auto-style80 {
-            text-align: right;
-            width: 503px;
-            height: 50px;
-        }
-        .auto-style81 {
-            width: 179px;
-            height: 53px;
-        }
-        .auto-style82 {
-            width: 64px;
-            text-align: right;
-            height: 53px;
-        }
-        .auto-style83 {
-            height: 53px;
-        }
-        </style>
+
 </head>
 <body>
 <!--Focus cursor to textbox and button-->
@@ -176,10 +131,13 @@
             </table>
 
 <!--Details View For Customer Search-->
-            <table align="center" class="auto-style73">
-                <tr>
-                    <td class="auto-style76">
-                        <asp:DetailsView ID="CustDetails" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="CustID" DataSourceID="SqlDataSource2" Height="50px" Width="1322px" ForeColor="Black" GridLines="None">
+           <table id="table4">
+            <tr>
+               <td>
+                  <table id="table5" style="width:100%;">
+                      <tr>
+                        <td>
+                        <asp:DetailsView ID="CustDetails" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="CustID" DataSourceID="SqlDataSource2" Height="50px" Width="1100px" ForeColor="Black" GridLines="None">
                             <AlternatingRowStyle BackColor="#E6D9CC" />
                             <CommandRowStyle BackColor="#A99583" Font-Bold="True" />
                             <EditRowStyle BackColor="#43382E" />
@@ -288,14 +246,20 @@
                             <PagerStyle BackColor="#A99583" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#A99583" />
                         </asp:DetailsView>
-                    </td>                    
-                </tr>               
-                <tr>
-
+                        </td>
+                        </tr>
+                        </table>
+                        </td>
+                        </tr>
+                        </table>
 <!--Details View For New Customer Insert-->
-                    <td class="auto-style77">
-                        <div class="auto-style79">
-                        <asp:DetailsView ID="CustDetails0" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="CustID" DataSourceID="SqlDataSource2" Height="50px" Width="1322px" ForeColor="Black" GridLines="None" DefaultMode="Insert" Visible="False">
+           <table id="table3">
+            <tr>
+               <td>
+                  <table id="table6" style="width:100%;">
+                      <tr>
+                        <td>
+                        <asp:DetailsView ID="CustDetails0" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="CustID" DataSourceID="SqlDataSource2" Height="50px" Width="1100px" ForeColor="Black" GridLines="None" DefaultMode="Insert" Visible="False">
                             <AlternatingRowStyle BackColor="#F3EDE7" />
                             <CommandRowStyle BackColor="#7A695A" Font-Bold="True" />
                             <EditRowStyle BackColor="#43382E" />
@@ -404,14 +368,22 @@
                             <PagerStyle BackColor="#A99583" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#43382E" />
                         </asp:DetailsView>
-                        </div>
-                       &nbsp;</td>                    
-                </tr>               
-                <tr>
-
+                        </td>
+                        </tr>
+                        </table>
+                        </td>
+                        </tr>
+                        </table>
+                         
+                       
 <!--GridView For View All Customers-->
-                    <td class="auto-style77">
-                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CustID" DataSourceID="SqlDataSource3" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="1322px" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" Visible="False">
+       <table id="table7">
+            <tr>
+               <td>
+                  <table id="table8" style="width:100%;">
+                      <tr>
+                        <td>        
+                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CustID" DataSourceID="SqlDataSource3" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="1200px" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small">
                             <AlternatingRowStyle BackColor="#A99583" />
                             <Columns>
                                 <asp:BoundField DataField="CustID" HeaderText="CustID" InsertVisible="False" ReadOnly="True" SortExpression="CustID">
@@ -438,15 +410,15 @@
                             <SortedDescendingCellStyle BackColor="#EAEAD3" />
                             <SortedDescendingHeaderStyle BackColor="#575357" />
                         </asp:GridView>
-                        </td>               
-                </tr>              
-                <tr>
-                    <td class="auto-style77">
+                        </td>
+                        </tr>
+                        </table>
+                        </td>
+                        </tr>
+                        </table> 
+                        </div>
                         <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="VG1" ShowMessageBox="True" />
-                    </td>                    
-                </tr>              
-            </table>
-        </div>
+                    
 
 <!--DataSource 1 For DropDownList Control-->
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Customers  WHERE ([phone] LIKE '%' + @phone + '%')ORDER BY Lname ASC">
