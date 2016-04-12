@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" %>
+﻿<%@ Page Language="VB" AutoEventWireup="true" %>
 
 <!DOCTYPE html>
 
@@ -6,6 +6,20 @@
 <head id="Head1" runat="server">
     <title></title>
     <link href="main.css" rel="stylesheet" type="text/css" />
+    <script runat="server">
+        Protected Sub Page_Load(sender As Object, e As EventArgs)
+            'If Session("user") IsNot "employee" Then
+            'Response.Redirect("login.aspx")
+            'End If
+        End Sub
+
+
+        Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
+            Session.RemoveAll()
+            Response.Redirect("login.aspx")
+        End Sub
+</script>
+
     <style type="text/css">
         .auto-style11 {
             height: 302px;
@@ -43,7 +57,7 @@
             <asp:Image ID="Image1" runat="server" ImageUrl="~/twoRiversLogo.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
          <div id="logoutbutton">
-            <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" />
+            <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" OnClick="ImageButton1_Click" />
         </div>
         <div id="title">
             <br />
