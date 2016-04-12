@@ -15,7 +15,6 @@
     Protected Sub reportButton_Click(sender As Object, e As EventArgs)
         CustDetails.Visible = True
         CustDetails0.Visible = False
-        DetailsView1.Visible = False
         GridView1.Visible = False
         FnDD.Visible = True
         FnameLabel.Visible = True
@@ -31,7 +30,6 @@
         GridView1.Visible = True
         CustDetails.Visible = False
         CustDetails0.Visible = False
-        DetailsView1.Visible = False
         PhoneTextBox.Visible = False
         PhoneLabel.Visible = False
         FnameLabel.Visible = False
@@ -44,7 +42,6 @@
     Protected Sub NewCustBT_Click(sender As Object, e As EventArgs)
         CustDetails0.Visible = True
         CustDetails.Visible = False
-        DetailsView1.Visible = False
         GridView1.Visible = False
         PhoneTextBox.Visible = False
         PhoneLabel.Visible = False
@@ -55,7 +52,7 @@
     End Sub
 
     Protected Sub EditVendorBT_Click(sender As Object, e As EventArgs)
-        DetailsView1.Visible = True
+        ' DetailsView1.Visible = True
         CustDetails.Visible = False
     End Sub
     Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
@@ -65,7 +62,24 @@
     Protected Sub FnDD_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
-    
+    Sub CustDetails_ItemUpdated(ByVal sender As Object, _
+    ByVal e As DetailsViewUpdatedEventArgs)
+        ' Refresh the GridView control after a new record is updated 
+        ' in the DetailsView control.
+        CustDetails.DataBind()
+    End Sub
+
+    Sub CustDetails_ItemUpdating(ByVal sender As Object, _
+      ByVal e As DetailsViewUpdateEventArgs)
+        ' Iterate though the values entered by the user and HTML encode 
+        ' the values. This helps prevent malicious values from being 
+        ' stored in the data source.
+        For i As Integer = 0 To e.NewValues.Count - 1
+            If e.NewValues(i) IsNot Nothing Then
+                e.NewValues(i) = Server.HtmlEncode(e.NewValues(i).ToString())
+            End If
+        Next
+    End Sub
     
 </script>
 
@@ -80,11 +94,7 @@
         .auto-style1 {
             text-align: left;
         }
-        .auto-style2 {
-            margin-left: 400px;
-            text-align: left;
-        }
-    </style>
+        </style>
 
 
     </head>
@@ -124,7 +134,6 @@
                     <asp:Button ID="reportButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Search" Width="150px" OnClick="reportButton_Click" CausesValidation="False" Font-Bold="True" />
                     <asp:Button ID="viewAllButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="*View All" Width="150px" OnClick="viewAllButton_Click" Font-Bold="True" Font-Size="Small" Font-Underline="False" CausesValidation="False" />
                     <asp:Button ID="NewVendorBT" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="New Vendor" Width="150px" OnClick="NewCustBT_Click" CausesValidation="False" Font-Bold="True" />
-                    <asp:Button ID="EditVendorBT" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Edit" Width="150px" OnClick="EditVendorBT_Click" CausesValidation="False" Font-Bold="True" />
                     <asp:Button ID="printButton0" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Print" Width="150px" onclientclick="javascript:window.print();" xmlns:asp="#unknown" CausesValidation="False" Font-Bold="True" />
                     <asp:Button ID="homeBT" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Home" Width="150px" PostBackUrl="~/Default.aspx" CausesValidation="False" Font-Bold="True" />
                 </td>
@@ -163,7 +172,8 @@
                   <table id="table5" style="width:100%;">
                       <tr>
                         <td>
-                        <asp:DetailsView ID="CustDetails" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" Height="50px" Width="800px" ForeColor="Black" GridLines="None">
+                        <asp:DetailsView ID="CustDetails" OnItemUpdated="CustDetails_ItemUpdated"
+            OnItemUpdating="CustDetails_ItemUpdating" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" Height="50px" Width="800px" ForeColor="Black" GridLines="None">
                             <AlternatingRowStyle BackColor="#E6D9CC" />
                             <CommandRowStyle BackColor="#A99583" Font-Bold="True" />
                             <EditRowStyle BackColor="#43382E" />
@@ -293,11 +303,11 @@
                                 </asp:TemplateField>
                             <asp:TemplateField ShowHeader="False">
                                     <EditItemTemplate>
-                                        <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Update" Text="Update" BackColor="#E6D9CC" Width="75px"/>
+                                        <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Update" OnClientClick="javascript:window.alert('Updated Successfully!');" Text="Update" BackColor="#E6D9CC" Width="75px"/>
                                         &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" BackColor="#E6D9CC" Width="75px"/>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
-                                        <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Insert" Text="Insert"  BackColor="#E6D9CC" Width="75px"/>
+                                        <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Insert"  Text="Insert" BackColor="#E6D9CC" Width="75px"/>
                                         &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Clear" BackColor="#E6D9CC" Width="75px"/>
                                     </InsertItemTemplate>
                                     <ItemTemplate>
@@ -460,7 +470,7 @@
                                         &nbsp;<asp:Button ID="Button4" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" BackColor="#E6D9CC" Width="75px"/>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
-                                        <asp:Button ID="Button5" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Insert" Text="Insert"  BackColor="#E6D9CC" Width="75px"/>
+                                        <asp:Button ID="Button5" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Insert" Text="Insert"  OnClientClick="javascript:window.alert('Insert Successful!');" BackColor="#E6D9CC" Width="75px"/>
                                         &nbsp;<asp:Button ID="Button6" runat="server" CausesValidation="False" CommandName="Cancel" Text="Clear" BackColor="#E6D9CC" Width="75px"/>
                                     </InsertItemTemplate>
                                     <ItemTemplate>
@@ -480,88 +490,7 @@
                </td>
             </tr>
 </table>                                              
-<table id="table12">
-            <tr>
-               <td>
-                  <table id="table13" style="width:100%;">
-                      <tr>
-                        <td class="leftColumn">
-                            <asp:Label ID="Label10" runat="server" Font-Bold="True" Text="Vendor:"></asp:Label>
-                          </td>
-                        <td class="rightColumn">
-                            <asp:TextBox ID="TextBox8" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="leftColumn">
-                            <asp:Label ID="Label11" runat="server" Font-Bold="True" Text="Contact First Name:"></asp:Label>
-                          </td>
-                        <td class="rightColumn">
-                            <asp:TextBox ID="TextBox9" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="leftColumn">
-                            <asp:Label ID="Label12" runat="server" Font-Bold="True" Text="Contact Last Name:"></asp:Label>
-                          </td>
-                        <td class="rightColumn">
-                            <asp:TextBox ID="TextBox10" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="leftColumn">
-                            <asp:Label ID="Label13" runat="server" Font-Bold="True" Text="Street:"></asp:Label>
-                          </td>
-                        <td class="rightColumn">
-                            <asp:TextBox ID="TextBox11" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="leftColumn">
-                            <asp:Label ID="Label14" runat="server" Font-Bold="True" Text="City:"></asp:Label>
-                          </td>
-                        <td class="rightColumn">
-                            <asp:TextBox ID="TextBox12" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="leftColumn">
-                            <asp:Label ID="Label15" runat="server" Font-Bold="True" Text="State:"></asp:Label>
-                          </td>
-                        <td class="rightColumn">
-                            <asp:DropDownList ID="DropDownList1" runat="server" BackColor="#F3EDE7" Width="150px">
-                            </asp:DropDownList>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="leftColumn">
-                            <asp:Label ID="Label16" runat="server" Font-Bold="True" Text="Zip:"></asp:Label>
-                          </td>
-                        <td class="rightColumn">
-                            <asp:TextBox ID="TextBox14" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="leftColumn">
-                            <asp:Label ID="Label17" runat="server" Font-Bold="True" Text="Country:"></asp:Label>
-                          </td>
-                        <td class="rightColumn">
-                            <asp:DropDownList ID="DropDownList2" runat="server" BackColor="#F3EDE7" Width="150px">
-                            </asp:DropDownList>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="leftColumn">
-                            <asp:Label ID="Label18" runat="server" Font-Bold="True" Text="Phone:"></asp:Label>
-                          </td>
-                        <td class="rightColumn">
-                            <asp:TextBox ID="TextBox13" runat="server" BackColor="#F3EDE7" Width="200px"></asp:TextBox>
-                          </td>
-                      </tr>
-                   </table>
-               </td>
-            </tr>
-</table>                                              
+              
 
 <!--GridView For View All Vendors-->
 <table id="table11">
@@ -679,6 +608,35 @@
                 <asp:Parameter Name="VendID" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" DeleteCommand="DELETE FROM [Vendors] WHERE [VendID] = @VendID" InsertCommand="INSERT INTO [Vendors] ([VendName], [ContactFname], [ContactLname], [street], [city], [zip], [country], [phone], [State]) VALUES (@VendName, @ContactFname, @ContactLname, @street, @city, @zip, @country, @phone, @State)" SelectCommand="SELECT * FROM [Vendors] ORDER BY [VendName]" UpdateCommand="UPDATE [Vendors] SET [VendName] = @VendName, [ContactFname] = @ContactFname, [ContactLname] = @ContactLname, [street] = @street, [city] = @city, [zip] = @zip, [country] = @country, [phone] = @phone, [State] = @State WHERE [VendID] = @VendID">
+            <DeleteParameters>
+                <asp:Parameter Name="VendID" Type="Int32" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="VendName" Type="String" />
+                <asp:Parameter Name="ContactFname" Type="String" />
+                <asp:Parameter Name="ContactLname" Type="String" />
+                <asp:Parameter Name="street" Type="String" />
+                <asp:Parameter Name="city" Type="String" />
+                <asp:Parameter Name="zip" Type="String" />
+                <asp:Parameter Name="country" Type="String" />
+                <asp:Parameter Name="phone" Type="String" />
+                <asp:Parameter Name="State" Type="String" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="VendName" Type="String" />
+                <asp:Parameter Name="ContactFname" Type="String" />
+                <asp:Parameter Name="ContactLname" Type="String" />
+                <asp:Parameter Name="street" Type="String" />
+                <asp:Parameter Name="city" Type="String" />
+                <asp:Parameter Name="zip" Type="String" />
+                <asp:Parameter Name="country" Type="String" />
+                <asp:Parameter Name="phone" Type="String" />
+                <asp:Parameter Name="State" Type="String" />
+                <asp:Parameter Name="VendID" Type="Int32" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT * FROM [statelist] ORDER BY [state]"></asp:SqlDataSource>
         <br />
     </form>
 </body>

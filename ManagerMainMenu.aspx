@@ -74,7 +74,7 @@
                     <asp:Button ID="Button2" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Appointments" Width="170px" PostBackUrl="~/ManagerAppointments.aspx" Font-Bold="True" />
                 </td>
                 <td class="auto-style26">
-                    <asp:Button ID="Button3" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Today's Appointments" Width="170px" Font-Bold="True" />
+                    <asp:Button ID="Button3" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Vendors" Width="170px" Font-Bold="True" PostBackUrl="~/Vendors.aspx" />
                 </td>
                 <td class="auto-style26">
                     <asp:Button ID="Button14" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Price List" Width="170px" Font-Bold="True" />
