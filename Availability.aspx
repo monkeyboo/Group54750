@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" %>
+﻿<%@ Page Language="VB" AutoEventWireup="true" %>
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Data.SqlClient" %>
 <%@ Import Namespace="System.Configuration" %>
@@ -9,7 +9,9 @@
 <!DOCTYPE html>
 <script runat="server">
     Protected Sub Page_Load(sender As Object, e As EventArgs)
-       
+        ' If Session("user") IsNot "manager" Then
+        'Response.Redirect("login.aspx")
+        'End If
     End Sub
     
     'Search Button Event 
@@ -18,6 +20,11 @@
         ListView1.Visible = True
         ListView1.DataBind()
         
+    End Sub
+
+    Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
+        Session.RemoveAll()
+        Response.Redirect("login.aspx")
     End Sub
 </script>
 

@@ -1,0 +1,89 @@
+﻿/* styles for the header */
+header, body, form {
+	display:block;
+}
+
+header {
+    width: 600px;
+    height: 200px;
+    background-color: #BE9D80 ;
+}
+
+body {
+   margin: 4em auto;
+    width: auto;
+    height: auto;
+	background-color: #A99583;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+form {
+    margin: auto;
+    width: 600px;
+    height: auto;
+    border: 3px solid black;
+    box-shadow: 4px 4px 6px 0 black;
+	background-color: #7a695a;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.container {
+    width: 600px;
+    height: 115px;
+    background-color: #43382e;
+    text-align:center;
+    vertical-align: middle;
+
+}
+/* the styles for the div tags that divide the page into sections */
+#logo {
+    float: left;
+    padding-left: 30px;
+    padding-top: 25px;
+}
+#title {
+    width: auto;
+    padding-top: 35px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+#logoutbutton {
+    float: right;
+    padding-top: 25px;
+    padding-right: 140px;
+    padding-bottom: 20px;
+}
+#calendarbutton {
+    
+    padding-top: 15px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    
+}
+table {
+    width: auto;
+    height: 17px;
+    margin-top: 2em;
+    margin-left:auto;
+    margin-right: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+    text-align:right;
+    
+
+}
+
+td{
+    padding:.5em;
+}
+#loginbutton{
+    text-align:right;
+}
+
+.textbox{
+    width: 200px;
+}
+
+img{
+    margin-top:25px;
+    
+}

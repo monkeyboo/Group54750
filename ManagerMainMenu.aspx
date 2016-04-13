@@ -1,11 +1,22 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" %>
+﻿<%@ Page Language="VB" AutoEventWireup="true" %>
 
 <!DOCTYPE html>
 <script runat="server">
+    
+    Protected Sub Page_Load(sender As Object, e As EventArgs)
+        ' If Session("user") IsNot "manager" Then
+        'Response.Redirect("login.aspx")
+        'End If
+    End Sub
 
    
     Protected Sub CustomersButton_Click(sender As Object, e As EventArgs)
         Response.Redirect("NewCustomerForm.aspx")
+    End Sub
+
+    Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
+        Session.RemoveAll()
+        Response.Redirect("login.aspx")
     End Sub
 </script>
 
@@ -51,7 +62,7 @@
             <asp:Image ID="Image1" runat="server" ImageUrl="~/twoRiversLogo.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
          <div id="logoutbutton">
-            <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" />
+            <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" OnClick="ImageButton1_Click" />
         </div>
         <div id="title">
             <br />

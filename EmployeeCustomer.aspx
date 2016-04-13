@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" %>
+﻿<%@ Page Language="VB" AutoEventWireup="true" %>
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Data.SqlClient" %>
 <%@ Import Namespace="System.Configuration" %>
@@ -8,51 +8,58 @@
 <!DOCTYPE html>
 <script runat="server">
     Protected Sub Page_Load(sender As Object, e As EventArgs)
-       
-    End Sub
+         ' If Session("user") IsNot "employee" Then
+         'Response.Redirect("login.aspx")
+         'End If
+     End Sub
     
-    'New Report Button Event 
-    Protected Sub reportButton_Click(sender As Object, e As EventArgs)
-        CustDetails.Visible = True
-        CustDetails0.Visible = False
-        GridView1.Visible = False
-        FnDD.Visible = True
-        FnameLabel.Visible = True
-        PhoneLabel.Visible = True
-        PhoneTextBox.Visible = True
-        DigitLabel.Visible = True
-        GridView1.DataBind()
-    End Sub
+     'New Report Button Event 
+     Protected Sub reportButton_Click(sender As Object, e As EventArgs)
+         CustDetails.Visible = True
+         CustDetails0.Visible = False
+         GridView1.Visible = False
+         FnDD.Visible = True
+         FnameLabel.Visible = True
+         PhoneLabel.Visible = True
+         PhoneTextBox.Visible = True
+         DigitLabel.Visible = True
+         GridView1.DataBind()
+     End Sub
     
-    'View All Report Button Event           
-    Protected Sub viewAllButton_Click(sender As Object, e As EventArgs)
-        GridView1.Visible = True
-        CustDetails.Visible = False
-        CustDetails0.Visible = False
-        PhoneTextBox.Visible = False
-        PhoneLabel.Visible = False
-        FnameLabel.Visible = False
-        FnDD.Visible = False
-        DigitLabel.Visible = False
-        GridView1.DataBind()
-    End Sub
+     'View All Report Button Event           
+     Protected Sub viewAllButton_Click(sender As Object, e As EventArgs)
+         GridView1.Visible = True
+         CustDetails.Visible = False
+         CustDetails0.Visible = False
+         PhoneTextBox.Visible = False
+         PhoneLabel.Visible = False
+         FnameLabel.Visible = False
+         FnDD.Visible = False
+         DigitLabel.Visible = False
+         GridView1.DataBind()
+     End Sub
     
-    'Add New Customer Button Event
-    Protected Sub NewCustBT_Click(sender As Object, e As EventArgs)
-        CustDetails0.Visible = True
-        CustDetails.Visible = False
-        GridView1.Visible = False
-        PhoneTextBox.Visible = False
-        PhoneLabel.Visible = False
-        FnameLabel.Visible = False
-        FnDD.Visible = False
-        DigitLabel.Visible = False
-        GridView1.DataBind()
-    End Sub
+     'Add New Customer Button Event
+     Protected Sub NewCustBT_Click(sender As Object, e As EventArgs)
+         CustDetails0.Visible = True
+         CustDetails.Visible = False
+         GridView1.Visible = False
+         PhoneTextBox.Visible = False
+         PhoneLabel.Visible = False
+         FnameLabel.Visible = False
+         FnDD.Visible = False
+         DigitLabel.Visible = False
+         GridView1.DataBind()
+     End Sub
 
-    Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
+     Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
-    End Sub
+     End Sub
+
+     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
+         Session.RemoveAll()
+         Response.Redirect("login.aspx")
+     End Sub
 </script>
 
 
@@ -75,7 +82,7 @@
     
 <!--Logout Button-->
     <div id="logoutbutton">
-            <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" />
+            <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" OnClick="ImageButton1_Click" />
         </div>
 
 <!--SiteMap-->
