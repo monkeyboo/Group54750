@@ -4,6 +4,7 @@
 <%@ Import Namespace="System.Configuration" %>
 <%@ Import Namespace="System.Web.Services" %>
 <%@ Import Namespace="System.Drawing.Printing"%>
+<%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" tagPrefix="asp" %>
 
 <!DOCTYPE html>
 <script runat="server">
@@ -101,13 +102,14 @@
 <body>
 <!--Focus cursor to textbox and button-->
     <form id="form1" runat="server" defaultfocus="PhoneTextBox" >
-    
+
 <!--Page Header Logo-->
     <div class="container1">
         <div id="logo">
             <asp:Image ID="Image1" runat="server" ImageUrl="~/twoRiversLogo.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
-    
+     
+   
 <!--Logout Button-->
     <div id="logoutbutton">
             <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" />
@@ -427,12 +429,12 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="Zip" runat="server" ValidationGroup="VG1" Text='<%# Bind("zip") %>'></asp:TextBox>
                                         <asp:RequiredFieldValidator runat="server" ID="zipValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Zip" ForeColor="#CC3300"/>
-                                        <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit Zip Required" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit Zip" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
                                         <asp:TextBox ID="Zip" runat="server" ValidationGroup="VG1" Text='<%# Bind("zip") %>'></asp:TextBox>
                                         <asp:RequiredFieldValidator runat="server" ID="zipValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Zip" ForeColor="#CC3300"/>
-                                        <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit Zip Required" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit Zip" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </InsertItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="Label7" runat="server" Text='<%# Bind("zip") %>'></asp:Label>
@@ -453,12 +455,12 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="Phone" runat="server" ValidationGroup="VG1" Text='<%# Bind("phone") %>'></asp:TextBox>
                                         <asp:RequiredFieldValidator runat="server" ID="phoneValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Phone" ForeColor="#CC3300"/>
-                                        <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000 Required" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
                                         <asp:TextBox ID="Phone" runat="server" ValidationGroup="VG1" Text='<%# Bind("phone") %>'></asp:TextBox>
                                         <asp:RequiredFieldValidator runat="server" ID="phoneValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Phone" ForeColor="#CC3300"/>
-                                        <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000 Required" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </InsertItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="Label9" runat="server" Text='<%# Bind("phone") %>'></asp:Label>
@@ -535,6 +537,8 @@
         </div>
 
 <!--DataSource 1 For DropDownList Control-->
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT [VendName] FROM [Vendors] WHERE ([VendName] LIKE '%' + @VendName + '%') ORDER BY [VendName]">
             <SelectParameters>
                 <asp:ControlParameter ControlID="PhoneTextBox" Name="VendName" PropertyName="Text" Type="String" />
@@ -608,35 +612,6 @@
                 <asp:Parameter Name="VendID" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" DeleteCommand="DELETE FROM [Vendors] WHERE [VendID] = @VendID" InsertCommand="INSERT INTO [Vendors] ([VendName], [ContactFname], [ContactLname], [street], [city], [zip], [country], [phone], [State]) VALUES (@VendName, @ContactFname, @ContactLname, @street, @city, @zip, @country, @phone, @State)" SelectCommand="SELECT * FROM [Vendors] ORDER BY [VendName]" UpdateCommand="UPDATE [Vendors] SET [VendName] = @VendName, [ContactFname] = @ContactFname, [ContactLname] = @ContactLname, [street] = @street, [city] = @city, [zip] = @zip, [country] = @country, [phone] = @phone, [State] = @State WHERE [VendID] = @VendID">
-            <DeleteParameters>
-                <asp:Parameter Name="VendID" Type="Int32" />
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="VendName" Type="String" />
-                <asp:Parameter Name="ContactFname" Type="String" />
-                <asp:Parameter Name="ContactLname" Type="String" />
-                <asp:Parameter Name="street" Type="String" />
-                <asp:Parameter Name="city" Type="String" />
-                <asp:Parameter Name="zip" Type="String" />
-                <asp:Parameter Name="country" Type="String" />
-                <asp:Parameter Name="phone" Type="String" />
-                <asp:Parameter Name="State" Type="String" />
-            </InsertParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="VendName" Type="String" />
-                <asp:Parameter Name="ContactFname" Type="String" />
-                <asp:Parameter Name="ContactLname" Type="String" />
-                <asp:Parameter Name="street" Type="String" />
-                <asp:Parameter Name="city" Type="String" />
-                <asp:Parameter Name="zip" Type="String" />
-                <asp:Parameter Name="country" Type="String" />
-                <asp:Parameter Name="phone" Type="String" />
-                <asp:Parameter Name="State" Type="String" />
-                <asp:Parameter Name="VendID" Type="Int32" />
-            </UpdateParameters>
-        </asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT * FROM [statelist] ORDER BY [state]"></asp:SqlDataSource>
         <br />
     </form>
 </body>

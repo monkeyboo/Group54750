@@ -4,6 +4,7 @@
 <%@ Import Namespace="System.Configuration" %>
 <%@ Import Namespace="System.Web.Services" %>
 <%@ Import Namespace="System.Drawing.Printing"%>
+<%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" tagPrefix="asp" %>
 
 <!DOCTYPE html>
 <script runat="server">
@@ -26,7 +27,7 @@
     <title>Availability</title>
     <link href="Report.css" rel="stylesheet" type="text/css" />
 
-</head>
+    </head>
 <body>
 <!--Focus cursor to textbox and button-->
     <form id="form1" runat="server" defaultfocus="NameTextBox" >
@@ -65,32 +66,14 @@
                     <asp:Button ID="homeBT" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Home" Width="150px" PostBackUrl="~/Default.aspx" CausesValidation="False" Font-Bold="True" />
                 </td>
             </tr>
+            
          </table>
-
+<div id="combo">
+         <asp:ComboBox ID="NameTextBox" runat="server" AppendDataBoundItems="True" 
+              AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource4" 
+              DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" AutoPostBack="True" ></asp:ComboBox>
+</div>
 <!--Search Controls-->
-            <table id="table2">
-                <tr>
-                    <td class="nameLabel">
-                        <br />
-                        <asp:Label ID="NameLabel" runat="server" Text="Enter" Font-Bold="True"></asp:Label>
-                    </td>
-                    <td class="nameTextBox">
-                        <asp:Label ID="EntNameLabel" runat="server" Font-Size="Small" Text=" First Name" Width="180px" Font-Bold="True"></asp:Label>
-                        <br />
-                        <asp:TextBox ID="NameTextBox" runat="server" BackColor="#F3EDE7" AutoPostBack="True" Width="180px"></asp:TextBox>
-                    </td>
-                    <td class="nameLabel2">
-                        <br />
-                        <asp:Label ID="FnameLabel" runat="server" Text="Select" Font-Bold="True"></asp:Label>
-                    </td>
-                    <td class="FnDD">
-                        <br />
-                        <asp:DropDownList ID="FnDD" runat="server" Width="180px" DataSourceID="SqlDataSource1" DataTextField="name" DataValueField="name" BackColor="#F3EDE7" AutoPostBack="True">
-                        <asp:ListItem Value="name">Search</asp:ListItem>
-                    </asp:DropDownList>
-                    </td>
-                </tr>
-            </table>
 
 <!--Details View For Employee Search-->
             <table id="table4">
@@ -274,7 +257,9 @@
                                 </table>
                                 </div>  
                                 <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="VG1" ShowMessageBox="True" ShowSummary="False" />
-                                <br />
+                                <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+                                <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Employees  ORDER BY Fname ASC"></asp:SqlDataSource>
                                 
 <!--DataSource 1 For DropDownList Control-->
           <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Employees  WHERE ([Fname] LIKE '%' + @Fname + '%')ORDER BY Lname ASC">
@@ -284,7 +269,7 @@
           </asp:SqlDataSource>
           <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT * FROM [Employees] WHERE (Fname + ' ' + Lname)= @fulllnamedropdown">
                  <SelectParameters>
-                     <asp:ControlParameter ControlID="FnDD" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
+                     <asp:ControlParameter ControlID="NameTextBox" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
           </SelectParameters>
           </asp:SqlDataSource>
           <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
@@ -299,7 +284,7 @@
                          WHERE [EmpID] = @EmpID
                          AND [DayID] = (select dayid from [dayofweek] where [description] = @description)">
           <SelectParameters>
-          <asp:ControlParameter ControlID="FnDD" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
+          <asp:ControlParameter ControlID="NameTextBox" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
           </SelectParameters>
               <UpdateParameters>
                   <asp:Parameter Name="EmpID" />
