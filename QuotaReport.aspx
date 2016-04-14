@@ -121,7 +121,11 @@ form {
                                 </DataSources>
                             </LocalReport>
                         </rsweb:ReportViewer>
-                        <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetDataQuota" TypeName="QuotaDataSetTableAdapters.OuotaDataTable1TableAdapter"></asp:ObjectDataSource>
+                        <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetDataQuota" TypeName="QuotaDataSetTableAdapters.OuotaDataTable1TableAdapter">
+                            <SelectParameters>
+                                <asp:SessionParameter Name="empid" SessionField="id" Type="Int32" />
+                            </SelectParameters>
+                        </asp:ObjectDataSource>
                     </td>
                     
                 </tr>

@@ -122,7 +122,11 @@ form {
             </LocalReport>
         </rsweb:ReportViewer>
         <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetData" TypeName="DataSetTableAdapters.DataTable1TableAdapter"></asp:ObjectDataSource>
-        <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetData" TypeName="DataSetTableAdapters.DataTable1TableAdapter"></asp:ObjectDataSource></td>
+        <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetData" TypeName="DataSetTableAdapters.DataTable1TableAdapter" OldValuesParameterFormatString="original_{0}">
+            <SelectParameters>
+                <asp:SessionParameter Name="empid" SessionField="id" Type="Int32" />
+            </SelectParameters>
+                        </asp:ObjectDataSource></td>
                     
                 </tr>
               
