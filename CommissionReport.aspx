@@ -62,6 +62,7 @@ form {
     background-color: #43382e;
 
 }
+
 /* the styles for the div tags that divide the page into sections */
 #logo {
     float: left;
@@ -79,10 +80,15 @@ form {
     padding-top: 25px;
     padding-right: 140px;
     padding-bottom: 20px;
+    }
+        .auto-style1 {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+    <div class="container1">
 
            <div id="logo">
             <asp:Image ID="Image1" runat="server" ImageUrl="~/twoRiversLogo.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -100,12 +106,15 @@ form {
             </asp:SiteMapPath>
         <br />
         </div>
-   
+   </div> 
      
-            <table style="width: 100%;" id="report">
+            <table style="width: 96%;" align="center" id="report">
                 <tr>
-                    <td><asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt" Height="750px" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="100%" BackColor="#996600" AsyncRendering="true">
+                    <td class="auto-style1">
+                        <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Commission Report" Width="400px"></asp:Label>
+                        <br />
+                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt" Height="750px" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="100%" BackColor="#43382E" HeaderColor="white" AsyncRendering="true" BorderColor="Black">
             <LocalReport ReportPath="Commission Report.rdlc">
                 <DataSources>
                     <rsweb:ReportDataSource DataSourceId="ObjectDataSource1" Name="DataSet1" />

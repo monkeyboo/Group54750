@@ -95,18 +95,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>Customers</title>
-    <link href="EmployeeReport.css" rel="stylesheet" type="text/css" />
-
-
+    <title>Vendors</title>
+    <link href="EmployeeReport2.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .auto-style1 {
             text-align: left;
         }
         </style>
-
-
-    </head>
+</head>
 <body>
 <!--Focus cursor to textbox and button-->
     <form id="form1" runat="server" defaultfocus="PhoneTextBox" >
@@ -187,7 +183,7 @@
                             <AlternatingRowStyle BackColor="#E6D9CC" />
                             <CommandRowStyle BackColor="#A99583" Font-Bold="True" />
                             <EditRowStyle BackColor="#43382E" />
-                            <FieldHeaderStyle BackColor="#A99583" Font-Bold="True" />
+                            <FieldHeaderStyle BackColor="#A99583" Font-Bold="True" Width="300px" />
                             <Fields>
                                 <asp:BoundField DataField="VendID" HeaderText="VendID" InsertVisible="False" ReadOnly="True" SortExpression="VendID" />
                                 <asp:TemplateField HeaderText="Vendor" SortExpression="VendName">
@@ -342,15 +338,12 @@
                <td>
                   <table id="table6" style="width:100%;">
                       <tr>
-                        <td class="formview">
-
-                            <div class="auto-style1">
-
+                        <td>   
                         <asp:DetailsView ID="CustDetails0" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" Height="50px" Width="800px" ForeColor="Black" GridLines="None" DefaultMode="Insert" Visible="False">
                             <AlternatingRowStyle BackColor="#E6D9CC" />
                             <CommandRowStyle BackColor="#A99583" Font-Bold="True" />
                             <EditRowStyle BackColor="#43382E" />
-                            <FieldHeaderStyle BackColor="#A99583" Font-Bold="True" />
+                            <FieldHeaderStyle BackColor="#A99583" Font-Bold="True" Width="300px" />
                             <Fields>
                                 <asp:BoundField DataField="VendID" HeaderText="VendID" InsertVisible="False" ReadOnly="True" SortExpression="VendID" />
                                 <asp:TemplateField HeaderText="Vendor" SortExpression="VendName">
@@ -493,24 +486,22 @@
                             <PagerStyle BackColor="#A99583" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#A99583" />
                         </asp:DetailsView>
-                            </div>
+                           
                           </td>
                       </tr>
                    </table>
                </td>
             </tr>
 </table>                                              
-              
-
 <!--GridView For View All Vendors-->
-<table id="table11">
+<table id="table7">
             <tr>
                <td>
                   <table id="table8" style="width:100%;">
                       <tr>
                         <td>  
                             
-                            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource3" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small">
+                            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource3" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small" Width="1200px">
                                 <AlternatingRowStyle BackColor="#A99583" />
                                 <Columns>
                                     <asp:BoundField DataField="VendID" HeaderText="VendID" InsertVisible="False" ReadOnly="True" SortExpression="VendID" />
@@ -540,9 +531,8 @@
                 </td>
             </tr>
  </table>                                                 
-                        <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="VG1" ShowMessageBox="True" />
-                    
-        </div>
+ <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="VG1" ShowMessageBox="True" />
+ </div>
 
 <!--DataSource 1 For DropDownList Control-->
         <asp:ScriptManager ID="ScriptManager1" runat="server">

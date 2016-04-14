@@ -102,12 +102,12 @@ form {
         </div>
    
      
-            <table style="width: 100%;" id="report">
+            <table style="width: 94.5%;" align="center" id="report">
                 <tr>
                     <td>
 
                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="100%">
+                        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="100%" BackColor="#E6D9CC">
                             <LocalReport ReportPath="QuotaReport.rdlc">
                                 <DataSources>
                                     <rsweb:ReportDataSource DataSourceId="ObjectDataSource1" Name="DataSet1" />

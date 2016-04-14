@@ -18,6 +18,7 @@
                             <Value>Employee ID</Value>
                             <Style>
                               <FontWeight>Bold</FontWeight>
+                              <Color>#e6d9cc</Color>
                             </Style>
                           </TextRun>
                         </TextRuns>
@@ -30,7 +31,7 @@
                         <Color>#7a695a</Color>
                         <Style>Solid</Style>
                       </Border>
-                      <BackgroundColor>Sienna</BackgroundColor>
+                      <BackgroundColor>#43382e</BackgroundColor>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
                       <PaddingTop>2pt</PaddingTop>
@@ -51,6 +52,7 @@
                             <Value>Date</Value>
                             <Style>
                               <FontWeight>Bold</FontWeight>
+                              <Color>#e6d9cc</Color>
                             </Style>
                           </TextRun>
                         </TextRuns>
@@ -63,7 +65,7 @@
                         <Color>#7a695a</Color>
                         <Style>Solid</Style>
                       </Border>
-                      <BackgroundColor>Sienna</BackgroundColor>
+                      <BackgroundColor>#43382e</BackgroundColor>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
                       <PaddingTop>2pt</PaddingTop>
@@ -84,6 +86,7 @@
                             <Value>Item</Value>
                             <Style>
                               <FontWeight>Bold</FontWeight>
+                              <Color>#e6d9cc</Color>
                             </Style>
                           </TextRun>
                         </TextRuns>
@@ -96,7 +99,7 @@
                         <Color>#7a695a</Color>
                         <Style>Solid</Style>
                       </Border>
-                      <BackgroundColor>Sienna</BackgroundColor>
+                      <BackgroundColor>#43382e</BackgroundColor>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
                       <PaddingTop>2pt</PaddingTop>
@@ -117,6 +120,7 @@
                             <Value>Price</Value>
                             <Style>
                               <FontWeight>Bold</FontWeight>
+                              <Color>#e6d9cc</Color>
                             </Style>
                           </TextRun>
                         </TextRuns>
@@ -129,7 +133,7 @@
                         <Color>#7a695a</Color>
                         <Style>Solid</Style>
                       </Border>
-                      <BackgroundColor>Sienna</BackgroundColor>
+                      <BackgroundColor>#43382e</BackgroundColor>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
                       <PaddingTop>2pt</PaddingTop>
@@ -204,7 +208,7 @@
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>15pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>Brown</Color>
+                                <Color>Maroon</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -218,7 +222,7 @@
                           <Style>Solid</Style>
                         </Border>
                         <TopBorder>
-                          <Color>Brown</Color>
+                          <Color>Maroon</Color>
                           <Style>Solid</Style>
                           <Width>5pt</Width>
                         </TopBorder>
@@ -252,6 +256,7 @@
                             <Style>
                               <FontFamily>Tahoma</FontFamily>
                               <FontWeight>Bold</FontWeight>
+                              <Color>#e6d9cc</Color>
                             </Style>
                           </TextRun>
                         </TextRuns>
@@ -264,7 +269,7 @@
                         <Color>#7a695a</Color>
                         <Style>Solid</Style>
                       </Border>
-                      <BackgroundColor>Sienna</BackgroundColor>
+                      <BackgroundColor>#43382e</BackgroundColor>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
                       <PaddingTop>2pt</PaddingTop>
@@ -565,7 +570,7 @@
                                               <FontFamily>Tahoma</FontFamily>
                                               <FontSize>15pt</FontSize>
                                               <FontWeight>Bold</FontWeight>
-                                              <Color>Brown</Color>
+                                              <Color>Maroon</Color>
                                             </Style>
                                           </TextRun>
                                         </TextRuns>
@@ -579,7 +584,7 @@
                                         <Style>Solid</Style>
                                       </Border>
                                       <TopBorder>
-                                        <Color>Brown</Color>
+                                        <Color>Maroon</Color>
                                         <Style>Solid</Style>
                                         <Width>5pt</Width>
                                       </TopBorder>

@@ -37,7 +37,7 @@
     </head>
 <body>
 <!--Focus cursor to textbox and button-->
-    <form id="form1" runat="server" defaultfocus="NameTextBox" >
+    <form id="form1" runat="server" defaultfocus="ComboBox1" >
     
 <!--Page Header Logo-->
     <div class="container1">
@@ -75,11 +75,13 @@
             </tr>
             
          </table>
-<div id="combo">
-         <asp:ComboBox ID="NameTextBox" runat="server" AppendDataBoundItems="True" 
+ <div id="combo">
+         <asp:Label ID="EntNameLabel" runat="server" Font-Size="Small" Text=" First Name" Font-Bold="True"></asp:Label>
+         <asp:ComboBox ID="ComboBox1" runat="server" AppendDataBoundItems="True" 
               AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource4" 
-              DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" AutoPostBack="True" ></asp:ComboBox>
-</div>
+              DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
+</div>       
+        
 <!--Search Controls-->
 
 <!--Details View For Employee Search-->
@@ -264,19 +266,15 @@
                                 </table>
                                 </div>  
                                 <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="VG1" ShowMessageBox="True" ShowSummary="False" />
-                                <asp:ScriptManager ID="ScriptManager1" runat="server">
-        </asp:ScriptManager>
-                                <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Employees  ORDER BY Fname ASC"></asp:SqlDataSource>
                                 
 <!--DataSource 1 For DropDownList Control-->
-          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Employees  WHERE ([Fname] LIKE '%' + @Fname + '%')ORDER BY Lname ASC">
-                 <SelectParameters>
-                     <asp:ControlParameter ControlID="NameTextBox" Name="Fname" PropertyName="Text" Type="String" />
-                 </SelectParameters>
-          </asp:SqlDataSource>
+<asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+          <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Employees  ORDER BY Fname ASC"></asp:SqlDataSource>
+                                          
           <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT * FROM [Employees] WHERE (Fname + ' ' + Lname)= @fulllnamedropdown">
                  <SelectParameters>
-                     <asp:ControlParameter ControlID="NameTextBox" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
+                     <asp:ControlParameter ControlID="ComboBox1" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
           </SelectParameters>
           </asp:SqlDataSource>
           <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
@@ -291,7 +289,7 @@
                          WHERE [EmpID] = @EmpID
                          AND [DayID] = (select dayid from [dayofweek] where [description] = @description)">
           <SelectParameters>
-          <asp:ControlParameter ControlID="NameTextBox" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
+          <asp:ControlParameter ControlID="ComboBox1" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
           </SelectParameters>
               <UpdateParameters>
                   <asp:Parameter Name="EmpID" />
