@@ -21,11 +21,9 @@
         CustDetails.Visible = True
         CustDetails0.Visible = False
         GridView1.Visible = False
-        FnDD.Visible = True
-        FnameLabel.Visible = True
-        PhoneLabel.Visible = True
-        PhoneTextBox.Visible = True
-        DigitLabel.Visible = True
+        ComboBox1.Visible = True
+        EntNameLabel.Visible = True
+      
         GridView1.DataBind()
           
     End Sub
@@ -35,11 +33,8 @@
         GridView1.Visible = True
         CustDetails.Visible = False
         CustDetails0.Visible = False
-        PhoneTextBox.Visible = False
-        PhoneLabel.Visible = False
-        FnameLabel.Visible = False
-        FnDD.Visible = False
-        DigitLabel.Visible = False
+        ComboBox1.Visible = False
+        EntNameLabel.Visible = False
         GridView1.DataBind()
     End Sub
     
@@ -48,43 +43,18 @@
         CustDetails0.Visible = True
         CustDetails.Visible = False
         GridView1.Visible = False
-        PhoneTextBox.Visible = False
-        PhoneLabel.Visible = False
-        FnameLabel.Visible = False
-        FnDD.Visible = False
-        DigitLabel.Visible = False
+        ComboBox1.Visible = False
+        EntNameLabel.Visible = False
         GridView1.DataBind()
     End Sub
 
     Protected Sub EditVendorBT_Click(sender As Object, e As EventArgs)
-        ' DetailsView1.Visible = True
         CustDetails.Visible = False
     End Sub
     Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Protected Sub FnDD_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-    End Sub
-    Sub CustDetails_ItemUpdated(ByVal sender As Object, _
-    ByVal e As DetailsViewUpdatedEventArgs)
-        ' Refresh the GridView control after a new record is updated 
-        ' in the DetailsView control.
-        CustDetails.DataBind()
-    End Sub
-
-    Sub CustDetails_ItemUpdating(ByVal sender As Object, _
-      ByVal e As DetailsViewUpdateEventArgs)
-        ' Iterate though the values entered by the user and HTML encode 
-        ' the values. This helps prevent malicious values from being 
-        ' stored in the data source.
-        For i As Integer = 0 To e.NewValues.Count - 1
-            If e.NewValues(i) IsNot Nothing Then
-                e.NewValues(i) = Server.HtmlEncode(e.NewValues(i).ToString())
-            End If
-        Next
-    End Sub
     
     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
         Session.RemoveAll()
@@ -97,15 +67,10 @@
 <head id="Head1" runat="server">
     <title>Vendors</title>
     <link href="EmployeeReport2.css" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        .auto-style1 {
-            text-align: left;
-        }
-        </style>
-</head>
+    </head>
 <body>
 <!--Focus cursor to textbox and button-->
-    <form id="form1" runat="server" defaultfocus="PhoneTextBox" >
+    <form id="form1" runat="server" defaultfocus="ComboBox1" >
 
 <!--Page Header Logo-->
     <div class="container1">
@@ -147,29 +112,13 @@
             </table>
 
 <!--Search Controls-->
-             <table id="table2">
-                <tr>
-                    <td class="nameLabel">
-                        <br />
-                        <asp:Label ID="PhoneLabel" runat="server" Text="Vendor Name" Font-Bold="True"></asp:Label>
-                    </td>
-                    <td class="nameTextBox">
-                        <asp:Label ID="DigitLabel" runat="server" Font-Size="Small" Width="180px" Font-Bold="True"></asp:Label>
-                        <br />
-                        <asp:TextBox ID="PhoneTextBox" runat="server" BackColor="#F3EDE7" AutoPostBack="True" Width="180px"></asp:TextBox>
-                    </td>
-                    <td class="nameLabel2">
-                        <br />
-                        <asp:Label ID="FnameLabel" runat="server" Text="Select" Font-Bold="True"></asp:Label>
-                    </td>
-                    <td class="FnDD">
-                        <br />
-                    <asp:DropDownList ID="FnDD" runat="server" Width="180px" DataSourceID="SqlDataSource1" DataTextField="VendName" DataValueField="VendName" BackColor="#F3EDE7" OnSelectedIndexChanged="FnDD_SelectedIndexChanged">
-                        <asp:ListItem Value="name">Search</asp:ListItem>
-                    </asp:DropDownList>
-                    </td>
-                </tr>
-            </table>
+<div id="combo">
+         <asp:Label ID="EntNameLabel" runat="server" Font-Size="Small" Text="Name" Font-Bold="True"></asp:Label>
+         <asp:ComboBox ID="ComboBox1" runat="server" AppendDataBoundItems="True" 
+              AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource5" 
+              DataTextField="VendName" DataValueField="VendName" MaxLength="0" style="display: inline;" AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
+</div>
+             
 
 <!--Details View For Customer Search-->
            <table id="table10">
@@ -178,8 +127,7 @@
                   <table id="table5" style="width:100%;">
                       <tr>
                         <td>
-                        <asp:DetailsView ID="CustDetails" OnItemUpdated="CustDetails_ItemUpdated"
-            OnItemUpdating="CustDetails_ItemUpdating" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" Height="50px" Width="800px" ForeColor="Black" GridLines="None">
+                        <asp:DetailsView ID="CustDetails" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" Height="50px" Width="800px" ForeColor="Black" GridLines="None">
                             <AlternatingRowStyle BackColor="#E6D9CC" />
                             <CommandRowStyle BackColor="#A99583" Font-Bold="True" />
                             <EditRowStyle BackColor="#43382E" />
@@ -269,11 +217,13 @@
                                 <asp:TemplateField HeaderText="Zip" SortExpression="zip">
                                     <EditItemTemplate>
                                         <asp:TextBox ID="Zip" runat="server" ValidationGroup="VG1" Text='<%# Bind("zip") %>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="Zip_TextBoxWatermarkExtender" runat="server" BehaviorID="Zip_TextBoxWatermarkExtender" TargetControlID="Zip" ViewStateMode="Enabled" WatermarkText="00000" />
                                         <asp:RequiredFieldValidator runat="server" ID="zipValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Zip" ForeColor="#CC3300"/>
                                         <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit Zip Required" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
                                         <asp:TextBox ID="Zip" runat="server" ValidationGroup="VG1" Text='<%# Bind("zip") %>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="Zip_TextBoxWatermarkExtender" runat="server" BehaviorID="Zip_TextBoxWatermarkExtender" TargetControlID="Zip" ViewStateMode="Enabled" WatermarkText="00000" />
                                         <asp:RequiredFieldValidator runat="server" ID="zipValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Zip" ForeColor="#CC3300"/>
                                         <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit Zip Required" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </InsertItemTemplate>
@@ -295,12 +245,13 @@
                                 <asp:TemplateField HeaderText="Phone" SortExpression="phone">
                                     <EditItemTemplate>
                                         <asp:TextBox ID="Phone" runat="server" ValidationGroup="VG1" Text='<%# Bind("phone") %>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="Phone_TextBoxWatermarkExtender" runat="server" BehaviorID="Phone_TextBoxWatermarkExtender" TargetControlID="Phone" ViewStateMode="Enabled" WatermarkText="000-000-0000" />
                                         <asp:RequiredFieldValidator runat="server" ID="phoneValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Phone" ForeColor="#CC3300"/>
                                         <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000 Required" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
                                         <asp:TextBox ID="Phone" runat="server" ValidationGroup="VG1" Text='<%# Bind("phone") %>'></asp:TextBox>
-                                        <asp:RequiredFieldValidator runat="server" ID="phoneValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Phone" ForeColor="#CC3300"/>
+                                        <asp:TextBoxWatermarkExtender ID="Phone_TextBoxWatermarkExtender" runat="server" BehaviorID="Phone_TextBoxWatermarkExtender" TargetControlID="Phone" ViewStateMode="Enabled" WatermarkText="000-000-0000" />
                                         <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000 Required" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </InsertItemTemplate>
                                     <ItemTemplate>
@@ -429,11 +380,13 @@
                                 <asp:TemplateField HeaderText="Zip" SortExpression="zip">
                                     <EditItemTemplate>
                                         <asp:TextBox ID="Zip" runat="server" ValidationGroup="VG1" Text='<%# Bind("zip") %>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="Zip_TextBoxWatermarkExtender" runat="server" BehaviorID="Zip_TextBoxWatermarkExtender" TargetControlID="Zip" ViewStateMode="Enabled" WatermarkText="00000" />
                                         <asp:RequiredFieldValidator runat="server" ID="zipValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Zip" ForeColor="#CC3300"/>
                                         <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit Zip" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
                                         <asp:TextBox ID="Zip" runat="server" ValidationGroup="VG1" Text='<%# Bind("zip") %>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="Zip_TextBoxWatermarkExtender" runat="server" BehaviorID="Zip_TextBoxWatermarkExtender" TargetControlID="Zip" ViewStateMode="Enabled" WatermarkText="00000" />
                                         <asp:RequiredFieldValidator runat="server" ID="zipValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Zip" ForeColor="#CC3300"/>
                                         <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit Zip" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </InsertItemTemplate>
@@ -455,11 +408,13 @@
                                 <asp:TemplateField HeaderText="Phone" SortExpression="phone">
                                     <EditItemTemplate>
                                         <asp:TextBox ID="Phone" runat="server" ValidationGroup="VG1" Text='<%# Bind("phone") %>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="Phone_TextBoxWatermarkExtender" runat="server" BehaviorID="Phone_TextBoxWatermarkExtender" TargetControlID="Phone" ViewStateMode="Enabled" WatermarkText="000-000-0000" />
                                         <asp:RequiredFieldValidator runat="server" ID="phoneValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Phone" ForeColor="#CC3300"/>
                                         <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
                                         <asp:TextBox ID="Phone" runat="server" ValidationGroup="VG1" Text='<%# Bind("phone") %>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="Phone_TextBoxWatermarkExtender" runat="server" BehaviorID="Phone_TextBoxWatermarkExtender" TargetControlID="Phone" ViewStateMode="Enabled" WatermarkText="000-000-0000" />
                                         <asp:RequiredFieldValidator runat="server" ID="phoneValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Phone" ForeColor="#CC3300"/>
                                         <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </InsertItemTemplate>
@@ -501,7 +456,7 @@
                       <tr>
                         <td>  
                             
-                            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource3" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small" Width="1200px">
+                            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource3" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small" Width="1200px" PageSize="25">
                                 <AlternatingRowStyle BackColor="#A99583" />
                                 <Columns>
                                     <asp:BoundField DataField="VendID" HeaderText="VendID" InsertVisible="False" ReadOnly="True" SortExpression="VendID" />
@@ -537,20 +492,16 @@
 <!--DataSource 1 For DropDownList Control-->
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT [VendName] FROM [Vendors] WHERE ([VendName] LIKE '%' + @VendName + '%') ORDER BY [VendName]">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="PhoneTextBox" Name="VendName" PropertyName="Text" Type="String" />
-            </SelectParameters>
-        </asp:SqlDataSource>
 
 <!--DataSource 2 Details View (Vendor Report and Insert)-->
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
             ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
             SelectCommand="SELECT * FROM [Vendors] WHERE ([VendName] = @VendName)"
             InsertCommand="INSERT INTO [Vendors] ([VendName], [ContactFname], [ContactLname], [street], [city], [zip], [country], [phone], [State]) VALUES (@VendName, @ContactFname, @ContactLname, @street, @city, @zip, @country, @phone, @State)"
-            Updatecommand="UPDATE [Vendors] SET [VendName] = @VendName, [ContactFname] = @ContactFname, [ContactLname] = @ContactLname, [street] = @street, [city] = @city, [zip] = @zip, [country] = @country, [phone] = @phone, [State] = @State WHERE [VendID] = @VendID" DeleteCommand="DELETE FROM [Vendors] WHERE [VendID] = @VendID">
+            Updatecommand="UPDATE [Vendors] SET [VendName] = @VendName, [ContactFname] = @ContactFname, [ContactLname] = @ContactLname, [street] = @street, [city] = @city, [zip] = @zip, [country] = @country, [phone] = @phone, [State] = @State WHERE [VendID] = @VendID" 
+            DeleteCommand="DELETE FROM [Vendors] WHERE [VendID] = @VendID">
             <SelectParameters>
-                <asp:ControlParameter ControlID="FnDD" Name="VendName" PropertyName="SelectedValue" Type="String" />
+                <asp:ControlParameter ControlID="ComboBox1" Name="VendName" PropertyName="SelectedValue" Type="String" />
             </SelectParameters>
             <DeleteParameters>
                 <asp:Parameter Name="VendID" Type="Int32" />
@@ -580,9 +531,14 @@
             </UpdateParameters>
         </asp:SqlDataSource>
 
+        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT [VendName] FROM [Vendors] ORDER BY [VendName]"></asp:SqlDataSource>
+
 <!--DataSource 3 For GridView View All Customers-->
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
-            SelectCommand="SELECT * FROM [Vendors] ORDER BY [VendName]" DeleteCommand="DELETE FROM [Vendors] WHERE [VendID] = @VendID" InsertCommand="INSERT INTO [Vendors] ([VendName], [ContactFname], [ContactLname], [street], [city], [zip], [country], [phone], [State]) VALUES (@VendName, @ContactFname, @ContactLname, @street, @city, @zip, @country, @phone, @State)" UpdateCommand="UPDATE [Vendors] SET [VendName] = @VendName, [ContactFname] = @ContactFname, [ContactLname] = @ContactLname, [street] = @street, [city] = @city, [zip] = @zip, [country] = @country, [phone] = @phone, [State] = @State WHERE [VendID] = @VendID">
+            SelectCommand="SELECT * FROM [Vendors] ORDER BY [VendName]" 
+            DeleteCommand="DELETE FROM [Vendors] WHERE [VendID] = @VendID" 
+            InsertCommand="INSERT INTO [Vendors] ([VendName], [ContactFname], [ContactLname], [street], [city], [zip], [country], [phone], [State]) VALUES (@VendName, @ContactFname, @ContactLname, @street, @city, @zip, @country, @phone, @State)" 
+            UpdateCommand="UPDATE [Vendors] SET [VendName] = @VendName, [ContactFname] = @ContactFname, [ContactLname] = @ContactLname, [street] = @street, [city] = @city, [zip] = @zip, [country] = @country, [phone] = @phone, [State] = @State WHERE [VendID] = @VendID">
             <DeleteParameters>
                 <asp:Parameter Name="VendID" Type="Int32" />
             </DeleteParameters>

@@ -119,8 +119,8 @@
          </table>
 
 <!--Search Controls-->
- <div id="combo">
-         <asp:Label ID="EntNameLabel" runat="server" Font-Size="Small" Text=" First Name" Font-Bold="True"></asp:Label>
+<div id="combo">
+         <asp:Label ID="EntNameLabel" runat="server" Font-Size="Small" Text="Name" Font-Bold="True"></asp:Label>
          <asp:ComboBox ID="ComboBox1" runat="server" AppendDataBoundItems="True" 
               AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource1" 
               DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
@@ -214,11 +214,13 @@
                                 <asp:TemplateField HeaderText="Zip" SortExpression="zip">
                                     <EditItemTemplate>
                                         <asp:TextBox ID="Zip" runat="server" ValidationGroup="VG1" Text='<%# Bind("zip") %>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="Zip_TextBoxWatermarkExtender" runat="server" BehaviorID="Zip_TextBoxWatermarkExtender" TargetControlID="Zip" ViewStateMode="Enabled" WatermarkText="00000" />
                                         <asp:RequiredFieldValidator runat="server" ID="ZipValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Zip" ForeColor="#CC3300"/>
                                         <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
                                         <asp:TextBox ID="Zip" runat="server" ValidationGroup="VG1" Text='<%# Bind("zip") %>'></asp:TextBox>
+                                            <asp:TextBoxWatermarkExtender ID="Zip_TextBoxWatermarkExtender" runat="server" BehaviorID="Zip_TextBoxWatermarkExtender" TargetControlID="Zip" ViewStateMode="Enabled" WatermarkText="00000" />
                                         <asp:RequiredFieldValidator runat="server" ID="ZipValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="Zip" ForeColor="#CC3300"/>
                                         <asp:RegularExpressionValidator ID="zipExpressionValidator" runat="server" ControlToValidate="Zip" Font-size="Small" ErrorMessage="5-Digit" ValidationExpression="\d{5}?" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </InsertItemTemplate>
@@ -229,10 +231,12 @@
                                 <asp:TemplateField HeaderText="Phone" SortExpression="phone">
                                     <EditItemTemplate>
                                         <asp:TextBox ID="Phone" runat="server" Text='<%# Bind("phone") %>'></asp:TextBox>
+                                            <asp:TextBoxWatermarkExtender ID="Phone_TextBoxWatermarkExtender" runat="server" BehaviorID="Phone_TextBoxWatermarkExtender" TargetControlID="Phone" ViewStateMode="Enabled" WatermarkText="000-000-0000" />
                                         <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
                                         <asp:TextBox ID="Phone" runat="server" Text='<%# Bind("phone") %>'></asp:TextBox>
+                                            <asp:TextBoxWatermarkExtender ID="Phone_TextBoxWatermarkExtender" runat="server" BehaviorID="Phone_TextBoxWatermarkExtender" TargetControlID="Phone" ViewStateMode="Enabled" WatermarkText="000-000-0000" />
                                         <asp:RegularExpressionValidator ID="phoneExpressionValidator" runat="server" ControlToValidate="Phone" Font-size="Small" ErrorMessage="Format 000-000-0000" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" ForeColor="#CC3300"></asp:RegularExpressionValidator>
                                     </InsertItemTemplate>
                                     <ItemTemplate>
@@ -285,6 +289,7 @@
                                 <asp:TemplateField HeaderText="Hire Date" SortExpression="startdate" >
                                     <EditItemTemplate>
                                         <asp:TextBox ID="startdate" runat="server" Text='<%# Bind("startdate", "{0:MM/dd/yy}")%>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="startdate_TextBoxWatermarkExtender" runat="server" BehaviorID="startdate_TextBoxWatermarkExtender" TargetControlID="startdate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
                                         <asp:Label ID="Label27" runat="server" Text="(Format mm/dd/yy)" ForeColor="#E6D9CC" />
                                         <asp:RequiredFieldValidator runat="server" ID="startdateValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="startdate" ForeColor="#CC3300"/>
                                         <asp:CompareValidator
@@ -292,12 +297,13 @@
                                             Type="Date"
                                             Operator="DataTypeCheck"
                                             ControlToValidate="startdate" Font-size="Small"
-                                            ErrorMessage="Please enter a valid date."
+                                            ErrorMessage="Invalid date."
                                             ForeColor="#CC3300">
                                         </asp:CompareValidator>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
                                         <asp:TextBox ID="startdate" runat="server" Text='<%# Bind("startdate", "{0:MM/dd/yy}")%>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="startdate_TextBoxWatermarkExtender" runat="server" BehaviorID="startdate_TextBoxWatermarkExtender" TargetControlID="startdate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
                                         <asp:Label ID="Label28" runat="server" Text="(Format mm/dd/yy)" ForeColor="#E6D9CC" />
                                         <asp:RequiredFieldValidator runat="server" ID="startdateValidator" Font-size="Small" ErrorMessage="Required!" ControlToValidate="startdate" ForeColor="#CC3300"/>
                                         <asp:CompareValidator
@@ -305,7 +311,7 @@
                                             Type="Date"
                                             Operator="DataTypeCheck"
                                             ControlToValidate="startdate" Font-size="Small"
-                                            ErrorMessage="Please enter a valid date."
+                                            ErrorMessage="Invalid date."
                                             ForeColor="#CC3300">
                                         </asp:CompareValidator>
                                     </InsertItemTemplate>
@@ -316,25 +322,27 @@
                                 <asp:TemplateField HeaderText="Termination Date" SortExpression="enddate">
                                     <EditItemTemplate>
                                         <asp:TextBox ID="enddate" runat="server" Text='<%# Bind("enddate", "{0:MM/dd/yy}")%>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="Enddate_TextBoxWatermarkExtender" runat="server" BehaviorID="Enddate_TextBoxWatermarkExtender" TargetControlID="enddate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
                                         <asp:Label ID="Label29" runat="server" Text="(Format mm/dd/yy)" ForeColor="#E6D9CC" />
                                         <asp:CompareValidator
                                             ID="TermdateValidator" runat="server" 
                                             Type="Date"
                                             Operator="DataTypeCheck"
                                             ControlToValidate="enddate" Font-size="Small"
-                                            ErrorMessage="Please enter a valid date."
+                                            ErrorMessage="Invalid date."
                                             ForeColor="#CC3300">
                                         </asp:CompareValidator>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
                                         <asp:TextBox ID="enddate" runat="server" Text='<%# Bind("enddate", "{0:MM/dd/yy}")%>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="Enddate_TextBoxWatermarkExtender" runat="server" BehaviorID="Enddate_TextBoxWatermarkExtender" TargetControlID="enddate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
                                         <asp:Label ID="Label30" runat="server" Text="(Format mm/dd/yy)" ForeColor="#E6D9CC" />
                                         <asp:CompareValidator
                                             ID="TermdateValidator" runat="server" 
                                             Type="Date"
                                             Operator="DataTypeCheck"
                                             ControlToValidate="enddate" Font-size="Small"
-                                            ErrorMessage="Please enter a valid date."
+                                            ErrorMessage="Invalid date."
                                             ForeColor="#CC3300">
                                         </asp:CompareValidator>
                                     </InsertItemTemplate>
@@ -387,7 +395,6 @@
                                     </InsertItemTemplate>
                                     <ItemTemplate>
                                         <asp:Button ID="Button1" runat="server" CausesValidation="False" ValidatonGroup="VG1" CommandName="Edit" Text="Edit" BackColor="#A99583" Width="75px"/>
-                                        &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="New" Text="New" BackColor="#A99583" Width="75px"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Fields>
@@ -418,7 +425,7 @@
                                 <FieldHeaderStyle BackColor="#A99583" Font-Bold="True" Width="300px" />
                                 <Fields>
                                     <asp:BoundField DataField="EmpID" HeaderText="EmpID" InsertVisible="False" ReadOnly="True" SortExpression="EmpID">
-                                    <ControlStyle Width="300px" />
+                                    <ControlStyle Width="200px" />
                                     </asp:BoundField>
                                     <asp:TemplateField HeaderText="First Name" SortExpression="Fname">
                                         <EditItemTemplate>
@@ -432,7 +439,7 @@
                                         <ItemTemplate>
                                             <asp:Label ID="Label35" runat="server" Text='<%# Bind("Fname") %>'></asp:Label>
                                         </ItemTemplate>
-                                        <HeaderStyle Width="300px" />
+                                        <HeaderStyle Width="200px" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Last Name" SortExpression="Lname">
                                         <EditItemTemplate>
@@ -491,13 +498,15 @@
                                     <asp:TemplateField HeaderText="Zip" SortExpression="zip">
                                         <EditItemTemplate>
                                             <asp:TextBox ID="Zip" runat="server" Text='<%# Bind("zip") %>' ValidationGroup="VG1"></asp:TextBox>
+                                            <asp:TextBoxWatermarkExtender ID="Zip_TextBoxWatermarkExtender" runat="server" BehaviorID="Zip_TextBoxWatermarkExtender" TargetControlID="Zip" ViewStateMode="Enabled" WatermarkText="00000" />
                                             <asp:RequiredFieldValidator ID="ZipValidator0" runat="server" ControlToValidate="Zip" ErrorMessage="Required!" Font-size="Small" ForeColor="#CC3300" />
-                                            <asp:RegularExpressionValidator ID="zipExpressionValidator0" runat="server" ControlToValidate="Zip" ErrorMessage="5-Digit Zip Required" Font-size="Small" ForeColor="#CC3300" ValidationExpression="\d{5}?"></asp:RegularExpressionValidator>
+                                            <asp:RegularExpressionValidator ID="zipExpressionValidator0" runat="server" ControlToValidate="Zip" ErrorMessage="5-Digit Zip" Font-size="Small" ForeColor="#CC3300" ValidationExpression="\d{5}?"></asp:RegularExpressionValidator>
                                         </EditItemTemplate>
                                         <InsertItemTemplate>
                                             <asp:TextBox ID="Zip" runat="server" Text='<%# Bind("zip") %>' ValidationGroup="VG1"></asp:TextBox>
+                                            <asp:TextBoxWatermarkExtender ID="Zip_TextBoxWatermarkExtender" runat="server" BehaviorID="Zip_TextBoxWatermarkExtender" TargetControlID="Zip" ViewStateMode="Enabled" WatermarkText="00000" />
                                             <asp:RequiredFieldValidator ID="ZipValidator1" runat="server" ControlToValidate="Zip" ErrorMessage="Required!" Font-size="Small" ForeColor="#CC3300" />
-                                            <asp:RegularExpressionValidator ID="zipExpressionValidator1" runat="server" ControlToValidate="Zip" ErrorMessage="5-Digit Zip Required" Font-size="Small" ForeColor="#CC3300" ValidationExpression="\d{5}?"></asp:RegularExpressionValidator>
+                                            <asp:RegularExpressionValidator ID="zipExpressionValidator1" runat="server" ControlToValidate="Zip" ErrorMessage="5-Digit Zip" Font-size="Small" ForeColor="#CC3300" ValidationExpression="\d{5}?"></asp:RegularExpressionValidator>
                                         </InsertItemTemplate>
                                         <ItemTemplate>
                                             <asp:Label ID="Label39" runat="server" Text='<%# Bind("zip") %>'></asp:Label>
@@ -506,10 +515,12 @@
                                     <asp:TemplateField HeaderText="Phone" SortExpression="phone">
                                         <EditItemTemplate>
                                             <asp:TextBox ID="Phone" runat="server" Text='<%# Bind("phone") %>'></asp:TextBox>
+                                            <asp:TextBoxWatermarkExtender ID="Phone_TextBoxWatermarkExtender" runat="server" BehaviorID="Phone_TextBoxWatermarkExtender" TargetControlID="Phone" ViewStateMode="Enabled" WatermarkText="000-000-0000" />
                                             <asp:RegularExpressionValidator ID="phoneExpressionValidator0" runat="server" ControlToValidate="Phone" ErrorMessage="Format 000-000-0000" Font-size="Small" ForeColor="#CC3300" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"></asp:RegularExpressionValidator>
                                         </EditItemTemplate>
                                         <InsertItemTemplate>
                                             <asp:TextBox ID="Phone" runat="server" Text='<%# Bind("phone") %>'></asp:TextBox>
+                                            <asp:TextBoxWatermarkExtender ID="Phone_TextBoxWatermarkExtender" runat="server" BehaviorID="Phone_TextBoxWatermarkExtender" TargetControlID="Phone" ViewStateMode="Enabled" WatermarkText="000-000-0000" />
                                             <asp:RegularExpressionValidator ID="phoneExpressionValidator1" runat="server" ControlToValidate="Phone" ErrorMessage="Format 000-000-0000" Font-size="Small" ForeColor="#CC3300" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"></asp:RegularExpressionValidator>
                                         </InsertItemTemplate>
                                         <ItemTemplate>
@@ -562,16 +573,18 @@
                                     <asp:TemplateField HeaderText="Hire Date" SortExpression="startdate">
                                         <EditItemTemplate>
                                             <asp:TextBox ID="startdate" runat="server" Text='<%# Bind("startdate", "{0:MM/dd/yy}")%>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="startdate_TextBoxWatermarkExtender" runat="server" BehaviorID="startdate_TextBoxWatermarkExtender" TargetControlID="startdate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
                                             <asp:Label ID="Label48" runat="server" ForeColor="#E6D9CC" Text="(Format mm/dd/yy)" />
                                             <asp:RequiredFieldValidator ID="startdateValidator0" runat="server" ControlToValidate="startdate" ErrorMessage="Required!" Font-size="Small" ForeColor="#CC3300" />
-                                            <asp:CompareValidator ID="dateValidator0" runat="server" ControlToValidate="startdate" ErrorMessage="Please enter a valid date." Font-size="Small" ForeColor="#CC3300" Operator="DataTypeCheck" Type="Date">
+                                            <asp:CompareValidator ID="dateValidator0" runat="server" ControlToValidate="startdate" ErrorMessage="Invalid date." Font-size="Small" ForeColor="#CC3300" Operator="DataTypeCheck" Type="Date">
                                         </asp:CompareValidator>
                                         </EditItemTemplate>
                                         <InsertItemTemplate>
                                             <asp:TextBox ID="startdate" runat="server" Text='<%# Bind("startdate", "{0:MM/dd/yy}")%>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="startdate_TextBoxWatermarkExtender" runat="server" BehaviorID="startdate_TextBoxWatermarkExtender" TargetControlID="startdate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
                                             <asp:Label ID="Label49" runat="server" ForeColor="#E6D9CC" Text="(Format mm/dd/yy)" />
                                             <asp:RequiredFieldValidator ID="startdateValidator1" runat="server" ControlToValidate="startdate" ErrorMessage="Required!" Font-size="Small" ForeColor="#CC3300" />
-                                            <asp:CompareValidator ID="dateValidator1" runat="server" ControlToValidate="startdate" ErrorMessage="Please enter a valid date." Font-size="Small" ForeColor="#CC3300" Operator="DataTypeCheck" Type="Date">
+                                            <asp:CompareValidator ID="dateValidator1" runat="server" ControlToValidate="startdate" ErrorMessage="Invalid date." Font-size="Small" ForeColor="#CC3300" Operator="DataTypeCheck" Type="Date">
                                         </asp:CompareValidator>
                                         </InsertItemTemplate>
                                         <ItemTemplate>
@@ -581,12 +594,14 @@
                                     <asp:TemplateField HeaderText="Termination Date" SortExpression="enddate">
                                         <EditItemTemplate>
                                             <asp:TextBox ID="enddate" runat="server" Text='<%# Bind("enddate", "{0:MM/dd/yy}")%>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="Enddate_TextBoxWatermarkExtender" runat="server" BehaviorID="Enddate_TextBoxWatermarkExtender" TargetControlID="enddate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
                                             <asp:Label ID="Label51" runat="server" ForeColor="#E6D9CC" Text="(Format mm/dd/yy)" />
                                             <asp:CompareValidator ID="TermdateValidator0" runat="server" ControlToValidate="enddate" ErrorMessage="Please enter a valid date." Font-size="Small" ForeColor="#CC3300" Operator="DataTypeCheck" Type="Date">
                                         </asp:CompareValidator>
                                         </EditItemTemplate>
                                         <InsertItemTemplate>
                                             <asp:TextBox ID="enddate" runat="server" Text='<%# Bind("enddate", "{0:MM/dd/yy}")%>'></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="Enddate_TextBoxWatermarkExtender" runat="server" BehaviorID="Enddate_TextBoxWatermarkExtender" TargetControlID="enddate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
                                             <asp:Label ID="Label52" runat="server" ForeColor="#E6D9CC" Text="(Format mm/dd/yy)" />
                                             <asp:CompareValidator ID="TermdateValidator1" runat="server" ControlToValidate="enddate" ErrorMessage="Please enter a valid date." Font-size="Small" ForeColor="#CC3300" Operator="DataTypeCheck" Type="Date">
                                         </asp:CompareValidator>
@@ -663,7 +678,7 @@
                   <table id="table8" style="width:100%;">
                       <tr>
                         <td>
-                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="EmpID" DataSourceID="SqlDataSource3" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="1200px" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small" Font-Bold="False">
+                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="EmpID" DataSourceID="SqlDataSource3" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="1200px" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small" Font-Bold="False" PageSize="25">
                             <AlternatingRowStyle BackColor="#A99583" />
                             <Columns>
                                 <asp:BoundField DataField="EmpID" HeaderText="EmpID" InsertVisible="False" ReadOnly="True" SortExpression="EmpID">
