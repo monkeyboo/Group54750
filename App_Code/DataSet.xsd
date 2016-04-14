@@ -37,10 +37,10 @@ GROUP BY SalesTicket.EmpID, SalesTicket.date, Items.ItemName, SalesTicketDetails
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="QuotaTableAdapter" GeneratorDataComponentClassName="QuotaTableAdapter" Name="Quota" UserDataComponentName="QuotaTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="4750group5ConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="4750group5ConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillQuota" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataQuota" GeneratorSourceName="FillQuota" GetMethodModifier="Public" GetMethodName="GetDataQuota" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataQuota" UserSourceName="FillQuota">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        Employees.EmpID AS ID, Employees.Fname + ' ' + Employees.Lname AS Name, Items.ItemName AS Item, Items.price AS Price, SalesTicketDetails.qty AS Qty
+                    <CommandText>SELECT        Employees.EmpID AS ID, Employees.Fname + ' ' + Employees.Lname AS Name, Items.ItemName AS Item, salesticketdetails.unitprice AS Price, SalesTicketDetails.qty AS Qty, (salesticketdetails.unitprice* SalesTicketDetails.qty) as Total
 FROM            Employees INNER JOIN
                          SalesTicket ON Employees.EmpID = SalesTicket.EmpID INNER JOIN
                          SalesTicketDetails ON SalesTicket.ticketID = SalesTicketDetails.ticketID INNER JOIN
@@ -56,6 +56,7 @@ FROM            Employees INNER JOIN
               <Mapping SourceColumn="Item" DataSetColumn="Item" />
               <Mapping SourceColumn="Price" DataSetColumn="Price" />
               <Mapping SourceColumn="Qty" DataSetColumn="Qty" />
+              <Mapping SourceColumn="Total" DataSetColumn="Total" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -67,7 +68,7 @@ FROM            Employees INNER JOIN
   <xs:element name="DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="DataSet" msprop:Generator_UserDSName="DataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="EmployeeID" msprop:Generator_ColumnVarNameInTable="columnEmployeeID" msprop:Generator_ColumnPropNameInRow="EmployeeID" msprop:Generator_ColumnPropNameInTable="EmployeeIDColumn" msprop:Generator_UserColumnName="EmployeeID" type="xs:int" />
@@ -97,7 +98,7 @@ FROM            Employees INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Quota" msprop:Generator_TableClassName="QuotaDataTable" msprop:Generator_TableVarName="tableQuota" msprop:Generator_TablePropName="Quota" msprop:Generator_RowDeletingName="QuotaRowDeleting" msprop:Generator_RowChangingName="QuotaRowChanging" msprop:Generator_RowEvHandlerName="QuotaRowChangeEventHandler" msprop:Generator_RowDeletedName="QuotaRowDeleted" msprop:Generator_UserTableName="Quota" msprop:Generator_RowChangedName="QuotaRowChanged" msprop:Generator_RowEvArgName="QuotaRowChangeEvent" msprop:Generator_RowClassName="QuotaRow">
+        <xs:element name="Quota" msprop:Generator_TableClassName="QuotaDataTable" msprop:Generator_TableVarName="tableQuota" msprop:Generator_RowChangedName="QuotaRowChanged" msprop:Generator_TablePropName="Quota" msprop:Generator_RowDeletingName="QuotaRowDeleting" msprop:Generator_RowChangingName="QuotaRowChanging" msprop:Generator_RowEvHandlerName="QuotaRowChangeEventHandler" msprop:Generator_RowDeletedName="QuotaRowDeleted" msprop:Generator_RowClassName="QuotaRow" msprop:Generator_UserTableName="Quota" msprop:Generator_RowEvArgName="QuotaRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -115,12 +116,17 @@ FROM            Employees INNER JOIN
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Price" msprop:Generator_ColumnVarNameInTable="columnPrice" msprop:Generator_ColumnPropNameInRow="Price" msprop:Generator_ColumnPropNameInTable="PriceColumn" msprop:Generator_UserColumnName="Price" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Price" msprop:Generator_ColumnVarNameInTable="columnPrice" msprop:Generator_ColumnPropNameInRow="Price" msprop:Generator_ColumnPropNameInTable="PriceColumn" msprop:Generator_UserColumnName="Price" type="xs:decimal" />
               <xs:element name="Qty" msprop:Generator_ColumnVarNameInTable="columnQty" msprop:Generator_ColumnPropNameInRow="Qty" msprop:Generator_ColumnPropNameInTable="QtyColumn" msprop:Generator_UserColumnName="Qty" type="xs:int" />
+              <xs:element name="Total" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:choice>
     </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Quota" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
   </xs:element>
 </xs:schema>

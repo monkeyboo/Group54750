@@ -62,6 +62,7 @@ form {
     background-color: #43382e;
 
 }
+
 /* the styles for the div tags that divide the page into sections */
 #logo {
     float: left;
@@ -79,11 +80,15 @@ form {
     padding-top: 25px;
     padding-right: 140px;
     padding-bottom: 20px;
+    }
+        .auto-style1 {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-
+         <div class="container1">
            <div id="logo">
             <asp:Image ID="Image1" runat="server" ImageUrl="~/twoRiversLogo.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
@@ -100,21 +105,22 @@ form {
             </asp:SiteMapPath>
         <br />
         </div>
+             </div>
    
      
-            <table style="width: 94.5%;" align="center" id="report">
+            <table style="width: 96%;" align="center" id="report">
                 <tr>
-                    <td>
+                    <td class="auto-style1">
 
                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="100%" BackColor="#E6D9CC">
-                            <LocalReport ReportPath="QuotaReport.rdlc">
+                        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="100%" BackColor="#43382E" Height="650px">
+                            <LocalReport ReportPath="Report.rdlc">
                                 <DataSources>
-                                    <rsweb:ReportDataSource DataSourceId="ObjectDataSource1" Name="DataSet1" />
+                                    <rsweb:ReportDataSource DataSourceId="ObjectDataSource5" Name="QuotaDataSet" />
                                 </DataSources>
                             </LocalReport>
                         </rsweb:ReportViewer>
-                        <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetData" TypeName="DataSetTableAdapters.QuotaTableAdapter"></asp:ObjectDataSource>
+                        <asp:ObjectDataSource ID="ObjectDataSource5" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetData" TypeName="QuotaTableAdapters.QUOTATableAdapter"></asp:ObjectDataSource>
                     </td>
                     
                 </tr>
