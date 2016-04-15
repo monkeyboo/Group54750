@@ -8,6 +8,11 @@ header {
     height: 200px;
     background-color: #BE9D80 ;
 }
+.container1 {
+    width: 1300px;
+    height: 115px;
+    background-color: #43382e;
+}
 #logo {
     float: left;
     padding-left: 30px;
@@ -26,7 +31,6 @@ header {
     padding-bottom: 20px;
 }
 /* the styles for the div tags that divide the page into sections */
-
 body {
    margin: 4em auto;
     width: auto;
@@ -43,26 +47,45 @@ form {
 	background-color: #7a695a;
     font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-.container1 {
-    width: 1300px;
-    height: 115px;
-    background-color: #43382e;
-}
+/*Navigation Container*/
 .container2 {
     width: 1300px;
     height: auto;
 }
-.container {
-    width: 1300px;
-    height: 115px;
-    background-color: #43382e;
-
+#table1 {
+    align-content: center;
+    width: auto;
+    margin-left: 150px;
+    margin-right: 150px;
 }
 .navButtons {
     text-align: center;
     height: auto;
     width: 1200px;
     padding-top: 10px;
+}
+/*Search Controls*/
+#combo {
+    margin: auto;
+    text-align: center;
+    height: auto;
+    width: 250px;
+    padding-top: 10px;
+    
+}
+#combo2 {
+    margin: auto;
+    text-align: center;
+    height: auto;
+    width: 250px;
+    padding-top: 10px;
+    
+}
+#table2 {
+    width: auto;
+    margin-left: 150px;
+    margin-right: 150px;
+    
 }
 .nameLabel {
     align-content: center;
@@ -73,7 +96,7 @@ form {
 .nameTextBox {
     width: auto;
     height: auto;
-        }
+}
 .FnDD {
     width: auto;
     height: auto;
@@ -82,6 +105,54 @@ form {
     width: auto;
     text-align: right;
     height: auto;
+}
+/***********************************************************Start Customers and Employees Screen*****************************/
+/*Details View For Customers Page*/
+#table4 {
+    width: 65%;
+    margin-left: 75px;
+    margin-right: 25px;
+    margin-top: 15px;
+}
+#table5 {
+    align-content: center;
+    text-align: left;
+}
+#table3 {
+    width: 65%;
+    margin-left: 75px;
+    margin-right: 25px;
+}
+#table6 {
+    align-content: center;
+    text-align: left;
+}
+/*Gridview for Customers*/
+#table7 {
+    width: 95%;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+#table8 {
+    align-content: center;
+    text-align: left;
+   
+}
+
+/************************************************************End Customers and Employees Screen*******************************/
+.container {
+ 
+   width: 1300px;
+    height: 115px;
+    background-color: #43382e;
+}
+table {
+    align-content: center;
+    width: auto;
+    height: auto;
+    margin-top: 0;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 .formview {
     margin-left: 400px;
@@ -93,60 +164,11 @@ form {
 .rightColumn {
     text-align: left;
 }
-table {
-    align-content: center;
-    width: auto;
-    height: auto;
-    margin-top: 0;
-    padding-right: 10px;
-    padding-left: 10px;
-}
-#table1 {
-    align-content: center;
-    width: auto;
-    margin-left: 150px;
-    margin-right: 150px;
-}
-#table2 {
-    width: auto;
-    margin-left: 150px;
-    margin-right: 150px;
-    
-}
 #EntNameLabel {
     text-align: center;
 }
-#table4 {
-    width: 65%;
-    margin-left: 75px;
-    margin-right: 25px;
-    margin-top: 15px;
-}
-#table5 {
-    align-content: center;
-    text-align: left;
-   
-}
-#table3 {
-    width: 65%;
-    margin-left: 75px;
-    margin-right: 25px;
-}
-#table6 {
-    align-content: center;
-    text-align: left;
-   
-}
-#table7 {
-    width: 95%;
-    margin-left: 25px;
-    margin-right: 25px;
-}
-#table8 {
-    align-content: center;
-    text-align: left;
-   
-}
+/************************************************************Table Formatting for Vendors Screens*******************************/
+/*Details views includes tables 5 and 6 from Customers*/
 #table9 {
     width: 65%;
     margin-left: 225px;
@@ -158,37 +180,10 @@ table {
     margin-right: 25px;
     margin-top: 15px;
 }
+/*Gridview includes table 8 from Customers*/
 #table11 {
     width: 95%;
     margin-left: 35px;
     margin-right: 25px;
 }
-#table12 {
-    width: 65%;
-    margin-left: 225px;
-    margin-right: 25px;
-}
-#table13 {
-    align-content: center;
-    text-align: left;
-    background-color: #A99583;
-}
-#table5, td {
-    width: 800px;
-    align-self: center;
-}
-#WorkLabel {
-    width: auto;
-    height: 50px;
-    align-content: center;
-    text-align: center;
-}
-#WorkLabel2 {
-    width: auto;
-    height: 50px;
-    align-content: center;
-    text-align: center;
-}
-#DigitLabel {
-    text-align: center;
-}
+/*End Table Formatting for Vendors Screens*/
