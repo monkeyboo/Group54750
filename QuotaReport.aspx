@@ -89,6 +89,12 @@ form {
                  padding:.5em;
                  text-align: left;
              }
+         .auto-style2 {
+             text-align: center;
+         }
+         .auto-style3 {
+             width: 317px;
+         }
     </style>
 </head>
 <body>
@@ -115,14 +121,27 @@ form {
 
    </div> 
      
-            <table style="width: 100%;" align="center" id="report">
+            <table style="text-align:center; margin:auto auto;" id="report">
                 <tr>
-                    <td class="auto-style1">
+                    <td class="auto-style1" colspan="4">
                         <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Quota Report" Width="400px"></asp:Label>
                         <br />
                         </td>
 </tr>
                 <tr>
+                    <td class="auto-style2" style="text-align:right;">
+                        &nbsp;</td>
+                    <td class="auto-style2" style="text-align:right;">
+                        <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
+                        </td>
+                    <td class="auto-style2" style="text-align:right;">
+                        <asp:Calendar ID="Calendar2" runat="server" DataSourceID="SqlDataSource3" DataTextField="enddate" DataValueField="enddate"></asp:Calendar>
+                        </td>
+                    <td class="auto-style1" style="text-align:left;">
+                        &nbsp;</td>
+</tr>
+                <tr>
+                    <td class="auto-style2" style="text-align:right;" colspan="3">
                         
                     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="empid" >
                             
@@ -192,22 +211,59 @@ form {
                         </asp:ListView>
    
 
-                </tr>
-              
+                        </td>
+                    <td class="auto-style1" style="text-align:left;">
+                        &nbsp;</td>
+</tr>
+                              
                
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="select employees.empid,
+                        
+            </table>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
+            SelectCommand="select employees.empid,
 (employees.fname + ' ' + employees.lname),
 sum(unitprice*qty) as [Total Sales]
 from employees, salesticketdetails, salesticket, items
 where employees.empid = salesticket.empid
 and salesticket.ticketid = salesticketdetails.ticketid
 and salesticketdetails.itemid = items.itemid
+and salesticket.date between @start and @end
 group by employees.empid, fname, lname">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="Calendar1" Name="start" PropertyName="SelectedDate" />
+                <asp:ControlParameter ControlID="Calendar2" Name="end" PropertyName="SelectedDate" />
+            </SelectParameters>
 
                         </asp:SqlDataSource>
               
                
-            </table>
+       <asp:SqlDataSource ID="SqlDataSource2" runat="server"></asp:SqlDataSource>
+        
+       <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="
+
+if datename(dw, @startdate) = 'Monday'
+set @startdate =dateadd(d, -1, @startdate)
+
+if datename(dw, @startdate) = 'Tuesday'
+set @startdate =dateadd(d, -2, @startdate)
+
+if datename(dw, @startdate) = 'Wednesday'
+set @startdate= dateadd(d, -3, @startdate)
+
+if datename(dw, @startdate) = 'Thursday'
+set @startdate =dateadd(d, -4, @startdate)
+
+if datename(dw, @startdate) = 'Friday'
+set @startdate =dateadd(d, -5, @startdate)
+
+if datename(dw, @startdate) = 'Saturday'
+set @startdate =dateadd(d, -6, @startdate)
+
+select dateadd(d,6,@startdate) as enddate">
+           <SelectParameters>
+               <asp:ControlParameter ControlID="Calendar1" Name="startdate" PropertyName="SelectedDate" />
+           </SelectParameters>
+       </asp:SqlDataSource>
         
     </form>
 </body>
