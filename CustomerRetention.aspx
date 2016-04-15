@@ -185,11 +185,11 @@ form {
                                     </tr>
                                     <tr runat="server">
                                         <td runat="server" style="text-align: center; font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
-                                             <asp:DataPager ID="DataPager1" runat="server" PageSize="20">
-                               <Fields>
-                                   <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />
-                               </Fields>
-                           </asp:DataPager>
+                                            <asp:DataPager ID="DataPager1" runat="server" PageSize="20">
+                                                <Fields>
+                                                    <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />
+                                                </Fields>
+                                            </asp:DataPager>
                                         </td>
                                     </tr>
                                 </table>

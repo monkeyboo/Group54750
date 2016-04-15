@@ -1,5 +1,5 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false"  %>
-
+﻿<%@ Page Language="VB" AutoEventWireup="true"  %>
+<%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" tagPrefix="ajax" %>
 
 <!DOCTYPE html>
 <script runat="server">
@@ -11,9 +11,15 @@
     End Sub
 
     Protected Sub Page_Load(sender As Object, e As EventArgs)
-
+        If Session("user") IsNot "employee" Then
+            FormView1.Visible = False
+            
+            
+        End If
     End Sub
 
+
+  
 </script>
 
 
@@ -39,7 +45,7 @@ header {
 body {
    margin: 4em auto;
     width: auto;
-    height: 1000px;
+    height: auto;
 	background-color: #A99583;
     font-family: Verdana, Arial, Helvetica, sans-serif;
 }
@@ -86,10 +92,7 @@ form {
     padding-right: 140px;
     padding-bottom: 20px;
     }
-        .auto-style1 {
-            text-align: center;
-        }
-
+      
 
 
       #ListView1_itemPlaceholderContainer
@@ -104,7 +107,21 @@ form {
              }
        
    
-    </style>
+     
+
+        #report{
+            margin: auto auto;
+            text-align:center;
+
+          }
+
+#listview1
+{margin-left:150px;}
+
+#total{margin-left:750px;}
+   
+   
+        </style>
   
 
 </head>
@@ -131,19 +148,65 @@ form {
    </div> 
      
 
-            <table style="width: 96%;" align="center" id="report">
+            <table style="width: 96%; text-align:center;" id="report">
 
                 <tr>
-                    <td class="auto-style1">
+                    <td colspan="4">
+                        
+                        <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajax:ToolkitScriptManager>
                         <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Commission Report" Width="400px"></asp:Label>
                         <br />
                 </td>
                     
 						</tr>
+
                 <tr>
-                    <td class="auto-style1">
+                    <td >
+                        
+                            <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server"
+                            TargetControlID="StartTextBox" PopupButtonID="StartTextBox">
+                        </ajaxToolkit:CalendarExtender> 
+
+                </td>
+                    
+                    <td style="text-align:right; padding-right:15px;">
+                        
+                        <asp:Label ID="Label2" runat="server" Text="Start Date:" style="font-weight: 700"></asp:Label>
+                        
+                        <asp:TextBox ID="StartTextBox" runat="server"  AutoPostBack="True"/>
+                </td>
+                    
+                    <td  style="text-align:left;">
+                        
+                         <asp:Label ID="Label3" runat="server" Text="End Date:" style="font-weight: 700"></asp:Label>
+                        
+                         <asp:TextBox ID="EndTextBox" runat="server"  AutoPostBack="True" />
+                </td>
+                    
+                    <td>
+                        
+                            <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server"
+                            TargetControlID="EndTextBox" PopupButtonID="EndTextBox">
+                        </ajaxToolkit:CalendarExtender> 
+                </td>
+                    
+						</tr>
+                                  
+                
+           
+                    
                
-                       <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
+          
+                    
+                        
+                    
+					
+                  
+                
+               
+         </table>
+               
+                      <div id="listview1"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
 						
                             <AlternatingItemTemplate>
                                 <tr style="background-color:#E6D9CC;">
@@ -210,7 +273,13 @@ form {
                                         </td>
                                     </tr>
                                     <tr runat="server">
-                                        <td runat="server" style="text-align: center;background-color:black; font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;"></td>
+                                        <td runat="server" style="text-align: center;background-color:black; font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
+                                    <asp:DataPager ID="DataPager1" runat="server" PageSize="20">
+                                                <Fields>
+                                                    <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />
+                                                </Fields>
+                                            </asp:DataPager>
+                                        </td>
                                     </tr>
                                 </table>
                             </LayoutTemplate>
@@ -233,12 +302,22 @@ form {
                                     </td>
                                 </tr>
                             </SelectedItemTemplate>
-                        </asp:ListView>
+                        </asp:ListView> </div>
                     
-                        </td>
                     
-						</tr>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="if (@x = 'employee')
+       <div id="total">   <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource2">
+        <ItemTemplate>
+        <div>
+    <asp:Label ID="Label4" runat="server" style="font-weight: 700" Text="Total Commission Earned"></asp:Label>
+             <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("Total", "{0:c}")%>'></asp:TextBox>
+      
+        
+    </div>
+        </ItemTemplate>
+        </asp:FormView>
+           </div>
+
+              <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="if (@x = 'employee')
 begin
 
 SELECT        Employees.Fname + ' ' + Employees.Lname AS Name, Items.ItemName AS Item, SalesTicketDetails.UnitPrice AS Price, SalesTicketDetails.qty AS Qty, 
@@ -247,7 +326,8 @@ FROM            Employees INNER JOIN
                          SalesTicket ON Employees.EmpID = SalesTicket.EmpID INNER JOIN
                          SalesTicketDetails ON SalesTicket.ticketID = SalesTicketDetails.ticketID INNER JOIN
                          Items ON SalesTicketDetails.itemID = Items.itemID
-WHERE        (Employees.EmpID = @empid)
+
+WHERE        (Employees.EmpID = @empid) and  salesticket.date between @state and @end
 
 end
 if (@x = 'manager')
@@ -258,17 +338,33 @@ FROM            Employees INNER JOIN
                          SalesTicket ON Employees.EmpID = SalesTicket.EmpID INNER JOIN
                          SalesTicketDetails ON SalesTicket.ticketID = SalesTicketDetails.ticketID INNER JOIN
                          Items ON SalesTicketDetails.itemID = Items.itemID
+where salesticket.date between @state and @end
+order by employees.lname
 end">
                             <SelectParameters>
                                 <asp:SessionParameter DefaultValue="" Name="x" SessionField="user" />
                                 <asp:SessionParameter DefaultValue="" Name="empid" SessionField="id" />
+                                <asp:ControlParameter ControlID="StartTextBox" Name="state" PropertyName="Text" />
+                                <asp:ControlParameter ControlID="EndTextBox" Name="end" PropertyName="Text" />
                             </SelectParameters>
                         </asp:SqlDataSource>
-              
-               
-         </table>
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
+            SelectCommand="SELECT  sum( SalesTicketDetails.UnitPrice * SalesTicketDetails.qty) AS Total
+                         FROM  Employees INNER JOIN
+                         SalesTicket ON Employees.EmpID = SalesTicket.EmpID INNER JOIN
+                         SalesTicketDetails ON SalesTicket.ticketID = SalesTicketDetails.ticketID INNER JOIN
+                         Items ON SalesTicketDetails.itemID = Items.itemID
 
-        
+WHERE        (Employees.EmpID = @empid) and  salesticket.date between @state and @end
+">
+            <SelectParameters>
+                <asp:SessionParameter Name="empid" SessionField="id" />
+                <asp:ControlParameter ControlID="StartTextBox" Name="state" PropertyName="Text" />
+                <asp:ControlParameter ControlID="EndTextBox" Name="end" PropertyName="Text" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+               
+                    
     </form>
-</body>
+    </body>
 </html>

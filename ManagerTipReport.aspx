@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" %>
 
-<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+<%@ Import Namespace="System.Net.Mime.MediaTypeNames" %>
+
 
 <!DOCTYPE html>
 <script runat="server">
@@ -8,6 +9,7 @@
     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
 
     End Sub
+
 </script>
 
 
@@ -115,6 +117,7 @@ form {
             <table style="width: 100%;" align="center" id="report">
                 <tr>
                     <td class="auto-style1">
+                    
                         <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Tips Report" Width="400px"></asp:Label>
                         <br />
                         </td>
