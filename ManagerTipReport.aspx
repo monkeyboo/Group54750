@@ -12,7 +12,7 @@
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
+<head runat="server">
     <title></title>
      <style type="text/css">
 header, body, form {
@@ -75,7 +75,6 @@ form {
     padding-right: 140px;
     padding-bottom: 20px;
     }
-
  .auto-style1 {
       text-align: center;
         }
@@ -95,7 +94,6 @@ form {
    <form id="form1" runat="server">
     <div class="container1">
 
-
            <div id="logo">
             <asp:Image ID="Image1" runat="server" ImageUrl="~/twoRiversLogo.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
@@ -112,32 +110,31 @@ form {
             </asp:SiteMapPath>
         <br />
         </div>
-
    </div> 
      
             <table style="width: 100%;" align="center" id="report">
                 <tr>
                     <td class="auto-style1">
-                        <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Quota Report" Width="400px"></asp:Label>
+                        <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Tips Report" Width="400px"></asp:Label>
                         <br />
                         </td>
 </tr>
                 <tr>
                         
-                    <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="empid" >
+                    <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" >
                             
                           
                             
                             <AlternatingItemTemplate>
                                 <tr style="background-color:#E6D9CC;">
                                     <td>
-                                        <asp:Label ID="empidLabel" runat="server" Text='<%# Eval("empid") %>' />
+                                        <asp:Label ID="EmpidLabel" runat="server" Text='<%# Eval("Empid") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="Column1Label" runat="server" Text='<%# Eval("Column1") %>' />
+                                        <asp:Label ID="NameLabel" runat="server" Text='<%# Eval("Name") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="Total_SalesLabel" runat="server" Text='<%# Eval("[Total Sales]", "{0:c}")%>' />
+                                        <asp:Label ID="TotalLabel" runat="server" Text='<%# Eval("Total", "{0:c}")%>' />
                                     </td>
                                 </tr>
                             </AlternatingItemTemplate>
@@ -148,20 +145,21 @@ form {
                                         <td>No data was returned.</td>
                                     </tr>
                                 </table>
-                            </EmptyDataTemplate>   
+                            </EmptyDataTemplate>
+                                                       
                             <ItemTemplate>
                              
                               
                                   
                                         <tr style="background-color:#A99583; color: #000000;">
                                             <td>
-                                                <asp:Label ID="empidLabel" runat="server" Text='<%# Eval("empid") %>' />
+                                                <asp:Label ID="EmpidLabel" runat="server" Text='<%# Eval("Empid") %>' />
                                             </td>
                                             <td>
-                                                <asp:Label ID="Column1Label" runat="server" Text='<%# Eval("Column1") %>' />
+                                                <asp:Label ID="NameLabel" runat="server" Text='<%# Eval("Name") %>' />
                                             </td>
                                             <td>
-                                                <asp:Label ID="Total_SalesLabel" runat="server" Text='<%# Eval("[Total Sales]", "{0:c}")%>' />
+                                                <asp:Label ID="TotalLabel" runat="server" Text='<%# Eval("Total", "{0:c}")%>' />
                                             </td>
                                         </tr>
                                   
@@ -172,11 +170,11 @@ form {
                                 <table runat="server" style="margin:auto auto;">
                                     <tr runat="server">
                                         <td runat="server">
-                                            <table id="itemPlaceholderContainer" runat="server" border="0" style="">
+                                            <table id="itemPlaceholderContainer" runat="server" border="1" style="background-color: #A99583; border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
                                                 <tr runat="server" style="background-color:#E6D9CC; color: #000000;">
-                                                    <th runat="server">Employee ID</th>
+                                                    <th runat="server">Empid</th>
                                                     <th runat="server">Name</th>
-                                                    <th runat="server">Total Sales</th>
+                                                    <th runat="server">Total</th>
                                                 </tr>
                                                 <tr id="itemPlaceholder" runat="server">
                                                 </tr>
@@ -184,25 +182,31 @@ form {
                                         </td>
                                     </tr>
                                     <tr runat="server">
-                                        <td runat="server" style="text-align: center; font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
-                                        </td>
+                                        <td runat="server" style="text-align: center; font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;"></td>
                                     </tr>
                                 </table>
                             </LayoutTemplate>
+                            <SelectedItemTemplate>
+                                <tr style="background-color:#A99583; font-weight: bold;color: #FFFFFF;">
+                                    <td>
+                                        <asp:Label ID="EmpidLabel" runat="server" Text='<%# Eval("Empid") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="NameLabel" runat="server" Text='<%# Eval("Name") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="TotalLabel" runat="server" Text='<%# Eval("Total", "{0:c}")%>' />
+                                    </td>
+                                </tr>
+                            </SelectedItemTemplate>
+                            
+                           
                         </asp:ListView>
    
-
                 </tr>
               
                
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="select employees.empid,
-(employees.fname + ' ' + employees.lname),
-sum(unitprice*qty) as [Total Sales]
-from employees, salesticketdetails, salesticket, items
-where employees.empid = salesticket.empid
-and salesticket.ticketid = salesticketdetails.ticketid
-and salesticketdetails.itemid = items.itemid
-group by employees.empid, fname, lname">
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT Tips.Empid, Employees.Fname + ' ' + Employees.Lname AS Name, SUM(Tips.TipsCollected) AS Total FROM Employees INNER JOIN Tips ON Employees.EmpID = Tips.Empid GROUP BY Tips.Empid, Employees.Fname, Employees.Lname">
 
                         </asp:SqlDataSource>
               

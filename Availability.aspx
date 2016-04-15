@@ -76,7 +76,7 @@
             
          </table>
  <div id="combo">
-         <asp:Label ID="EntNameLabel" runat="server" Font-Size="Small" Text=" First Name" Font-Bold="True"></asp:Label>
+         <asp:Label ID="EntNameLabel" runat="server" Font-Size="Small" Text="Name" Font-Bold="True"></asp:Label>
          <asp:ComboBox ID="ComboBox1" runat="server" AppendDataBoundItems="True" 
               AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource4" 
               DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
