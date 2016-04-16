@@ -11,11 +11,10 @@
     End Sub
 
     Protected Sub Page_Load(sender As Object, e As EventArgs)
-        If Session("user") IsNot "employee" Then
-            FormView1.Visible = False
+    
             
             
-        End If
+  
     End Sub
 
 
@@ -153,7 +152,6 @@ form {
                 <tr>
                     <td colspan="4">
                         
-                        <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajax:ToolkitScriptManager>
                         <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Commission Report" Width="400px"></asp:Label>
                         <br />
                 </td>
@@ -173,14 +171,14 @@ form {
                         
                         <asp:Label ID="Label2" runat="server" Text="Start Date:" style="font-weight: 700"></asp:Label>
                         
-                        <asp:TextBox ID="StartTextBox" runat="server"  AutoPostBack="True"/>
+                        <asp:TextBox ID="StartTextBox" runat="server"  AutoPostBack="false" AutoComplete="false"/>
                 </td>
                     
                     <td  style="text-align:left;">
                         
                          <asp:Label ID="Label3" runat="server" Text="End Date:" style="font-weight: 700"></asp:Label>
                         
-                         <asp:TextBox ID="EndTextBox" runat="server"  AutoPostBack="True" />
+                         <asp:TextBox ID="EndTextBox" runat="server"  AutoPostBack="True" AutoComplete="false"/>
                 </td>
                     
                     <td>
@@ -309,7 +307,7 @@ form {
         <ItemTemplate>
         <div>
     <asp:Label ID="Label4" runat="server" style="font-weight: 700" Text="Total Commission Earned"></asp:Label>
-             <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("Total", "{0:c}")%>'></asp:TextBox>
+             <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("Total", "{0:c}")%>' ReadOnly="true"></asp:TextBox>
       
         
     </div>
@@ -317,39 +315,23 @@ form {
         </asp:FormView>
            </div>
 
-              <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="if (@x = 'employee')
-begin
-
-SELECT        Employees.Fname + ' ' + Employees.Lname AS Name, Items.ItemName AS Item, SalesTicketDetails.UnitPrice AS Price, SalesTicketDetails.qty AS Qty, 
-                         SalesTicketDetails.UnitPrice * SalesTicketDetails.qty AS Total
+              <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
+                  SelectCommand="SELECT        Employees.Fname + ' ' + Employees.Lname AS Name, Items.ItemName AS Item, SalesTicketDetails.UnitPrice AS Price, SalesTicketDetails.qty AS Qty, 
+                          (SalesTicketDetails.UnitPrice*(commissionrate/100)) * SalesTicketDetails.qty AS Total
 FROM            Employees INNER JOIN
                          SalesTicket ON Employees.EmpID = SalesTicket.EmpID INNER JOIN
                          SalesTicketDetails ON SalesTicket.ticketID = SalesTicketDetails.ticketID INNER JOIN
                          Items ON SalesTicketDetails.itemID = Items.itemID
 
-WHERE        (Employees.EmpID = @empid) and  salesticket.date between @state and @end
-
-end
-if (@x = 'manager')
-begin
-SELECT        Employees.Fname + ' ' + Employees.Lname AS Name, Items.ItemName AS Item, SalesTicketDetails.UnitPrice AS Price, SalesTicketDetails.qty AS Qty, 
-                         SalesTicketDetails.UnitPrice * SalesTicketDetails.qty AS Total
-FROM            Employees INNER JOIN
-                         SalesTicket ON Employees.EmpID = SalesTicket.EmpID INNER JOIN
-                         SalesTicketDetails ON SalesTicket.ticketID = SalesTicketDetails.ticketID INNER JOIN
-                         Items ON SalesTicketDetails.itemID = Items.itemID
-where salesticket.date between @state and @end
-order by employees.lname
-end">
+WHERE        (Employees.EmpID = @empid) and  salesticket.[date] between @start and @end">
                             <SelectParameters>
-                                <asp:SessionParameter DefaultValue="" Name="x" SessionField="user" />
                                 <asp:SessionParameter DefaultValue="" Name="empid" SessionField="id" />
-                                <asp:ControlParameter ControlID="StartTextBox" Name="state" PropertyName="Text" />
+                                <asp:ControlParameter ControlID="StartTextBox" Name="start" PropertyName="Text" />
                                 <asp:ControlParameter ControlID="EndTextBox" Name="end" PropertyName="Text" />
                             </SelectParameters>
                         </asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
-            SelectCommand="SELECT  sum( SalesTicketDetails.UnitPrice * SalesTicketDetails.qty) AS Total
+            SelectCommand="SELECT  sum(  (SalesTicketDetails.UnitPrice*(commissionrate/100)) * SalesTicketDetails.qty) AS Total
                          FROM  Employees INNER JOIN
                          SalesTicket ON Employees.EmpID = SalesTicket.EmpID INNER JOIN
                          SalesTicketDetails ON SalesTicket.ticketID = SalesTicketDetails.ticketID INNER JOIN
@@ -363,6 +345,9 @@ WHERE        (Employees.EmpID = @empid) and  salesticket.date between @state and
                 <asp:ControlParameter ControlID="EndTextBox" Name="end" PropertyName="Text" />
             </SelectParameters>
         </asp:SqlDataSource>
+               
+                    
+                        <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajax:ToolkitScriptManager>
                
                     
     </form>
