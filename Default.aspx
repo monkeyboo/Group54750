@@ -1,41 +1,34 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" %>
+﻿<%@ Page Language="VB" AutoEventWireup="true" %>
 
 <!DOCTYPE html>
 <script runat="server">
+    
+    Protected Sub Page_Load(sender As Object, e As EventArgs)
+        ' If Session("user") IsNot "manager" Then
+        'Response.Redirect("login.aspx")
+        'End If
+    End Sub
 
-   
-               
-    Protected Sub CustomersButton_Click(sender As Object, e As EventArgs)
-               
-        Response.Redirect("NewCustomerForm.aspx")
-                   End Sub
+    Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
+        Session.RemoveAll()
+        Response.Redirect("login.aspx")
+    End Sub
+
+    Protected Sub Button14_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Protected Sub Button21_Click(sender As Object, e As EventArgs)
+
+    End Sub
 </script>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+<head id="Head1" runat="server">
+    <title>Manager Menu</title>
     <link href="main.css" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        .auto-style11 {
-            height: 302px;
-        }
-        .auto-style25 {
-            text-align: center;
-            width: 219px;
-            height: 122px;
-        }
-        .auto-style26 {
-            text-align: center;
-            width: 220px;
-            height: 122px;
-        }
-        .auto-style27 {
-            text-align: right;
-            width: 219px;
-            height: 122px;
-        }
-        </style>
+    
 </head>
 <body>
     <form id="form1" runat="server">
@@ -45,7 +38,7 @@
             <asp:Image ID="Image1" runat="server" ImageUrl="~/twoRiversLogo.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
          <div id="logoutbutton">
-            <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" />
+            <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" OnClick="ImageButton1_Click" />
         </div>
         <div id="title">
             <br />
@@ -57,28 +50,26 @@
             </asp:SiteMapPath>
         <br />
         </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+        </div> 
         <br />
-        <table align="center" class="auto-style11">
+        
+<div id="main" class="container2">
+        <table align="center" class="mainTable">
             <tr>
-                <td class="auto-style25">
+                <td >
                     &nbsp;</td>
-                <td class="auto-style27">
-                    <strong>
-                    <asp:Button ID="MMenuButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Managers" Width="170px" OnClick="CustomersButton_Click" PostBackUrl="~/ManagerMainMenu.aspx" Font-Bold="True" />
-                    </strong>
+                <td >
+                    <asp:Button ID="VendorsButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Managers" Width="170px" Font-Bold="True" PostBackUrl="~/ManagerMainMenu.aspx" />
                 </td>
-                <td class="auto-style26">
-                    <strong>
-                    <asp:Button ID="Button2" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Employees" Width="170px" PostBackUrl="~/EmployeeMainMenu.aspx" Font-Bold="True" />
-                    </strong>
+                <td>
+                    <asp:Button ID="MyDetailsButton0" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Employees" Width="170px" PostBackUrl="~/EmployeeMainMenu.aspx" Font-Bold="True" />
                 </td>
-                <td class="auto-style26">
+                <td>
                     &nbsp;</td>
             </tr>
             </table>
-        <br />
-      </div><br />      
+        </div>
+      <br />      
     </form>
 </body>
 </html>
