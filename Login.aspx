@@ -158,6 +158,7 @@
             Response.Redirect("employeemainmenu.aspx")
         ElseIf ValidateManager(txtUserName.Text, txtUserPass.Text) Then
             Session("user") = "manager"
+            Session("id") = txtUserName.Text
             Response.Redirect("managermainmenu.aspx")
         Else
             Response.Redirect("login.aspx", True)

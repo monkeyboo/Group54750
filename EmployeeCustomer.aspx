@@ -44,10 +44,14 @@
          GridView1.DataBind()
      End Sub
 
+     Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+     End Sub
+
      Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
          Session.RemoveAll()
          Response.Redirect("login.aspx")
-    End Sub
+     End Sub
     
     Protected Sub CustDetails_ItemUpdated(sender As Object, e As DetailsViewUpdatedEventArgs) Handles CustDetails.ItemUpdated
         'Indicate whether the update operation succeeded.
@@ -139,8 +143,8 @@
               AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource1" 
               DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" 
              AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
-</div>       
-        
+</div>
+
 
            <table id="tableErrorMessage">
             <tr>

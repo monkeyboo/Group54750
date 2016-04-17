@@ -14,19 +14,12 @@
         Response.Redirect("login.aspx")
     End Sub
 
-    Protected Sub Button14_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Protected Sub Button21_Click(sender As Object, e As EventArgs)
-
-    End Sub
 </script>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>Manager Menu</title>
+    <title>Home</title>
     <link href="main.css" rel="stylesheet" type="text/css" />
     
 </head>
@@ -57,17 +50,15 @@
         <table align="center" class="mainTable">
             <tr>
                 <td >
-                    &nbsp;</td>
-                <td >
-                    <asp:Button ID="VendorsButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Managers" Width="170px" Font-Bold="True" PostBackUrl="~/ManagerMainMenu.aspx" />
+                    <asp:Button ID="ManagersButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Managers" Width="170px" PostBackUrl="~/ManagerMainMenu.aspx" Font-Bold="True" />
                 </td>
                 <td>
-                    <asp:Button ID="MyDetailsButton0" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Employees" Width="170px" PostBackUrl="~/EmployeeMainMenu.aspx" Font-Bold="True" />
+                    <asp:Button ID="EmployeesButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Employees" Width="170px" PostBackUrl="~/EmployeeMainMenu.aspx" Font-Bold="True" />
                 </td>
-                <td>
-                    &nbsp;</td>
+                
             </tr>
-            </table>
+            
+          </table>
         </div>
       <br />      
     </form>

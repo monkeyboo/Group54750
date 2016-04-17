@@ -46,6 +46,14 @@
         
     End Sub
 
+    Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
+  
+    Protected Sub EmpDetails0_PageIndexChanging(sender As Object, e As DetailsViewPageEventArgs)
+
+    End Sub
+
     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
         Session.RemoveAll()
         Response.Redirect("login.aspx")
@@ -62,11 +70,11 @@
                 "Please try again."
         Else
             lblError.Text = "Update Successful!"
-          
+
         End If
 
     End Sub
-    
+
     Protected Sub EmpDetails0_ItemInserted(sender As Object, e As DetailsViewInsertedEventArgs) Handles EmpDetails0.ItemInserted
         'Indicate whether the update operation succeeded.
         If e.Exception IsNot Nothing Then
@@ -603,7 +611,7 @@
                                     <asp:TemplateField HeaderText="Hire Date" SortExpression="startdate">
                                         <EditItemTemplate>
                                             <asp:TextBox ID="startdate" runat="server" Text='<%# Bind("startdate", "{0:MM/dd/yy}")%>'></asp:TextBox>
-                                            <asp:TextBoxWatermarkExtender ID="startdate_TextBoxWatermarkExtender" runat="server" BehaviorID="startdate_TextBoxWatermarkExtender" TargetControlID="startdate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
+                                        <asp:TextBoxWatermarkExtender ID="startdate_TextBoxWatermarkExtender" runat="server" BehaviorID="startdate_TextBoxWatermarkExtender" TargetControlID="startdate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
                                             <asp:CalendarExtender ID="startdate_CalendarExtender" runat="server" BehaviorID="startdate_CalendarExtender" TargetControlID="startdate" PopupPosition="BottomRight" />
                                             <asp:RequiredFieldValidator ID="startdateValidator0" runat="server" ControlToValidate="startdate" ErrorMessage="Required!" Font-size="Small" ForeColor="#CC3300" />
                                             <asp:CompareValidator ID="dateValidator0" runat="server" ControlToValidate="startdate" ErrorMessage="Invalid date." Font-size="Small" ForeColor="#CC3300" Operator="DataTypeCheck" Type="Date">
@@ -611,7 +619,7 @@
                                         </EditItemTemplate>
                                         <InsertItemTemplate>
                                             <asp:TextBox ID="startdate" runat="server" Text='<%# Bind("startdate", "{0:MM/dd/yy}")%>'></asp:TextBox>
-                                            <asp:TextBoxWatermarkExtender ID="startdate_TextBoxWatermarkExtender" runat="server" BehaviorID="startdate_TextBoxWatermarkExtender" TargetControlID="startdate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
+                                        <asp:TextBoxWatermarkExtender ID="startdate_TextBoxWatermarkExtender" runat="server" BehaviorID="startdate_TextBoxWatermarkExtender" TargetControlID="startdate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
                                             <asp:CalendarExtender ID="startdate_CalendarExtender" runat="server" BehaviorID="startdate_CalendarExtender" TargetControlID="startdate" PopupPosition="BottomRight" />
                                             <asp:RequiredFieldValidator ID="startdateValidator1" runat="server" ControlToValidate="startdate" ErrorMessage="Required!" Font-size="Small" ForeColor="#CC3300" />
                                             <asp:CompareValidator ID="dateValidator1" runat="server" ControlToValidate="startdate" ErrorMessage="Invalid date." Font-size="Small" ForeColor="#CC3300" Operator="DataTypeCheck" Type="Date">
@@ -624,14 +632,14 @@
                                     <asp:TemplateField HeaderText="Termination Date" SortExpression="enddate">
                                         <EditItemTemplate>
                                             <asp:TextBox ID="enddate" runat="server" Text='<%# Bind("enddate", "{0:MM/dd/yy}")%>'></asp:TextBox>
-                                            <asp:TextBoxWatermarkExtender ID="Enddate_TextBoxWatermarkExtender" runat="server" BehaviorID="Enddate_TextBoxWatermarkExtender" TargetControlID="enddate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
+                                        <asp:TextBoxWatermarkExtender ID="Enddate_TextBoxWatermarkExtender" runat="server" BehaviorID="Enddate_TextBoxWatermarkExtender" TargetControlID="enddate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
                                             <asp:CalendarExtender ID="enddate_CalendarExtender" runat="server" BehaviorID="enddate_CalendarExtender" TargetControlID="enddate" PopupPosition="BottomRight" />
                                             <asp:CompareValidator ID="TermdateValidator0" runat="server" ControlToValidate="enddate" ErrorMessage="Please enter a valid date." Font-size="Small" ForeColor="#CC3300" Operator="DataTypeCheck" Type="Date">
                                         </asp:CompareValidator>
                                         </EditItemTemplate>
                                         <InsertItemTemplate>
                                             <asp:TextBox ID="enddate" runat="server" Text='<%# Bind("enddate", "{0:MM/dd/yy}")%>'></asp:TextBox>
-                                            <asp:TextBoxWatermarkExtender ID="Enddate_TextBoxWatermarkExtender" runat="server" BehaviorID="Enddate_TextBoxWatermarkExtender" TargetControlID="enddate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
+                                        <asp:TextBoxWatermarkExtender ID="Enddate_TextBoxWatermarkExtender" runat="server" BehaviorID="Enddate_TextBoxWatermarkExtender" TargetControlID="enddate" ViewStateMode="Enabled" WatermarkText="mm/dd/yy" />
                                             <asp:CalendarExtender ID="enddate_CalendarExtender" runat="server" BehaviorID="enddate_CalendarExtender" TargetControlID="enddate" PopupPosition="BottomRight" />
                                             <asp:CompareValidator ID="TermdateValidator1" runat="server" ControlToValidate="enddate" ErrorMessage="Please enter a valid date." Font-size="Small" ForeColor="#CC3300" Operator="DataTypeCheck" Type="Date">
                                         </asp:CompareValidator>
@@ -708,7 +716,7 @@
                   <table id="table8" style="width:100%;">
                       <tr>
                         <td>
-                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="EmpID" DataSourceID="SqlDataSource3" Width="1200px" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small" Font-Bold="False" PageSize="25">
+                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="EmpID" DataSourceID="SqlDataSource3" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="1200px" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small" Font-Bold="False" PageSize="25">
                             <AlternatingRowStyle BackColor="#A99583" />
                             <Columns>
                                 <asp:BoundField DataField="EmpID" HeaderText="EmpID" InsertVisible="False" ReadOnly="True" SortExpression="EmpID">
@@ -808,7 +816,7 @@
 
 <!--DataSource 3 For GridView View All Employees-->
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
-            SelectCommand="SELECT * FROM [Employees] ORDER BY [Lname]" >
+            SelectCommand="SELECT * FROM [Employees] ORDER BY [Lname]" OnSelecting="SqlDataSource3_Selecting">
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT * FROM [EmpJobTitles]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT [state] FROM [statelist] ORDER BY [state]"></asp:SqlDataSource>

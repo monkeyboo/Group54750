@@ -72,7 +72,7 @@
         End If
 
     End Sub
-    
+
     Protected Sub CustDetails0_ItemInserted(sender As Object, e As DetailsViewInsertedEventArgs) Handles CustDetails0.ItemInserted
         'Indicate whether the update operation succeeded.
         If e.Exception IsNot Nothing Then
@@ -83,7 +83,7 @@
             lblError.Text = "Insert Successful!"
           
         End If
-
+    
     End Sub
    
 </script>
