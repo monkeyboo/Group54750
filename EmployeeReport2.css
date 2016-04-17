@@ -187,3 +187,44 @@ table {
     margin-right: 25px;
 }
 /*End Table Formatting for Vendors Screens*/
+/************************************************************Tabel Formatiing for Order Screen************************************/
+#DetailsView1 {
+    margin: auto;
+}
+#DetailsView2 {
+    margin: auto;
+}
+#table12 {
+    
+    width: 50%;
+    margin: auto;
+    margin-top: 15px;
+    text-align: center;
+}
+#table13 {
+    text-align: center;
+}
+#tableErrorMessage{
+    width: 30%;
+    margin: auto;
+    margin-top: 15px;
+    text-align: center;
+} 
+#tableErrorMessage2 {
+    text-align: center;
+}
+#ImageButton2 {
+ padding-top: 10px;
+}
+/*Gridview for Orders*/
+#table14 {
+    clear:right;
+    width: 50%;
+    margin: auto;
+    
+}
+#table15 {
+    align-content: center;
+    text-align: left;
+   
+}

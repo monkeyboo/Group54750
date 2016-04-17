@@ -79,7 +79,7 @@ table {
     margin: auto;
     text-align: center;
     height: auto;
-    width: 250px;
+    width: 230px;
     padding-top: 10px;
     
 }
@@ -170,4 +170,13 @@ table {
 #table6, td {
     width: 900px;
     align-self: center;
+}
+#tableErrorMessage{
+    width: 30%;
+    margin: auto;
+    margin-top: 15px;
+    text-align: center;
+} 
+#tableErrorMessage2 {
+    text-align: center;
 }

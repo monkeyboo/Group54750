@@ -190,7 +190,7 @@
     </head>
 <body>
 <!--Focus cursor to textbox and button-->
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" defaultfocus="txtUserName">
     
 <!--Page Header Logo-->
     <div class="container">

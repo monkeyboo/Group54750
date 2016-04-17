@@ -26,6 +26,22 @@
         Session.RemoveAll()
         Response.Redirect("login.aspx")
     End Sub
+    
+    Protected Sub ListView1_ItemUpdated(sender As Object, e As ListViewUpdatedEventArgs) Handles ListView1.ItemUpdated
+        'Indicate whether the update operation succeeded.
+        If e.Exception IsNot Nothing Then
+            lblError.Text = "A database error has occured. " &
+                e.ExceptionHandled = True
+            e.KeepInEditMode = True
+        ElseIf e.AffectedRows = 0 Then
+            lblError.Text = "Another user may have updated that item. " &
+                "Please try again."
+        Else
+            lblError.Text = "Update Successful!"
+          
+        End If
+    End Sub
+            
 </script>
 
 
@@ -68,13 +84,14 @@
         <table id="table1" >
             <tr>
                 <td class="navButtons">                    
-                    <asp:Button ID="SearchButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Search" Width="150px" OnClick="SearchButton_Click" CausesValidation="False" Font-Bold="True" />
+                    <asp:Button ID="SearchButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Availability" Width="150px" OnClick="SearchButton_Click" CausesValidation="False" Font-Bold="True" />
                     <asp:Button ID="printButton0" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Print" Width="150px" onclientclick="javascript:window.print();" xmlns:asp="#unknown" CausesValidation="False" Font-Bold="True" />
                     <asp:Button ID="homeBT" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Home" Width="150px" PostBackUrl="~/Default.aspx" CausesValidation="False" Font-Bold="True" />
                 </td>
             </tr>
             
          </table>
+
  <div id="combo">
          <asp:Label ID="EntNameLabel" runat="server" Font-Size="Small" Text="Name" Font-Bold="True"></asp:Label>
          <asp:ComboBox ID="ComboBox1" runat="server" AppendDataBoundItems="True" 
@@ -83,6 +100,22 @@
 </div>       
         
 <!--Search Controls-->
+
+           <table id="tableErrorMessage">
+            <tr>
+               <td>
+                  <table id="tableErrorMessage2" style="width:100%;">
+                      <tr>
+                        <td>
+                            <asp:Label ID="lblError" runat="server" EnableViewState="False"
+                                CssClass="error" Font-Bold="True"></asp:Label>
+                        </td>
+                        </tr>
+                        </table>
+                        </td>
+                        </tr>
+                        </table>      
+        
 
 <!--Details View For Employee Search-->
             <table id="table4">
@@ -119,7 +152,7 @@
                                 <tr>
                                     <td><table id="table3" style="width:100%;">
                                         <tr>
-                                            <td><asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource3" Visible="False" DataKeyNames="EmpID">
+                                            <td><asp:ListView ID="ListView1" runat="server" OnItemUpdated="ListView1_ItemUpdated" DataSourceID="SqlDataSource3" Visible="False" DataKeyNames="EmpID">
                                         <AlternatingItemTemplate>
                                             <tr style="background-color:#E6D9CC;">
                                                 <td>
@@ -152,23 +185,19 @@
                                                     <asp:TextBox ID="descriptionTextBox" runat="server" Text='<%# Bind("description") %>' ReadOnly="true" />
                                                 </td>
                                                 <td>
-                                                    <asp:RegularExpressionValidator ID="starttimeexpression1" runat="server" ControlToValidate="starttimeTextBox" ErrorMessage="Format hh:mm AM/PM" ValidationExpression="^(1[0-2]|0[1-9]):[0-5][0-9]\040(AM|am|PM|pm)$" ForeColor="#CC3300"></asp:RegularExpressionValidator>
-                                                    <asp:Label ID="Label3" runat="server" Text="Enter format hh:mm" ForeColor="#CC3300" />
-                                                    <asp:TextBox ID="starttimeTextBox" ValidationGroup="VG1" runat="server" Text='<%# Bind("starttime") %>' />
-                                                    <asp:Label ID="UpdateLabel1" runat="server" Text="Enter AM or PM" ForeColor="#CC3300" />
-                                                    <asp:RangeValidator ID="starttimeValidator1" runat="server" ErrorMessage="Enter 1-12" ControlToValidate="starttimeTextBox" MaximumValue="12" MinimumValue="1" Type="Integer" ForeColor="#CC3300" />                                    
+                                                    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource5"   SelectedValue='<%# Bind("starttime")%>'
+                                                        AppendDataBoundItems="true" DataTextField="starttime" DataValueField="starttime">
+                                                    <asp:ListItem Text="" Value="">none</asp:ListItem>   
+                                                    </asp:DropDownList>
                                                 </td>
                                                 <td>
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="endtimeTextBox" ErrorMessage="Format hh:mm AM/PM" ValidationExpression="^(1[0-2]|0[1-9]):[0-5][0-9]\040(AM|am|PM|pm)$" ForeColor="#CC3300"></asp:RegularExpressionValidator>
-                                                    <asp:Label ID="Label2" runat="server" Text="Enter format hh:mm" ForeColor="#CC3300" />
-                                                    <asp:TextBox ID="endtimeTextBox" ValidationGroup="VG1" runat="server" Text='<%# Bind("endtime") %>' />
-                                                    <asp:Label ID="Label1" runat="server" Text="Enter AM or PM" ForeColor="#CC3300" />
-                                                    <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Enter 1-12" ControlToValidate="endtimeTextBox" MaximumValue="12" MinimumValue="1" Type="Integer" ForeColor="#CC3300" />                                    
+                                                    <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource5"   SelectedValue='<%#  Bind("endtime") %>'
+                                                        AppendDataBoundItems="true" DataTextField="endtime" DataValueField="endtime">
+                                                    <asp:ListItem Text="" Value="">none</asp:ListItem>
+                                                    </asp:DropDownList>
                                                 </td>
                                             </tr>
-
                                         </EditItemTemplate>
-
                                         <EmptyDataTemplate>
                                             <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
                                                 <tr>
@@ -278,7 +307,7 @@
           </SelectParameters>
           </asp:SqlDataSource>
           <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
-          SelectCommand="SELECT empavil.empid, [description], FORMAT(CAST(starttime AS DATETIME),'hh:mm tt') as starttime, FORMAT(CAST(endtime AS DATETIME),'hh:mm tt') as endtime
+          SelectCommand="SELECT empavil.empid, [description], FORMAT(CAST(starttime AS DATETIME),'hh:mmtt') as starttime, FORMAT(CAST(endtime AS DATETIME),'hh:mmtt') as endtime
                          FROM empavil, employees, [dayofweek]
                          WHERE empavil.empid = employees.empid
                          and empavil.dayid = [dayofweek].dayid
@@ -298,6 +327,9 @@
                   <asp:Parameter Name="Endtime" />
               </UpdateParameters>
           </asp:SqlDataSource>
+          <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
+              SelectCommand="SELECT * FROM [times]"></asp:SqlDataSource>
+        <br />
           <br />
        </form>
  </body>
