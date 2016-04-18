@@ -51,15 +51,41 @@
     Protected Sub EditVendorBT_Click(sender As Object, e As EventArgs)
         CustDetails.Visible = False
     End Sub
-    Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    
+   
     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
         Session.RemoveAll()
         Response.Redirect("login.aspx")
     End Sub
+   
+    Protected Sub CustDetails_ItemUpdated(sender As Object, e As DetailsViewUpdatedEventArgs) Handles CustDetails.ItemUpdated
+        'Indicate whether the update operation succeeded.
+        If e.Exception IsNot Nothing Then
+            lblError.Text = "A database error has occured. " &
+                e.ExceptionHandled = True
+            e.KeepInEditMode = True
+        ElseIf e.AffectedRows = 0 Then
+            lblError.Text = "Another user may have updated that item. " &
+                "Please try again."
+        Else
+            lblError.Text = "Update Successful!"
+          
+        End If
+
+    End Sub
+
+    Protected Sub CustDetails0_ItemInserted(sender As Object, e As DetailsViewInsertedEventArgs) Handles CustDetails0.ItemInserted
+        'Indicate whether the update operation succeeded.
+        If e.Exception IsNot Nothing Then
+            lblError.Text = "A database error has occured. " &
+                e.ExceptionHandled = True
+            e.KeepInInsertMode = True
+        Else
+            lblError.Text = "Insert Successful!"
+          
+        End If
+    
+    End Sub
+   
 </script>
 
 
@@ -81,7 +107,7 @@
    
 <!--Logout Button-->
     <div id="logoutbutton">
-            <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" />
+            <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" OnClick="ImageButton1_Click"/>
         </div>
 
 <!--SiteMap-->
@@ -113,13 +139,29 @@
 
 <!--Search Controls-->
 <div id="combo">
-         <asp:Label ID="EntNameLabel" runat="server" Font-Size="Small" Text="Name" Font-Bold="True"></asp:Label>
+         <asp:Label ID="EntNameLabel" runat="server" Font-Size="Medium" Text="Vendor" Font-Bold="True"></asp:Label>
          <asp:ComboBox ID="ComboBox1" runat="server" AppendDataBoundItems="True" 
               AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource5" 
               DataTextField="VendName" DataValueField="VendName" MaxLength="0" style="display: inline;" AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
 </div>
              
 
+           <table id="tableErrorMessage">
+            <tr>
+               <td>
+                  <table id="tableErrorMessage2" style="width:100%;">
+                      <tr>
+                        <td>
+                            <asp:Label ID="lblError" runat="server" EnableViewState="False"
+                                CssClass="error" Font-Bold="True"></asp:Label>
+                        </td>
+                        </tr>
+                        </table>
+                        </td>
+                        </tr>
+                        </table>
+                         
+                       
 <!--Details View For Customer Search-->
            <table id="table10">
             <tr>
@@ -127,7 +169,7 @@
                   <table id="table5" style="width:100%;">
                       <tr>
                         <td>
-                        <asp:DetailsView ID="CustDetails" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" Height="50px" Width="800px" ForeColor="Black" GridLines="None">
+                        <asp:DetailsView ID="CustDetails" runat="server" ItemUpdated="CustDetails_ItemUpdated" AutoGenerateRows="False" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" Height="50px" Width="800px" ForeColor="Black" GridLines="None">
                             <AlternatingRowStyle BackColor="#E6D9CC" />
                             <CommandRowStyle BackColor="#A99583" Font-Bold="True" />
                             <EditRowStyle BackColor="#43382E" />
@@ -260,7 +302,7 @@
                                 </asp:TemplateField>
                             <asp:TemplateField ShowHeader="False">
                                     <EditItemTemplate>
-                                        <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Update" OnClientClick="javascript:window.alert('Updated Successfully!');" Text="Update" BackColor="#E6D9CC" Width="75px"/>
+                                        <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Update"  Text="Update" BackColor="#E6D9CC" Width="75px"/>
                                         &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" BackColor="#E6D9CC" Width="75px"/>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
@@ -290,7 +332,7 @@
                   <table id="table6" style="width:100%;">
                       <tr>
                         <td>   
-                        <asp:DetailsView ID="CustDetails0" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" Height="50px" Width="800px" ForeColor="Black" GridLines="None" DefaultMode="Insert" Visible="False">
+                        <asp:DetailsView ID="CustDetails0" runat="server" ItemInserted="CustDetails0_ItemInserted"  AutoGenerateRows="False" CellPadding="4" DataKeyNames="VendID" DataSourceID="SqlDataSource2" Height="50px" Width="800px" ForeColor="Black" GridLines="None" DefaultMode="Insert" Visible="False">
                             <AlternatingRowStyle BackColor="#E6D9CC" />
                             <CommandRowStyle BackColor="#A99583" Font-Bold="True" />
                             <EditRowStyle BackColor="#43382E" />
@@ -428,7 +470,7 @@
                                         &nbsp;<asp:Button ID="Button4" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" BackColor="#E6D9CC" Width="75px"/>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
-                                        <asp:Button ID="Button5" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Insert" Text="Insert"  OnClientClick="javascript:window.alert('Insert Successful!');" BackColor="#E6D9CC" Width="75px"/>
+                                        <asp:Button ID="Button5" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Insert" Text="Insert" BackColor="#E6D9CC" Width="75px"/>
                                         &nbsp;<asp:Button ID="Button6" runat="server" CausesValidation="False" CommandName="Cancel" Text="Clear" BackColor="#E6D9CC" Width="75px"/>
                                     </InsertItemTemplate>
                                     <ItemTemplate>
@@ -531,7 +573,8 @@
             </UpdateParameters>
         </asp:SqlDataSource>
 
-        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT [VendName] FROM [Vendors] ORDER BY [VendName]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
+            SelectCommand="SELECT [VendName] FROM [Vendors] ORDER BY [VendName]"></asp:SqlDataSource>
 
 <!--DataSource 3 For GridView View All Customers-->
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
