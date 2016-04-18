@@ -204,7 +204,7 @@ form {
                
          </table>
                
-                      <div id="listview1"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
+                      <div id="listview1">  <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
 						
                             <AlternatingItemTemplate>
                                 <tr style="background-color:#E6D9CC;">

@@ -11,7 +11,8 @@
     Protected Sub Page_Load(sender As Object, e As EventArgs)
          ' If Session("user") IsNot "employee" Then
          'Response.Redirect("login.aspx")
-         'End If
+        'End If
+       
      End Sub
     
      'New Report Button Event 
@@ -52,6 +53,8 @@
          Session.RemoveAll()
          Response.Redirect("login.aspx")
      End Sub
+
+   
 </script>
 
 
@@ -109,7 +112,7 @@
          <asp:Label ID="EntNameLabel" runat="server" Font-Size="Small" Text=" Name" Font-Bold="True"></asp:Label>
          <asp:ComboBox ID="ComboBox1" runat="server" 
               AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource1" 
-              DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" AutoPostBack="True" Width="200px" BackColor="#F3EDE7" AppendDataBoundItems="True" ></asp:ComboBox>
+              DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" AutoPostBack="True" Width="200px" BackColor="#F3EDE7" AppendDataBoundItems="True" EnableViewState="false"></asp:ComboBox>
 </div>
 
 <!--Details View For Customer Search-->
@@ -218,7 +221,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField ShowHeader="False">
                                     <EditItemTemplate>
-                                        <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Update" Text="Update" BackColor="#E6D9CC" Width="75px"/>
+                                        <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Update" Text="Update" BackColor="#E6D9CC" Width="75px" />
                                         &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" BackColor="#E6D9CC" Width="75px" />
                                     </EditItemTemplate>
                                     <InsertItemTemplate>

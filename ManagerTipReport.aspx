@@ -1,5 +1,5 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" %>
-
+﻿<%@ Page Language="VB" AutoEventWireup="true" %>
+<%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" tagPrefix="ajax" %>
 <%@ Import Namespace="System.Net.Mime.MediaTypeNames" %>
 
 
@@ -77,10 +77,7 @@ form {
     padding-right: 140px;
     padding-bottom: 20px;
     }
- .auto-style1 {
-      text-align: center;
-        }
-
+ 
          #ListView1_itemPlaceholderContainer
          {
              width:700px;
@@ -90,6 +87,10 @@ form {
                  padding:.5em;
                  text-align: left;
              }
+         .auto-style2
+         {
+             height: 771px;
+         }
     </style>
 </head>
 <body>
@@ -114,14 +115,64 @@ form {
         </div>
    </div> 
      
-            <table style="width: 100%;" align="center" id="report">
+        <table style="width: 96%; text-align:center;" id="Table1">
+
                 <tr>
-                    <td class="auto-style1">
-                    
-                        <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Tips Report" Width="400px"></asp:Label>
+                    <td colspan="4">
+                        
+                        <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Tips Report" Width="400px"></asp:Label>
                         <br />
-                        </td>
-</tr>
+                </td>
+                    
+						</tr>
+
+                <tr>
+                    <td >
+                        
+                            <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server"
+                            TargetControlID="StartTextBox" PopupButtonID="StartTextBox">
+                        </ajaxToolkit:CalendarExtender> 
+
+                </td>
+                    
+                    <td style="text-align:right; padding-right:15px;">
+                        
+                        <asp:Label ID="Label3" runat="server" Text="Start Date:" style="font-weight: 700"></asp:Label>
+                        
+                        <asp:TextBox ID="StartTextBox" runat="server"  AutoPostBack="false" AutoComplete="false"/>
+                </td>
+                    
+                    <td  style="text-align:left;">
+                        
+                         <asp:Label ID="Label4" runat="server" Text="End Date:" style="font-weight: 700"></asp:Label>
+                        
+                         <asp:TextBox ID="EndTextBox" runat="server"  AutoPostBack="True" AutoComplete="false"/>
+                </td>
+                    
+                    <td>
+                        
+                            <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server"
+                            TargetControlID="EndTextBox" PopupButtonID="EndTextBox">
+                        </ajaxToolkit:CalendarExtender> 
+                </td>
+                    
+						</tr>
+                                  
+                
+           
+                    
+               
+          
+                    
+                        
+                    
+					
+                  
+                
+               
+         </table>     
+       
+       <table style="width: 100%;" align="center" id="report">
                 <tr>
                         
                     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" >
@@ -143,7 +194,7 @@ form {
                             </AlternatingItemTemplate>
                             
                             <EmptyDataTemplate>
-                                <table runat="server" style="">
+                                <table runat="server" style="margin:auto;">
                                     <tr>
                                         <td>No data was returned.</td>
                                     </tr>
@@ -209,13 +260,23 @@ form {
                 </tr>
               
                
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT Tips.Empid, Employees.Fname + ' ' + Employees.Lname AS Name, SUM(Tips.TipsCollected) AS Total FROM Employees INNER JOIN Tips ON Employees.EmpID = Tips.Empid GROUP BY Tips.Empid, Employees.Fname, Employees.Lname">
-
-                        </asp:SqlDataSource>
+                       
               
                
             </table>
-        
+         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT Tips.Empid, Employees.Fname + ' ' + Employees.Lname AS Name, SUM(Tips.TipsCollected) AS Total FROM Employees INNER JOIN Tips ON Employees.EmpID = Tips.Empid
+where tips.date between @start and @end
+ GROUP BY Tips.Empid, Employees.Fname, Employees.Lname
+">
+             <SelectParameters>
+                 <asp:ControlParameter ControlID="StartTextBox" Name="start" PropertyName="Text" />
+                 <asp:ControlParameter ControlID="EndTextBox" Name="end" PropertyName="Text" />
+             </SelectParameters>
+
+                        </asp:SqlDataSource>
+       
+                        <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajax:ToolkitScriptManager>
+               
     </form>
 </body>
 </html>

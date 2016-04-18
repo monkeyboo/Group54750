@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" %>
-
-<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+<%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" tagPrefix="ajax" %>
 
 <!DOCTYPE html>
 <script runat="server">
@@ -76,10 +75,6 @@ form {
     padding-bottom: 20px;
     }
 
- .auto-style1 {
-      text-align: center;
-        }
-
          #ListView1_itemPlaceholderContainer
          {
              width:700px;
@@ -92,10 +87,7 @@ form {
          .auto-style2 {
              text-align: center;
          }
-         .auto-style3 {
-             width: 317px;
-         }
-    </style>
+         </style>
 </head>
 <body>
    <form id="form1" runat="server">
@@ -121,27 +113,79 @@ form {
 
    </div> 
      
-            <table style="text-align:center; margin:auto auto;" id="report">
+
+       <table style="width: 96%; text-align:center;" id="Table1">
+
                 <tr>
-                    <td class="auto-style1" colspan="4">
-                        <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Quota Report" Width="400px"></asp:Label>
+                    <td colspan="4">
+                        
+                        <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Quota Report" Width="400px"></asp:Label>
                         <br />
-                        </td>
-</tr>
+                </td>
+                    
+						</tr>
+
+                <tr>
+                    <td >
+                        
+                        
+
+                </td>
+                    
+                    <td style="text-align:right; padding-right:15px;">
+                        
+                       
+
+                                      
+       <div id="total">   
+           <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource2">
+        <ItemTemplate>
+        <div>
+ 
+             <asp:TextBox ID="StartTextbox" runat="server" Text='<%# Eval("startdate")%>' ></asp:TextBox>
+            <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server"
+                            TargetControlID="StartTextBox" PopupButtonID="StartTextBox">
+                        </ajaxToolkit:CalendarExtender> 
+      
+        
+    </div>
+        </ItemTemplate>
+        </asp:FormView>
+           </div>
+                </td>
+                    
+                    <td  style="text-align:left;">
+                        
+                         <asp:Label ID="Label4" runat="server" Text="End Date:" style="font-weight: 700"></asp:Label>
+                        
+                         <asp:TextBox ID="EndTextBox" runat="server"  AutoPostBack="True" AutoComplete="false"/>
+                </td>
+                    
+                    <td>
+                        
+                            <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server"
+                            TargetControlID="EndTextBox" PopupButtonID="EndTextBox">
+                        </ajaxToolkit:CalendarExtender> 
+                </td>
+                    
+						</tr>
+                                  
+                
+           
+                    
+               
+          
+                    
+                        
+                    
+					
+                  
+                
+               
+         </table>
+            <table style="text-align:center; margin:auto;" id="report">
                 <tr>
                     <td class="auto-style2" style="text-align:right;">
-                        &nbsp;</td>
-                    <td class="auto-style2" style="text-align:right;">
-                        <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
-                        </td>
-                    <td class="auto-style2" style="text-align:right;">
-                        <asp:Calendar ID="Calendar2" runat="server" DataSourceID="SqlDataSource3" DataTextField="enddate" DataValueField="enddate"></asp:Calendar>
-                        </td>
-                    <td class="auto-style1" style="text-align:left;">
-                        &nbsp;</td>
-</tr>
-                <tr>
-                    <td class="auto-style2" style="text-align:right;" colspan="3">
                         
                     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="empid" >
                             
@@ -212,8 +256,6 @@ form {
    
 
                         </td>
-                    <td class="auto-style1" style="text-align:left;">
-                        &nbsp;</td>
 </tr>
                               
                
@@ -230,41 +272,15 @@ and salesticketdetails.itemid = items.itemid
 and salesticket.date between @start and @end
 group by employees.empid, fname, lname">
             <SelectParameters>
-                <asp:ControlParameter ControlID="Calendar1" Name="start" PropertyName="SelectedDate" />
-                <asp:ControlParameter ControlID="Calendar2" Name="end" PropertyName="SelectedDate" />
+                <asp:ControlParameter ControlID="FormView1" Name="start" PropertyName="SelectedValue" />
+                <asp:ControlParameter ControlID="EndTextBox" Name="end" PropertyName="Text" />
             </SelectParameters>
 
                         </asp:SqlDataSource>
-              
+              <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajax:ToolkitScriptManager>
                
-       <asp:SqlDataSource ID="SqlDataSource2" runat="server"></asp:SqlDataSource>
-        
-       <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="
-
-if datename(dw, @startdate) = 'Monday'
-set @startdate =dateadd(d, -1, @startdate)
-
-if datename(dw, @startdate) = 'Tuesday'
-set @startdate =dateadd(d, -2, @startdate)
-
-if datename(dw, @startdate) = 'Wednesday'
-set @startdate= dateadd(d, -3, @startdate)
-
-if datename(dw, @startdate) = 'Thursday'
-set @startdate =dateadd(d, -4, @startdate)
-
-if datename(dw, @startdate) = 'Friday'
-set @startdate =dateadd(d, -5, @startdate)
-
-if datename(dw, @startdate) = 'Saturday'
-set @startdate =dateadd(d, -6, @startdate)
-
-select dateadd(d,6,@startdate) as enddate">
-           <SelectParameters>
-               <asp:ControlParameter ControlID="Calendar1" Name="startdate" PropertyName="SelectedDate" />
-           </SelectParameters>
-       </asp:SqlDataSource>
-        
+       <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="getstartdate" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+               
     </form>
 </body>
 </html>
