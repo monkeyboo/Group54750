@@ -9,6 +9,7 @@
         'End If
         DetailsView1.DefaultMode = DetailsViewMode.Insert
         DetailsView2.DefaultMode = DetailsViewMode.Edit
+        
     End Sub
 
     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
@@ -31,7 +32,7 @@
                 e.ExceptionHandled = True
             e.KeepInEditMode = True
         ElseIf e.AffectedRows = 0 Then
-            lblError.Text = "You are already clocked out. You much clock in first. " &
+            lblError.Text = "You are already clocked out. You must clock in first. " &
                 "Please try again."
         Else
             lblError.Text = "Clocked Out!"
@@ -88,20 +89,17 @@
         <br />
         
 <div id="main" class="container2">
-    <table id="tableErrorMessage">
-            <tr>
-               <td>
+    
                   <table id="tableErrorMessage2" style="width:100%; margin:auto;">
                       <tr>
                         <td>
                             <asp:Label ID="lblError" runat="server" EnableViewState="False"
-                                CssClass="error" Font-Bold="True"></asp:Label>
+                                CssClass="error" Font-Bold="True" Font-Size="Small"></asp:Label>
                         </td>
                         </tr>
                         </table>
-                        </td>
-                        </tr>
-                        </table>
+                        
+                       
         <table align="center" class="mainTable">
             <tr>
                 <td >
@@ -111,21 +109,11 @@
                     <asp:Button ID="AppointmentsButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Appointments" Width="170px" PostBackUrl="~/ManagerAppointments.aspx" Font-Bold="True" />
                 </td>
                 <td >
-                    <asp:Button ID="VendorsButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Vendors" Width="170px" Font-Bold="True" PostBackUrl="~/Vendors.aspx" />
-                </td>
-                <td>
                     <asp:Button ID="PriceListButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Price List" Width="170px" Font-Bold="True" OnClick="Button14_Click" />
                 </td>
                 <td>
-                    <asp:Button ID="InventoryButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Inventory" Width="170px" Font-Bold="True" />
-                </td>
-            </tr>
-            <tr>
+                    &nbsp;</td>
                 <td>
-                    <asp:Button ID="SalesTicketButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Sales Ticket" Width="170px" PostBackUrl="~/SalesTicket.aspx" Font-Bold="True" />
-                </td>
-                <td >
-               <div id="tableId">
             <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" DataSourceID="SqlDataSource1" Height="50px" Width="125px">
                 <Fields>
             
@@ -139,11 +127,22 @@
                 </Fields>
             </asp:DetailsView>
            
-        </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="SalesTicketButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Sales Ticket" Width="170px" PostBackUrl="~/SalesTicket.aspx" Font-Bold="True" />
+                </td>
+                <td >
+                    <asp:Button ID="InventoryButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Inventory" Width="170px" Font-Bold="True" />
 
                 </td>
                 <td>
-                  <div id="Div1">
+                    <asp:Button ID="ManagerFButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="My Details" Width="170px" Font-Bold="True" />
+                </td>
+                <td>
+                    &nbsp;</td>
+                <td>
                <asp:DetailsView ID="DetailsView2" runat="server" AutoGenerateRows="False" DataSourceID="SqlDataSource1" Height="50px" Width="125px" DefaultMode="Edit"> 
                 <Fields>
             
@@ -156,13 +155,6 @@
                     </asp:TemplateField>
                 </Fields>
             </asp:DetailsView>
-                      </div>
-                </td>
-                <td>
-                    <asp:Button ID="MyDetailsButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Employees" Width="170px" PostBackUrl="~/Employee.aspx" Font-Bold="True" />
-                </td>
-                <td>
-                    <asp:Button ID="ManagerFButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="My Details" Width="170px" Font-Bold="True" />
                 </td>
             </tr>
           </table> <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
