@@ -198,7 +198,7 @@ form {
                             <EmptyDataTemplate>
                                 <table runat="server" style="">
                                     <tr>
-                                        <td>No data was returned.</td>
+                                        <td>There are no Quota records for the selected timeframe. Please try a different timeframe.</td>
                                     </tr>
                                 </table>
                             </EmptyDataTemplate>   
@@ -226,7 +226,7 @@ form {
                                     <tr runat="server">
                                         <td runat="server">
                                             <table id="itemPlaceholderContainer" runat="server" border="0" style="">
-                                                <tr runat="server" style="background-color:#E6D9CC; color: #000000;">
+                                                <tr runat="server" style="background-color:#E6D9CC; color: #000000; text-align:center;">
                                                     <th runat="server">Employee ID</th>
                                                     <th runat="server">Name</th>
                                                     <th runat="server">Total Sales</th>

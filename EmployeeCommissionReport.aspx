@@ -229,7 +229,7 @@ form {
                             <EmptyDataTemplate>
                                 <table runat="server" style="">
                                     <tr>
-                                        <td>No data was returned.</td>
+                                        <td>NThere are no Commission records for the selected timeframe. Please try a different timeframe.</td>
                                     </tr>
                                 </table>
                             </EmptyDataTemplate>

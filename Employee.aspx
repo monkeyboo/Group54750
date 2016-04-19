@@ -87,6 +87,10 @@
         End If
 
     End Sub
+
+    Protected Sub SqlDataSource3_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs)
+
+    End Sub
 </script>
 
 <html xmlns="http://www.w3.org/1999/xhtml">

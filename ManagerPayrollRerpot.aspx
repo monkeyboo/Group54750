@@ -128,30 +128,20 @@ form {
                 <tr>
                     <td >
                         
-                        
+                            <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server"
+                            TargetControlID="StartTextBox" PopupButtonID="StartTextBox">
+                        </ajaxToolkit:CalendarExtender> 
 
                 </td>
                     
                     <td style="text-align:right; padding-right:15px;">
                         
-                       
+                        <asp:Label ID="Label3" runat="server" Text="Start Date:" style="font-weight: 700"></asp:Label>
+                        
+                        <asp:TextBox ID="StartTextBox" runat="server"  AutoPostBack="false" AutoComplete="false"/>
 
                                       
-       <div id="total">   
-           <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource2">
-        <ItemTemplate>
-        <div>
- 
-             <asp:TextBox ID="StartTextbox" runat="server" Text='<%# Eval("startdate")%>' ></asp:TextBox>
-            <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server"
-                            TargetControlID="StartTextBox" PopupButtonID="StartTextBox">
-                        </ajaxToolkit:CalendarExtender> 
-      
-        
-    </div>
-        </ItemTemplate>
-        </asp:FormView>
-           </div>
+                    
                 </td>
                     
                     <td  style="text-align:left;">
@@ -187,20 +177,26 @@ form {
                 <tr>
                     <td class="auto-style2" style="text-align:right;">
                         
-                    <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="empid" >
+                    <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="Employee ID, name" >
                             
                           
                             
                             <AlternatingItemTemplate>
                                 <tr style="background-color:#E6D9CC;">
                                     <td>
-                                        <asp:Label ID="empidLabel" runat="server" Text='<%# Eval("empid") %>' />
+                                        <asp:Label ID="empidLabel" runat="server" Text='<%# Eval("Employee ID")%>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="Column1Label" runat="server" Text='<%# Eval("Column1") %>' />
+                                        <asp:Label ID="Column1Label" runat="server" Text='<%# Eval("Name")%>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="Total_SalesLabel" runat="server" Text='<%# Eval("[Total Sales]", "{0:c}")%>' />
+                                        <asp:Label ID="Total_SalesLabel" runat="server" Text='<%# Eval("[Commission Earned]", "{0:c}")%>' />
+                                    </td>
+                                     <td>
+                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("[Salary Earned]", "{0:c}")%>' />
+                                    </td>
+                                     <td>
+                                        <asp:Label ID="Label5" runat="server" Text='<%# Eval("Will Earn")%>' />
                                     </td>
                                 </tr>
                             </AlternatingItemTemplate>
@@ -208,7 +204,7 @@ form {
                             <EmptyDataTemplate>
                                 <table runat="server" style="">
                                     <tr>
-                                        <td>No data was returned.</td>
+                                        <td>There are no Quota records for the selected timeframe. Please try a different timeframe.</td>
                                     </tr>
                                 </table>
                             </EmptyDataTemplate>   
@@ -217,15 +213,21 @@ form {
                               
                                   
                                         <tr style="background-color:#A99583; color: #000000;">
-                                            <td>
-                                                <asp:Label ID="empidLabel" runat="server" Text='<%# Eval("empid") %>' />
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="Column1Label" runat="server" Text='<%# Eval("Column1") %>' />
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="Total_SalesLabel" runat="server" Text='<%# Eval("[Total Sales]", "{0:c}")%>' />
-                                            </td>
+                                                <td>
+                                        <asp:Label ID="empidLabel" runat="server" Text='<%# Eval("Employee ID")%>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="Column1Label" runat="server" Text='<%# Eval("Name")%>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="Total_SalesLabel" runat="server" Text='<%# Eval("[Commission Earned]", "{0:c}")%>' />
+                                    </td>
+                                     <td>
+                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("[Salary Earned]", "{0:c}")%>' />
+                                    </td>
+                                     <td>
+                                        <asp:Label ID="Label5" runat="server" Text='<%# Eval("Will Earn")%>' />
+                                    </td>
                                         </tr>
                                   
                                 
@@ -236,10 +238,12 @@ form {
                                     <tr runat="server">
                                         <td runat="server">
                                             <table id="itemPlaceholderContainer" runat="server" border="0" style="">
-                                                <tr runat="server" style="background-color:#E6D9CC; color: #000000;">
+                                                <tr runat="server" style="background-color:#E6D9CC; color: #000000; text-align:center;">
                                                     <th runat="server">Employee ID</th>
                                                     <th runat="server">Name</th>
-                                                    <th runat="server">Total Sales</th>
+                                                    <th runat="server">Commission</th>
+                                                    <th runat="server">Salary</th>
+                                                    <th runat="server">Will Earn</th>
                                                 </tr>
                                                 <tr id="itemPlaceholder" runat="server">
                                                 </tr>
@@ -262,24 +266,26 @@ form {
                         
             </table>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
-            SelectCommand="select employees.empid,
-(employees.fname + ' ' + employees.lname),
-sum(unitprice*qty) as [Total Sales]
-from employees, salesticketdetails, salesticket, items
-where employees.empid = salesticket.empid
-and salesticket.ticketid = salesticketdetails.ticketid
-and salesticketdetails.itemid = items.itemid
-and salesticket.date between @start and @end
-group by employees.empid, fname, lname">
+            SelectCommand="	select employees.empid as [Employee ID], 
+(fname + ' ' + lname) as name, 
+sum((unitprice)*((commissionrate)/100)) as [Commission Earned], 
+sum((datediff(mi,[timein], [timeout])/60)*rateofpay) as [Salary Earned], 
+case when sum((unitprice)*((commissionrate)/100)) > sum((datediff(mi,[timein], [timeout])/60)*rateofpay) then 'Commission' else 'Salary' end as [Will Earn]
+from employees, salesticketdetails, salesticket, timesheets
+where employees.empid = salesticket.empid and 
+		salesticket.ticketid = salesticketdetails.ticketid and
+		 employees.empid = timesheets.empid
+            and timesheets.date between @startdate and @enddate
+            and salesticket.date between @startdate and @enddate
+	
+		group by employees.empid, fname, lname">
             <SelectParameters>
-                <asp:ControlParameter ControlID="FormView1" Name="start" PropertyName="SelectedValue" />
-                <asp:ControlParameter ControlID="EndTextBox" Name="end" PropertyName="Text" />
+                <asp:ControlParameter ControlID="StartTextBox" Name="startdate" PropertyName="Text" />
+                <asp:ControlParameter ControlID="EndTextBox" Name="enddate" PropertyName="Text" />
             </SelectParameters>
 
                         </asp:SqlDataSource>
               <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajax:ToolkitScriptManager>
-               
-       <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="getstartdate" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
                
     </form>
 </body>

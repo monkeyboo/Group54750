@@ -198,7 +198,7 @@ form {
                             <EmptyDataTemplate>
                                 <table runat="server" style="">
                                     <tr>
-                                        <td>No data was returned.</td>
+                                        <td>There are no Quota records for the selected timeframe. Please try a different timeframe.</td>
                                     </tr>
                                 </table>
                             </EmptyDataTemplate>   
