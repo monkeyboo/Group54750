@@ -206,7 +206,7 @@ form {
                             <EmptyDataTemplate>
                                 <table id="Table2" runat="server" style="">
                                     <tr>
-                                        <td>No data was returned.</td>
+                                        <td>No Products/Services sold for the selected timeframe.</td>
                                     </tr>
                                 </table>
                             </EmptyDataTemplate>   
