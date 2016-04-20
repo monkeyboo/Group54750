@@ -12,7 +12,6 @@
          ' If Session("user") IsNot "employee" Then
          'Response.Redirect("login.aspx")
          'End If
-       
      End Sub
     
      'New Report Button Event 
@@ -45,14 +44,14 @@
          GridView1.DataBind()
      End Sub
 
-     Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
+    Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
-     End Sub
+    End Sub
 
-     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
-         Session.RemoveAll()
-         Response.Redirect("login.aspx")
-     End Sub
+    Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
+        Session.RemoveAll()
+        Response.Redirect("login.aspx")
+    End Sub
     
     Protected Sub CustDetails_ItemUpdated(sender As Object, e As DetailsViewUpdatedEventArgs) Handles CustDetails.ItemUpdated
         'Indicate whether the update operation succeeded.

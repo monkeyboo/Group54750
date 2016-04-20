@@ -12,7 +12,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title></title>
+    <title>Quotas</title>
      <style type="text/css">
 header, body, form {
 	display:block;
@@ -196,7 +196,7 @@ form {
                             </AlternatingItemTemplate>
                             
                             <EmptyDataTemplate>
-                                <table runat="server" style="">
+                                <table id="Table2" runat="server" style="">
                                     <tr>
                                         <td>There are no Quota records for the selected timeframe. Please try a different timeframe.</td>
                                     </tr>
@@ -222,22 +222,22 @@ form {
                                
                             </ItemTemplate>
                             <LayoutTemplate>
-                                <table runat="server" style="margin:auto auto;">
-                                    <tr runat="server">
-                                        <td runat="server">
+                                <table id="Table3" runat="server" style="margin:auto auto;">
+                                    <tr id="Tr1" runat="server">
+                                        <td id="Td1" runat="server">
                                             <table id="itemPlaceholderContainer" runat="server" border="0" style="">
-                                                <tr runat="server" style="background-color:#E6D9CC; color: #000000; text-align:center;">
-                                                    <th runat="server">Employee ID</th>
-                                                    <th runat="server">Name</th>
-                                                    <th runat="server">Total Sales</th>
+                                                <tr id="Tr2" runat="server" style="background-color:#E6D9CC; color: #000000; text-align:center;">
+                                                    <th id="Th1" runat="server">Employee ID</th>
+                                                    <th id="Th2" runat="server">Name</th>
+                                                    <th id="Th3" runat="server">Total Sales</th>
                                                 </tr>
                                                 <tr id="itemPlaceholder" runat="server">
                                                 </tr>
                                             </table>
                                         </td>
                                     </tr>
-                                    <tr runat="server">
-                                        <td runat="server" style="text-align: center; font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
+                                    <tr id="Tr3" runat="server">
+                                        <td id="Td2" runat="server" style="text-align: center; font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
                                         </td>
                                     </tr>
                                 </table>
@@ -267,7 +267,7 @@ group by employees.empid, fname, lname">
             </SelectParameters>
 
                         </asp:SqlDataSource>
-              <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajax:ToolkitScriptManager>
+              <asp:ScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ScriptManager>
                
     </form>
 </body>

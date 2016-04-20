@@ -43,6 +43,7 @@
     End Sub
             
 </script>
+</script>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -92,16 +93,14 @@
             
          </table>
 <!--Search Controls-->
- <div id="combo">
+<div id="combo">
          <asp:Label ID="EntNameLabel" runat="server" Font-Size="Medium" Text="Name" Font-Bold="True"></asp:Label>
          <asp:ComboBox ID="ComboBox1" runat="server" AppendDataBoundItems="True" 
               AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource4" 
               DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
 </div>       
         
-<!--Search Controls-->
-
-           <table id="tableErrorMessage">
+                       <table id="tableErrorMessage">
             <tr>
                <td>
                   <table id="tableErrorMessage2" style="width:100%;">
@@ -184,7 +183,7 @@
                                                 <td>
                                                     <asp:TextBox ID="descriptionTextBox" runat="server" Text='<%# Bind("description") %>' ReadOnly="true" />
                                                 </td>
-                                                <td>
+                                                     <td>
                                                     <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource5"   SelectedValue='<%# Bind("starttime")%>'
                                                         AppendDataBoundItems="true" DataTextField="starttime" DataValueField="starttime">
                                                     <asp:ListItem Text="" Value="">none</asp:ListItem>   
@@ -247,24 +246,24 @@
                                             </tr>
                                         </ItemTemplate>
                                         <LayoutTemplate>
-                                            <table runat="server">
-                                                <tr runat="server">
-                                                    <td runat="server">
+                                            <table id="Table6" runat="server">
+                                                <tr id="Tr1" runat="server">
+                                                    <td id="Td1" runat="server">
                                                         <table id="itemPlaceholderContainer" runat="server" border="1" style="background-color: #A99583; border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
-                                                            <tr runat="server" style="background-color:#E6D9CC; color: #000000;">
-                                                                <th runat="server"></th>
-                                                                <th runat="server">EmpID</th>
-                                                                <th runat="server">Day</th>
-                                                                <th runat="server">Start Time</th>
-                                                                <th runat="server">End Time</th>
+                                                           <tr id="Tr2" runat="server" style="background-color:#E6D9CC; color: #000000;">
+                                                                <th id="Th1" runat="server"></th>
+                                                                <th id="Th2" runat="server">EmpID</th>
+                                                                <th id="Th3" runat="server">Day</th>
+                                                                <th id="Th4" runat="server">Start Time</th>
+                                                                <th id="Th5" runat="server">End Time</th>
                                                             </tr>
                                                             <tr id="itemPlaceholder" runat="server">
                                                             </tr>
                                                         </table>
                                                     </td>
                                                 </tr>
-                                                <tr runat="server">
-                                                    <td runat="server" style="text-align: center;background-color:black; font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;"></td>
+                                                <tr id="Tr3" runat="server">
+                                                    <td id="Td2" runat="server" style="text-align: center;background-color:black; font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;"></td>
                                                 </tr>
                                             </table>
                                         </LayoutTemplate>
@@ -337,3 +336,7 @@
        </form>
  </body>
 </html>
+
+
+        
+
