@@ -181,7 +181,9 @@
                     
 
 <!--DataSource 1 For DropDownList Control-->
-       
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+
 <!--DataSource 2 For Both Details View (Customer Report and Insert)-->
 
 <!--DataSource 3 For GridView View All Customers-->
@@ -201,7 +203,7 @@ and timesheets.date between @startdate and @enddate"
                 <asp:Parameter Name="timesheetid" Type="int32" />
              </UpdateParameters>
         </asp:SqlDataSource>
-        <ASP:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ASP:ToolkitScriptManager>
+        <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajax:ToolkitScriptManager>
         <br />
         <br />
     </form>
