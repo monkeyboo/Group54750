@@ -67,7 +67,12 @@
             lblError.Text = "Update Successful!"
          
         End If
-
+        Dim box As String
+        box = ComboBox1.SelectedValue
+        ComboBox1.Items.Clear()
+        ComboBox1.DataBind()
+        ComboBox1=box
+        
     End Sub
     
     Protected Sub CustDetails0_ItemInserted(sender As Object, e As DetailsViewInsertedEventArgs) Handles CustDetails0.ItemInserted
@@ -84,6 +89,10 @@
     End Sub
     
     
+    Protected Sub CustDetails_PageIndexChanging(sender As Object, e As DetailsViewPageEventArgs)
+       
+        
+    End Sub
 </script>
 
 
@@ -141,7 +150,7 @@
          <asp:Label ID="EntNameLabel" runat="server" Font-Size="Medium" Text="Name" Font-Bold="True"></asp:Label>
          <asp:ComboBox ID="ComboBox1" runat="server" AppendDataBoundItems="True" 
               AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource1" 
-              DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" 
+              DataTextField="name" DataValueField="custid" MaxLength="0" style="display: inline;" 
              AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
 </div>
 
@@ -539,14 +548,14 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
-            SelectCommand="SELECT (Fname + ' ' + Lname + ' ' + phone)as name FROM Customers ORDER BY Fname ASC">
+            SelectCommand="SELECT (Fname + ' ' + Lname + ' ' + phone)as name, custid FROM Customers ORDER BY Fname ASC">
             
         </asp:SqlDataSource>
 
 <!--DataSource 2 For Both Details View (Customer Report and Insert)-->
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
             ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
-            SelectCommand="SELECT DISTINCT * FROM [Customers] WHERE (Fname + ' ' + Lname + ' ' + phone) = @fulllnamedropdown"
+            SelectCommand="SELECT DISTINCT * FROM [Customers] WHERE custid = @fulllnamedropdown"
             InsertCommand="INSERT INTO [Customers] ([Fname], [Lname], [street], [city], [zip], [phone], [email], [state]) VALUES (@Fname, @Lname, @street, @city, @zip, @phone, @email, UPPER(@state))"
             Updatecommand="UPDATE [Customers] SET [Fname] = @Fname, [Lname] = @Lname, [street] = @street, [city] = @city, [zip] = @zip, [phone] = @phone, [email] = @email, [state] = UPPER(@state) WHERE [CustID] = @CustID">
             <SelectParameters>
