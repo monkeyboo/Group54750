@@ -44,7 +44,7 @@
         'ComboBox1.Visible = False
         EntNameLabel.Visible = False
         GridView1.DataBind()
-       
+        
     End Sub
 
     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
@@ -56,21 +56,21 @@
         'Indicate whether the update operation succeeded.
         If e.Exception IsNot Nothing Then
             lblError.Text = "A database error has occured. " &
-               e.ExceptionHandled = True
+                e.ExceptionHandled = True
             e.KeepInEditMode = True
         ElseIf e.AffectedRows = 0 Then
             lblError.Text = "Another user may have updated that item. " &
-               "Please try again."
+                "Please try again."
         Else
             EmpDetails.DataBind()
             lblError.Text = "Update Successful!"
-         
+
         End If
         ComboBox1.Items.Clear()
         ComboBox1.DataBind()
 
     End Sub
-    
+
     Protected Sub EmpDetails0_ItemInserted(sender As Object, e As DetailsViewInsertedEventArgs) Handles EmpDetails0.ItemInserted
         'Indicate whether the update operation succeeded.
         If e.Exception IsNot Nothing Then
@@ -147,7 +147,7 @@
              AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
          <br />
          
-</div>
+</div>       
         
 
            <table id="tableErrorMessage">

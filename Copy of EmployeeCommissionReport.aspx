@@ -6,8 +6,8 @@
 
     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
 
-        ' Session.RemoveAll()
-        ' Response.Redirect("login.aspx")
+        Session.RemoveAll()
+        Response.Redirect("login.aspx")
     End Sub
 
     Protected Sub Page_Load(sender As Object, e As EventArgs)
@@ -96,7 +96,7 @@ form {
 
       #ListView1_itemPlaceholderContainer
          {
-             width:1000px;
+             width:600px;
              margin:auto auto;
          }
              #ListView1_itemPlaceholderContainer td
@@ -105,6 +105,16 @@ form {
                  text-align: left;
              }
        
+               #ListView2_itemPlaceholderContainer
+         {
+             width:600px;
+             margin:auto auto;
+         }
+             #ListView2_itemPlaceholderContainer td
+             {
+                 padding:.5em;
+                 text-align: left;
+             }
    
      
 
@@ -115,9 +125,15 @@ form {
           }
 
 #listview1
-{margin-left:150px;}
+{margin-left:10px;}
 
-#total{margin-left:750px;}
+    
+   
+   
+        .auto-style1
+        {
+            height: 54px;
+        }
    
    
         </style>
@@ -150,7 +166,7 @@ form {
             <table style="width: 96%; text-align:center;" id="report">
 
                 <tr>
-                    <td colspan="4">
+                    <td colspan="4" class="auto-style1">
                         
                         <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Commission Report" Width="400px"></asp:Label>
                         <br />
@@ -204,7 +220,10 @@ form {
                
          </table>
                
-                      <div id="listview1">  <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
+                      <div id="listview1">  
+                          <table style="width:100%; margin:auto;" id="views">
+                              <tr>
+                                  <td style="width:600px;">  <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
 						
                             <AlternatingItemTemplate>
                                 <tr style="background-color:#E6D9CC;">
@@ -300,10 +319,8 @@ form {
                                     </td>
                                 </tr>
                             </SelectedItemTemplate>
-                        </asp:ListView> </div>
-                    
-                    
-       <div id="total">   <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource2">
+                        </asp:ListView>
+                                      <div id="Div1">   <asp:FormView ID="FormView2" runat="server" DataSourceID="SqlDataSource2">
         <ItemTemplate>
         <div>
     <asp:Label ID="Label4" runat="server" style="font-weight: 700" Text="Total Commission Earned"></asp:Label>
@@ -314,6 +331,122 @@ form {
         </ItemTemplate>
         </asp:FormView>
            </div>
+
+                                  </td>
+                                  <td style="width:600px;">
+                                      <asp:ListView ID="ListView2" runat="server" DataSourceID="SqlDataSource3">
+
+
+                                           <AlternatingItemTemplate>
+                                <tr style="background-color:#E6D9CC;">
+                                   <td>
+                                        <asp:Label ID="NameLabel" runat="server" Text='<%# Eval("empid")%>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="ItemLabel" runat="server" Text='<%# Eval("timein")%>' />
+                                    </td>
+                                   
+                                    <td>
+                                        <asp:Label ID="QtyLabel" runat="server" Text='<%# Eval("timeout")%>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="TotalLabel" runat="server" Text='<%# Eval("hours", "{0:F2}")%>' />
+                                    </td>
+                                </tr>
+                            </AlternatingItemTemplate>
+                     
+                            <EmptyDataTemplate>
+                                <table id="Table1" runat="server" style="">
+                                    <tr>
+                                        <td>NThere are no Commission records for the selected timeframe. Please try a different timeframe.</td>
+                                    </tr>
+                                </table>
+                            </EmptyDataTemplate>
+                           
+                            <ItemTemplate>
+                                <tr style="background-color:#A99583; color: #000000;">
+                                    <td>
+                                        <asp:Label ID="NameLabel" runat="server" Text='<%# Eval("empid")%>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="ItemLabel" runat="server" Text='<%# Eval("timein")%>' />
+                                    </td>
+                                    
+                                    <td>
+                                        <asp:Label ID="QtyLabel" runat="server" Text='<%# Eval("timeout")%>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="TotalLabel" runat="server" Text='<%# Eval("hours", "{0:F2}")%>' />
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                            <LayoutTemplate>
+                                <table id="Table2" runat="server">
+                                    <tr id="Tr1" runat="server">
+                                        <td id="Td1" runat="server">
+                                            <table id="itemPlaceholderContainer" runat="server" border="1" style="background-color: #A99583; border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                                <tr id="Tr2" runat="server" style="background-color:#E6D9CC; color: #000000;">
+                                                    <th id="Th1" runat="server">Emplopyee ID</th>
+                                                    <th id="Th2" runat="server">ClockIN</th>
+                                                    <th id="Th3" runat="server">ClockOut</th>
+                                                    <th id="Th4" runat="server">Hours Worked</th>
+                                                   
+                                                </tr>
+                                                <tr id="itemPlaceholder" runat="server">
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr id="Tr3" runat="server">
+                                        <td id="Td2" runat="server" style="text-align: center;background-color:black; font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
+                                    <asp:DataPager ID="DataPager1" runat="server" PageSize="20">
+                                                <Fields>
+                                                    <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />
+                                                </Fields>
+                                            </asp:DataPager>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </LayoutTemplate>
+                            <SelectedItemTemplate>
+                                <tr style="background-color:#A99583; font-weight: bold;color: #FFFFFF;">
+                                    <td>
+                                        <asp:Label ID="NameLabel" runat="server" Text='<%# Eval("empid")%>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="ItemLabel" runat="server" Text='<%# Eval("timein")%>' />
+                                    </td>
+                                    
+                                    <td>
+                                        <asp:Label ID="QtyLabel" runat="server" Text='<%# Eval("timeout")%>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="TotalLabel" runat="server" Text='<%# Eval("hours", "{0:F2}")%>' />
+                                    </td>
+                                </tr>
+                            </SelectedItemTemplate>
+
+
+                                      </asp:ListView>
+                                      <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>"
+                                           SelectCommand="select empid, timein, timeout, 
+                                                                datediff(mi,[timein], [timeout])/60.0  as hours
+                                                                from timesheets 
+                                                                where empid = @empid
+                                                                and date between @startdate and @enddate">
+                                          <SelectParameters>
+                                              <asp:SessionParameter Name="empid" SessionField="id" />
+                                              <asp:ControlParameter ControlID="StartTextBox" Name="startdate" PropertyName="Text" />
+                                              <asp:ControlParameter ControlID="EndTextBox" Name="enddate" PropertyName="Text" />
+                                          </SelectParameters>
+                                      </asp:SqlDataSource>
+                                  </td>
+                              </tr>
+                          </table>
+        </div>
+                    
+                    
+       
 
               <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
                   SelectCommand="SELECT        Employees.Fname + ' ' + Employees.Lname AS Name, Items.ItemName AS Item, SalesTicketDetails.UnitPrice AS Price, SalesTicketDetails.qty AS Qty, 
@@ -347,8 +480,9 @@ WHERE        (Employees.EmpID = @empid) and  salesticket.date between @state and
         </asp:SqlDataSource>
                
                     
-                        <asp:ScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ScriptManager>
+                        <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajax:ToolkitScriptManager>
                
+                    
     </form>
     </body>
 </html>

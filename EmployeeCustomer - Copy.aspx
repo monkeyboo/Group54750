@@ -12,7 +12,6 @@
          ' If Session("user") IsNot "employee" Then
          'Response.Redirect("login.aspx")
          'End If
-       
      End Sub
     
      'New Report Button Event 
@@ -45,9 +44,10 @@
          GridView1.DataBind()
      End Sub
 
-     Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-     End Sub
+    Protected Sub edit_button(sender As Object, e As EventArgs)
+        
+        ComboBox1.DataBind()
+    End Sub
 
      Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
          Session.RemoveAll()
@@ -68,8 +68,7 @@
             lblError.Text = "Update Successful!"
          
         End If
-        ComboBox1.Items.Clear()
-        ComboBox1.DataBind()
+
     End Sub
     
     Protected Sub CustDetails0_ItemInserted(sender As Object, e As DetailsViewInsertedEventArgs) Handles CustDetails0.ItemInserted
@@ -143,9 +142,8 @@
          <asp:Label ID="EntNameLabel" runat="server" Font-Size="Medium" Text="Name" Font-Bold="True"></asp:Label>
          <asp:ComboBox ID="ComboBox1" runat="server" AppendDataBoundItems="True" 
               AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource1" 
-              DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" 
-             AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
-         <br />
+              DataTextField="name" DataValueField="custid" MaxLength="0" style="display: inline;" 
+             AutoPostBack="True" Width="200px" BackColor="#F3EDE7" EnableViewState="false" ></asp:ComboBox>
 </div>
 
 
@@ -155,7 +153,7 @@
                   <table id="tableErrorMessage2" style="width:100%;">
                       <tr>
                         <td>
-                            <asp:Label ID="lblError" runat="server" Forecolor="maroon" EnableViewState="False"
+                            <asp:Label ID="lblError" runat="server" EnableViewState="False"
                                 CssClass="error" Font-Bold="True"></asp:Label>
                         </td>
                         </tr>
@@ -300,8 +298,8 @@
                                 <asp:TemplateField ShowHeader="False">
                                     <EditItemTemplate>
                                         <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidatonGroup="VG1" 
-                                            CommandName="Update" Text="Update" BackColor="#E6D9CC" Width="75px"/>
-                                        &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" 
+                                            CommandName="Update" Text="Update" BackColor="#E6D9CC" Width="75px" Onclick="edit_button"/>
+                                        &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False"
                                             CommandName="Cancel" Text="Cancel" BackColor="#E6D9CC" Width="75px"/>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
@@ -542,17 +540,18 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
-            SelectCommand="SELECT (Fname + ' ' + Lname + ' ' + phone)as name FROM Customers ORDER BY Fname ASC">
+            SelectCommand="SELECT (Fname + ' ' + Lname + ' ' + phone)as name, custid FROM Customers ORDER BY Fname ASC">
+            
         </asp:SqlDataSource>
 
 <!--DataSource 2 For Both Details View (Customer Report and Insert)-->
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
             ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
-            SelectCommand="SELECT DISTINCT * FROM [Customers] WHERE (Fname + ' ' + Lname + ' ' + phone) = @fulllnamedropdown"
+            SelectCommand="SELECT DISTINCT * FROM [Customers] WHERE custid = @fulllnamedropdown"
             InsertCommand="INSERT INTO [Customers] ([Fname], [Lname], [street], [city], [zip], [phone], [email], [state]) VALUES (@Fname, @Lname, @street, @city, @zip, @phone, @email, UPPER(@state))"
             Updatecommand="UPDATE [Customers] SET [Fname] = @Fname, [Lname] = @Lname, [street] = @street, [city] = @city, [zip] = @zip, [phone] = @phone, [email] = @email, [state] = UPPER(@state) WHERE [CustID] = @CustID">
             <SelectParameters>
-                <asp:ControlParameter ControlID="ComboBox1" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
+                <asp:ControlParameter ControlID="ComboBox1" Name="fulllnamedropdown" PropertyName="SelectedValue" />
             </SelectParameters>
             <InsertParameters>
                 <asp:Parameter Name="Fname" Type="String" />
