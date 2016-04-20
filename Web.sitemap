@@ -1,15 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
-    <siteMapNode url="~/Default.aspx" title="Home Page "  description="Home Page">
-      <siteMapNode url="~/ManagerMainMenu.aspx" title="Manager Menu"  description="Manager's Main Menu" >
-        <siteMapNode url="~/ManagerCustomer.aspx" title="Customers" description="Customer's Details" />
-        <siteMapNode url="~/Vendors.aspx" title="Vendors" description ="Vendor Details"/>
-        <siteMapNode url="~/Employee.aspx" title="Employees" description="Employee's Details">
-          <siteMapNode url="~/Availability.aspx" title="Availability" description ="Availability Details" />
-        </siteMapNode>
+  <siteMapNode url="~/Default.aspx" title="Home Page "  description="Home Page">
+    <siteMapNode url="~/MainMenu.aspx" title="Main Menu"  description="Main Menu" >
+     <siteMapNode url="~/Customer.aspx" title="Customers" description="Customer's Details" />
+     <siteMapNode url="~/Appointments.aspx" title="Appointments" description="Appointments" />
+     <siteMapNode url="~/SalesTicket.aspx" title="Sales Ticket" description="Sales Ticket" />
+     <siteMapNode url="~/PriceList.aspx" title="Price List" description="Price List" />
+     <siteMapNode url="~/MyDetails.aspx" title="My Details" description="My Details" />
+      <siteMapNode url="~/ManagerFunctions.aspx" title="Manager Functions"  description="Manager Functions" >
+      <siteMapNode url="~/Vendors.aspx" title="Vendors" description ="Vendor Details"/>
+      <siteMapNode url="~/Orders.aspx" title="Orders" description="Order Details" />
+      <siteMapNode url="~/Services.aspx" title="Services" description="Services and Products" />
+      <siteMapNode url="~/Payroll.aspx" title="Payroll" description="Payroll"/>
+      <siteMapNode url="~/SalesReport.aspx" title="Sales Reports" description ="Sales Report" />
+      <siteMapNode url="~/Employee.aspx" title="Employees" description="Employee's Details">
+        <siteMapNode url="~/Availability.aspx" title="Availability" description ="Availability Details" />
       </siteMapNode>
-      <siteMapNode url="~/EmployeeMainMenu.aspx" title="Employee Menu"  description="Employee's Main Menu" >
-        <siteMapNode url="~/EmployeeCustomer.aspx" title="Customers" description ="Customer's Details" />
-      </siteMapNode>
+     </siteMapNode>
     </siteMapNode>
+   </siteMapNode>
 </siteMap>

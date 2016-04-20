@@ -6,16 +6,16 @@
 
     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
 
-        Session.RemoveAll()
-        Response.Redirect("login.aspx")
+        'Session.RemoveAll()
+        ' Response.Redirect("login.aspx")
     End Sub
 
     Protected Sub Page_Load(sender As Object, e As EventArgs)
-        If Session("user") IsNot "manager" Then
-            Response.Redirect("login.aspx")
+        'If Session("user") IsNot "manager" Then
+        'Response.Redirect("login.aspx")
      
             
-        End If
+        'End If
     End Sub
 
 
@@ -450,7 +450,7 @@ WHERE        (Employees.EmpID = @empid) and  salesticket.date between @state and
         </asp:SqlDataSource>
                
                     
-                        <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajax:ToolkitScriptManager>
+                        <asp:ScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ScriptManager>
                
                     
     </form>

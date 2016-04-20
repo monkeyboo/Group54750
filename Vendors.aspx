@@ -23,7 +23,6 @@
         GridView1.Visible = False
         ComboBox1.Visible = True
         EntNameLabel.Visible = True
-      
         GridView1.DataBind()
           
     End Sub
@@ -70,7 +69,8 @@
             lblError.Text = "Update Successful!"
           
         End If
-
+        ComboBox1.Items.Clear()
+        ComboBox1.DataBind()
     End Sub
 
     Protected Sub CustDetails0_ItemInserted(sender As Object, e As DetailsViewInsertedEventArgs) Handles CustDetails0.ItemInserted
@@ -152,7 +152,7 @@
                   <table id="tableErrorMessage2" style="width:100%;">
                       <tr>
                         <td>
-                            <asp:Label ID="lblError" runat="server" EnableViewState="False"
+                            <asp:Label ID="lblError" runat="server" Forecolor="maroon" EnableViewState="False"
                                 CssClass="error" Font-Bold="True"></asp:Label>
                         </td>
                         </tr>

@@ -57,19 +57,16 @@
         <table align="center" class="mainTable">
             <tr>
                 <td >
-                    <asp:Button ID="CustomersButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Customers" Width="170px" PostBackUrl="~/ManagerCustomer.aspx" Font-Bold="True" />
+                    <asp:Button ID="CustomersButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Customers" Width="170px" PostBackUrl="~/Customer.aspx" Font-Bold="True" />
                 </td>
                 <td>
-                    <asp:Button ID="AppointmentsButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Appointments" Width="170px" PostBackUrl="~/ManagerAppointments.aspx" Font-Bold="True" />
-                </td>
-                <td >
-                    <asp:Button ID="VendorsButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Vendors" Width="170px" Font-Bold="True" PostBackUrl="~/Vendors.aspx" />
+                    <asp:Button ID="AppointmentsButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Appointments" Width="170px" PostBackUrl="~/Appointments.aspx" Font-Bold="True" />
                 </td>
                 <td>
-                    <asp:Button ID="PriceListButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Price List" Width="170px" Font-Bold="True" OnClick="Button14_Click" />
+                    <asp:Button ID="ManagerFButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="My Details" Width="170px" Font-Bold="True" />
                 </td>
                 <td>
-                    <asp:Button ID="InventoryButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Inventory" Width="170px" Font-Bold="True" />
+                    <asp:Button ID="Button26" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Manager Functions" Width="170px" PostBackUrl="~/ManagerFunctions.aspx" Font-Bold="True" />
                 </td>
             </tr>
             <tr>
@@ -77,16 +74,13 @@
                     <asp:Button ID="SalesTicketButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Sales Ticket" Width="170px" PostBackUrl="~/SalesTicket.aspx" Font-Bold="True" />
                 </td>
                 <td >
-                    <asp:Button ID="TimeClockButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Time Clock" Width="170px" PostBackUrl="~/EmployeeClockIn.aspx" Font-Bold="True" OnClick="Button21_Click" />
+                    <asp:Button ID="PriceListButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Price List" Width="170px" Font-Bold="True" OnClick="Button14_Click" />
                 </td>
                 <td>
-                    <asp:Button ID="MyDetailsButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Employees" Width="170px" PostBackUrl="~/Employee.aspx" Font-Bold="True" />
+                    <asp:Button ID="TimeClockButton0" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Clock In" Width="170px" Font-Bold="True" OnClick="Button21_Click" />
                 </td>
                 <td>
-                    <asp:Button ID="ManagerFButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="My Details" Width="170px" Font-Bold="True" />
-                </td>
-                <td>
-                    <asp:Button ID="Button26" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Management Funct." Width="170px" PostBackUrl="~/ManagementFunctions.aspx" Font-Bold="True" />
+                    <asp:Button ID="TimeClockButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Clock Out" Width="170px" Font-Bold="True" OnClick="Button21_Click" />
                 </td>
             </tr>
           </table>

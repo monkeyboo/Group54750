@@ -20,9 +20,10 @@
         EmpDetails.Visible = True
         EmpDetails0.Visible = False
         GridView1.Visible = False
-        ComboBox1.Visible = True
+        ' ComboBox1.Visible = True
         EntNameLabel.Visible = True
         GridView1.DataBind()
+        
     End Sub
     
     'View All Customers Button Event
@@ -30,7 +31,7 @@
         GridView1.Visible = True
         EmpDetails.Visible = False
         EmpDetails0.Visible = False
-        ComboBox1.Visible = False
+        'ComboBox1.Visible = False
         EntNameLabel.Visible = False
         GridView1.DataBind()
     End Sub
@@ -40,41 +41,36 @@
         EmpDetails0.Visible = True
         EmpDetails.Visible = False
         GridView1.Visible = False
-        ComboBox1.Visible = False
+        'ComboBox1.Visible = False
         EntNameLabel.Visible = False
         GridView1.DataBind()
-        
-    End Sub
-
-    Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-    End Sub
-  
-    Protected Sub EmpDetails0_PageIndexChanging(sender As Object, e As DetailsViewPageEventArgs)
-
+       
     End Sub
 
     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
-        Session.RemoveAll()
-        Response.Redirect("login.aspx")
+        'Session.RemoveAll()
+        'Response.Redirect("login.aspx")
     End Sub
 
     Protected Sub EmpDetails_ItemUpdated(sender As Object, e As DetailsViewUpdatedEventArgs) Handles EmpDetails.ItemUpdated
         'Indicate whether the update operation succeeded.
         If e.Exception IsNot Nothing Then
             lblError.Text = "A database error has occured. " &
-                e.ExceptionHandled = True
+               e.ExceptionHandled = True
             e.KeepInEditMode = True
         ElseIf e.AffectedRows = 0 Then
             lblError.Text = "Another user may have updated that item. " &
-                "Please try again."
+               "Please try again."
         Else
+            EmpDetails.DataBind()
             lblError.Text = "Update Successful!"
-
+         
         End If
+        ComboBox1.Items.Clear()
+        ComboBox1.DataBind()
 
     End Sub
-
+    
     Protected Sub EmpDetails0_ItemInserted(sender As Object, e As DetailsViewInsertedEventArgs) Handles EmpDetails0.ItemInserted
         'Indicate whether the update operation succeeded.
         If e.Exception IsNot Nothing Then
@@ -87,6 +83,8 @@
         End If
 
     End Sub
+    
+    
 </script>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -141,11 +139,15 @@
 
 <!--Search Controls-->
 <div id="combo">
-         <asp:Label ID="EntNameLabel" runat="server" Font-Size="Small" Text="Name" Font-Bold="True"></asp:Label>
+         <asp:Label ID="EntNameLabel" runat="server" Font-Size="Medium" Text="Name" Font-Bold="True"></asp:Label>
+         <br />
          <asp:ComboBox ID="ComboBox1" runat="server" AppendDataBoundItems="True" 
               AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource1" 
-              DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
-</div>       
+              DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" 
+             AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
+         <br />
+         
+</div>
         
 
            <table id="tableErrorMessage">
@@ -154,7 +156,7 @@
                   <table id="tableErrorMessage2" style="width:100%;">
                       <tr>
                         <td>
-                            <asp:Label ID="lblError" runat="server" EnableViewState="False"
+                            <asp:Label ID="lblError" runat="server" Forecolor="maroon" EnableViewState="False"
                                 CssClass="error" Font-Bold="True"></asp:Label>
                         </td>
                         </tr>
@@ -424,7 +426,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField ShowHeader="False">
                                     <EditItemTemplate>
-                                        <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Update" Text="Update" BackColor="#E6D9CC" Width="75px"/>
+                                        <asp:Button ID="UpdateButton" runat="server" CausesValidation="True" ValidatonGroup="VG1" CommandName="Update" Text="Update" BackColor="#E6D9CC" Width="75px"/>
                                         &nbsp;<asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" BackColor="#E6D9CC" Width="75px"/>
                                     </EditItemTemplate>
                                     <InsertItemTemplate>
@@ -456,7 +458,7 @@
                   <table id="table6" style="width:100%;">
                       <tr>
                         <td>
-                            <asp:DetailsView ID="EmpDetails0" runat="server" ItemInserted="EmpDetails0_ItemInserted" AutoGenerateRows="False" CellPadding="3" DataKeyNames="EmpID" DataSourceID="SqlDataSource2" DefaultMode="Insert" ForeColor="Black" GridLines="None" Height="50px" Visible="False" Width="800px">
+                            <asp:DetailsView ID="EmpDetails0" runat="server" ItemInserted="CustDetails0_ItemInserted"  AutoGenerateRows="False" CellPadding="3" DataKeyNames="EmpID" DataSourceID="SqlDataSource2" DefaultMode="Insert" ForeColor="Black" GridLines="None" Height="50px" Visible="False" Width="800px">
                                 <AlternatingRowStyle BackColor="#E6D9CC" />
                                 <CommandRowStyle BackColor="#A99583" Font-Bold="True" />
                                 <EditRowStyle BackColor="#43382E" />
@@ -716,7 +718,7 @@
                   <table id="table8" style="width:100%;">
                       <tr>
                         <td>
-                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="EmpID" DataSourceID="SqlDataSource3" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="1200px" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small" Font-Bold="False" PageSize="25">
+                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="EmpID" DataSourceID="SqlDataSource3" Width="1200px" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" Visible="False" Font-Size="Small" Font-Bold="False" PageSize="25">
                             <AlternatingRowStyle BackColor="#A99583" />
                             <Columns>
                                 <asp:BoundField DataField="EmpID" HeaderText="EmpID" InsertVisible="False" ReadOnly="True" SortExpression="EmpID">
@@ -767,7 +769,9 @@
 <!--DataSource 1 For DropDownList Control-->
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Employees  ORDER BY Fname ASC"></asp:SqlDataSource>
+       <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
+            SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Employees ORDER BY Fname ASC">
+        </asp:SqlDataSource>
      
 
 <!--DataSource 2 For Both Details View (Employee Report and Insert)-->
@@ -777,7 +781,7 @@
             InsertCommand="INSERT INTO [Employees] ([Fname], [Lname], [street], [city], [zip], [phone], [JobTitleID], [PayID], [startdate], [enddate], [password], [state], [RateOfPay], [CommissionRate]) VALUES (@Fname, @Lname, @street, @city, @zip, @phone, @JobTitleID, @payID, @startdate, @enddate, @password, UPPER(@state), @RateOfPay, @CommissionRate)"
             Updatecommand="UPDATE [Employees] SET [Fname] = @Fname, [Lname] = @Lname, [street] = @street, [city] = @city, [zip] = @zip, [phone] = @phone, [JobTitleID] = @JobTitleID, [PayID] = @PayID, [startdate] = @startdate, [enddate] = @enddate, [password] = @password, [state] = UPPER(@state),[RateOfPay] = @RateOfPay, [CommissionRate] = @CommissionRate WHERE [EmpID] = @EmpID">
             <SelectParameters>
-                <asp:ControlParameter ControlID="Combobox1" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
+                <asp:ControlParameter ControlID="ComboBox1" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
             </SelectParameters>
             <InsertParameters>
                 <asp:Parameter Name="Fname" Type="String" />
@@ -816,7 +820,7 @@
 
 <!--DataSource 3 For GridView View All Employees-->
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
-            SelectCommand="SELECT * FROM [Employees] ORDER BY [Lname]" OnSelecting="SqlDataSource3_Selecting">
+            SelectCommand="SELECT * FROM [Employees] ORDER BY [Fname]" >
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT * FROM [EmpJobTitles]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT [state] FROM [statelist] ORDER BY [state]"></asp:SqlDataSource>
