@@ -117,11 +117,11 @@
             margin: auto auto;
         }
 
-        #ListView1_itemPlaceholderContainer td, #ListView2_itemPlaceholderContainer td
-        {
-            padding: .5em;
-            text-align: left;
-        }
+            #ListView1_itemPlaceholderContainer td, #ListView2_itemPlaceholderContainer td
+            {
+                padding: .5em;
+                text-align: left;
+            }
 
         #ListView2_itemPlaceholderContainer
         {
@@ -396,8 +396,7 @@
                 </tr>
             </table>
             <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>"
-                SelectCommand="if (@x = 'manager')
-                                                    begin
+                SelectCommand="
 
                                                     SELECT        
                                                     Employees.Fname + ' ' + Employees.Lname AS Name, 
@@ -411,9 +410,9 @@
                                                     group by fname, lname
                                                     order by employees.lname
 
-                                                    end">
+                                                    ">
                 <SelectParameters>
-                    <asp:SessionParameter Name="x" SessionField="user" />
+              
                     <asp:ControlParameter ControlID="StartTextBox" Name="state" PropertyName="Text" />
                     <asp:ControlParameter ControlID="EndTextBox" Name="end" PropertyName="Text" />
                 </SelectParameters>

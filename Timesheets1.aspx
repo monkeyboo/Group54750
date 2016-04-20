@@ -1,6 +1,7 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" %>
+﻿<%@ Page Language="VB" AutoEventWireup="true" %>
+<%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" tagPrefix="ajax" %>
+<%@ Import Namespace="System.Net.Mime.MediaTypeNames" %>
 
-<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
 <!DOCTYPE html>
 <script runat="server">
@@ -9,7 +10,6 @@
 
     End Sub
 
-    
 </script>
 
 
@@ -77,10 +77,7 @@ form {
     padding-right: 140px;
     padding-bottom: 20px;
     }
- .auto-style1 {
-      text-align: center;
-        }
-
+ 
          #ListView1_itemPlaceholderContainer
          {
              width:700px;
@@ -90,6 +87,10 @@ form {
                  padding:.5em;
                  text-align: left;
              }
+         .auto-style2
+         {
+             height: 771px;
+         }
     </style>
 </head>
 <body>
@@ -114,13 +115,64 @@ form {
         </div>
    </div> 
      
-            <table style="width: 100%;" align="center" id="report">
+        <table style="width: 96%; text-align:center;" id="Table1">
+
                 <tr>
-                    <td class="auto-style1">
-                        <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Customer Retention" Width="400px"></asp:Label>
+                    <td colspan="4">
+                        
+                        <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Tips Report" Width="400px"></asp:Label>
                         <br />
-                        </td>
-</tr>
+                </td>
+                    
+						</tr>
+
+                <tr>
+                    <td >
+                        
+                            <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server"
+                            TargetControlID="StartTextBox" PopupButtonID="StartTextBox">
+                        </ajaxToolkit:CalendarExtender> 
+
+                </td>
+                    
+                    <td style="text-align:right; padding-right:15px;">
+                        
+                        <asp:Label ID="Label3" runat="server" Text="Start Date:" style="font-weight: 700"></asp:Label>
+                        
+                        <asp:TextBox ID="StartTextBox" runat="server"  AutoPostBack="false" AutoComplete="false"/>
+                </td>
+                    
+                    <td  style="text-align:left;">
+                        
+                         <asp:Label ID="Label4" runat="server" Text="End Date:" style="font-weight: 700"></asp:Label>
+                        
+                         <asp:TextBox ID="EndTextBox" runat="server"  AutoPostBack="True" AutoComplete="false"/>
+                </td>
+                    
+                    <td>
+                        
+                            <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server"
+                            TargetControlID="EndTextBox" PopupButtonID="EndTextBox">
+                        </ajaxToolkit:CalendarExtender> 
+                </td>
+                    
+						</tr>
+                                  
+                
+           
+                    
+               
+          
+                    
+                        
+                    
+					
+                  
+                
+               
+         </table>     
+       
+       <table style="width: 100%;" align="center" id="report">
                 <tr>
                         
                     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" >
@@ -130,19 +182,19 @@ form {
                             <AlternatingItemTemplate>
                                 <tr style="background-color:#E6D9CC;">
                                     <td>
-                                        <asp:Label ID="CustomerIDLabel" runat="server" Text='<%# Eval("CustomerID") %>' />
+                                        <asp:Label ID="EmpidLabel" runat="server" Text='<%# Eval("Empid") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="NameLabel" runat="server" Text='<%# Eval("Name") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="VisitsLabel" runat="server" Text='<%# Eval("Visits") %>' />
+                                        <asp:Label ID="TotalLabel" runat="server" Text='<%# Eval("Total", "{0:c}")%>' />
                                     </td>
                                 </tr>
                             </AlternatingItemTemplate>
                             
                             <EmptyDataTemplate>
-                                <table runat="server" style="">
+                                <table id="Table2" runat="server" style="margin:auto;">
                                     <tr>
                                         <td>No data was returned.</td>
                                     </tr>
@@ -155,13 +207,13 @@ form {
                                   
                                         <tr style="background-color:#A99583; color: #000000;">
                                             <td>
-                                                <asp:Label ID="CustomerIDLabel" runat="server" Text='<%# Eval("CustomerID") %>' />
+                                                <asp:Label ID="EmpidLabel" runat="server" Text='<%# Eval("Empid") %>' />
                                             </td>
                                             <td>
                                                 <asp:Label ID="NameLabel" runat="server" Text='<%# Eval("Name") %>' />
                                             </td>
                                             <td>
-                                                <asp:Label ID="VisitsLabel" runat="server" Text='<%# Eval("Visits") %>' />
+                                                <asp:Label ID="TotalLabel" runat="server" Text='<%# Eval("Total", "{0:c}")%>' />
                                             </td>
                                         </tr>
                                   
@@ -169,41 +221,35 @@ form {
                                
                             </ItemTemplate>
                             <LayoutTemplate>
-                                <table runat="server" style="margin:auto auto;">
-                                    <tr runat="server">
-                                        <td runat="server">
-                                            <table id="itemPlaceholderContainer" runat="server" border="0" style="">
-                                                <tr runat="server" style="">
-                                                    <th runat="server">CustomerID</th>
-                                                    <th runat="server">Name</th>
-                                                    <th runat="server">Visits</th>
+                                <table id="Table3" runat="server" style="margin:auto auto;">
+                                    <tr id="Tr1" runat="server">
+                                        <td id="Td1" runat="server">
+                                            <table id="itemPlaceholderContainer" runat="server" border="1" style="background-color: #A99583; border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                                <tr id="Tr2" runat="server" style="background-color:#E6D9CC; color: #000000;">
+                                                    <th id="Th1" runat="server">Empid</th>
+                                                    <th id="Th2" runat="server">Name</th>
+                                                    <th id="Th3" runat="server">Total</th>
                                                 </tr>
                                                 <tr id="itemPlaceholder" runat="server">
                                                 </tr>
                                             </table>
                                         </td>
                                     </tr>
-                                    <tr runat="server">
-                                        <td runat="server" style="text-align: center; font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
-                                            <asp:DataPager ID="DataPager1" runat="server" PageSize="20">
-                                                <Fields>
-                                                    <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />
-                                                </Fields>
-                                            </asp:DataPager>
-                                        </td>
+                                    <tr id="Tr3" runat="server">
+                                        <td id="Td2" runat="server" style="text-align: center; font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;"></td>
                                     </tr>
                                 </table>
                             </LayoutTemplate>
                             <SelectedItemTemplate>
                                 <tr style="background-color:#A99583; font-weight: bold;color: #FFFFFF;">
                                     <td>
-                                        <asp:Label ID="CustomerIDLabel" runat="server" Text='<%# Eval("CustomerID") %>' />
+                                        <asp:Label ID="EmpidLabel" runat="server" Text='<%# Eval("Empid") %>' />
                                     </td>
                                     <td>
                                         <asp:Label ID="NameLabel" runat="server" Text='<%# Eval("Name") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="VisitsLabel" runat="server" Text='<%# Eval("Visits") %>' />
+                                        <asp:Label ID="TotalLabel" runat="server" Text='<%# Eval("Total", "{0:c}")%>' />
                                     </td>
                                 </tr>
                             </SelectedItemTemplate>
@@ -214,17 +260,23 @@ form {
                 </tr>
               
                
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
-                            SelectCommand="SELECT SALESTICKET.CUSTID as CustomerID, (FNAME + ' ' + LNAME) as Name, COUNT(SALESTICKET.CUSTID) as Visits
-FROM SALESTICKET, CUSTOMERS
-WHERE SALESTICKET.CUSTID = CUSTOMERS.CUSTID
-GROUP BY SALESTICKET.CUSTID, FNAME, LNAME">
-
-                        </asp:SqlDataSource>
+                       
               
                
             </table>
-        
+         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT Tips.Empid, Employees.Fname + ' ' + Employees.Lname AS Name, SUM(Tips.TipsCollected) AS Total FROM Employees INNER JOIN Tips ON Employees.EmpID = Tips.Empid
+where tips.date between @start and @end
+ GROUP BY Tips.Empid, Employees.Fname, Employees.Lname
+">
+             <SelectParameters>
+                 <asp:ControlParameter ControlID="StartTextBox" Name="start" PropertyName="Text" />
+                 <asp:ControlParameter ControlID="EndTextBox" Name="end" PropertyName="Text" />
+             </SelectParameters>
+
+                        </asp:SqlDataSource>
+       
+                        <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajax:ToolkitScriptManager>
+               
     </form>
 </body>
 </html>
