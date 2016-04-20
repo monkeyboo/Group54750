@@ -44,14 +44,14 @@
          GridView1.DataBind()
      End Sub
 
-     Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
+    Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
-     End Sub
+    End Sub
 
-     Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
-         Session.RemoveAll()
-         Response.Redirect("login.aspx")
-     End Sub
+    Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
+        Session.RemoveAll()
+        Response.Redirect("login.aspx")
+    End Sub
     
     Protected Sub CustDetails_ItemUpdated(sender As Object, e As DetailsViewUpdatedEventArgs) Handles CustDetails.ItemUpdated
         'Indicate whether the update operation succeeded.
@@ -63,15 +63,19 @@
             lblError.Text = "Another user may have updated that item. " &
                "Please try again."
         Else
-            CustDetails.DataBind()
             lblError.Text = "Update Successful!"
          
         End If
+<<<<<<< HEAD:EmployeeCustomer.aspx
         Dim box As String
         box = ComboBox1.SelectedValue
         ComboBox1.Items.Clear()
         ComboBox1.DataBind()
         ComboBox1=box
+=======
+        ComboBox1.Items.Clear()
+        ComboBox1.DataBind()
+>>>>>>> 6a7b5bbcd238053a24598965eb51ff4bb6a7e37d:Customer.aspx
         
     End Sub
     
@@ -152,6 +156,7 @@
               AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource1" 
               DataTextField="name" DataValueField="custid" MaxLength="0" style="display: inline;" 
              AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
+         <br />
 </div>
 
 
@@ -161,7 +166,7 @@
                   <table id="tableErrorMessage2" style="width:100%;">
                       <tr>
                         <td>
-                            <asp:Label ID="lblError" runat="server" EnableViewState="False"
+                            <asp:Label ID="lblError" runat="server" Forecolor="maroon" EnableViewState="False"
                                 CssClass="error" Font-Bold="True"></asp:Label>
                         </td>
                         </tr>
@@ -548,8 +553,12 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
+<<<<<<< HEAD:EmployeeCustomer.aspx
             SelectCommand="SELECT (Fname + ' ' + Lname + ' ' + phone)as name, custid FROM Customers ORDER BY Fname ASC">
             
+=======
+            SelectCommand="SELECT (Fname + ' ' + Lname + ' ' + phone)as name FROM Customers ORDER BY Fname ASC">
+>>>>>>> 6a7b5bbcd238053a24598965eb51ff4bb6a7e37d:Customer.aspx
         </asp:SqlDataSource>
 
 <!--DataSource 2 For Both Details View (Customer Report and Insert)-->

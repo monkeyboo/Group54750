@@ -1,4 +1,3 @@
-
 ﻿<%@ Page Language="VB" AutoEventWireup="true" %>
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Data.SqlClient" %>
@@ -85,16 +84,16 @@
         <table id="table1" >
             <tr>
                 <td class="navButtons">                    
-                    <asp:Button ID="SearchButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Availability" Width="150px" OnClick="SearchButton_Click" CausesValidation="False" Font-Bold="True" />
+                    <asp:Button ID="SearchButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Search" Width="150px" OnClick="SearchButton_Click" CausesValidation="False" Font-Bold="True" />
                     <asp:Button ID="printButton0" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Print" Width="150px" onclientclick="javascript:window.print();" xmlns:asp="#unknown" CausesValidation="False" Font-Bold="True" />
                     <asp:Button ID="homeBT" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="60px" Text="Home" Width="150px" PostBackUrl="~/Default.aspx" CausesValidation="False" Font-Bold="True" />
                 </td>
             </tr>
             
          </table>
-
+<!--Search Controls-->
  <div id="combo">
-         <asp:Label ID="EntNameLabel" runat="server" Font-Size="Small" Text="Name" Font-Bold="True"></asp:Label>
+         <asp:Label ID="EntNameLabel" runat="server" Font-Size="Medium" Text="Name" Font-Bold="True"></asp:Label>
          <asp:ComboBox ID="ComboBox1" runat="server" AppendDataBoundItems="True" 
               AutoCompleteMode="SuggestAppend" DataSourceID="SqlDataSource4" 
               DataTextField="name" DataValueField="name" MaxLength="0" style="display: inline;" AutoPostBack="True" Width="200px" BackColor="#F3EDE7" ></asp:ComboBox>
@@ -108,7 +107,7 @@
                   <table id="tableErrorMessage2" style="width:100%;">
                       <tr>
                         <td>
-                            <asp:Label ID="lblError" runat="server" EnableViewState="False"
+                            <asp:Label ID="lblError" runat="server" Forecolor="maroon" EnableViewState="False"
                                 CssClass="error" Font-Bold="True"></asp:Label>
                         </td>
                         </tr>
@@ -153,7 +152,7 @@
                                 <tr>
                                     <td><table id="table3" style="width:100%;">
                                         <tr>
-                                            <td><asp:ListView ID="ListView1" runat="server" OnItemUpdated="ListView1_ItemUpdated" DataSourceID="SqlDataSource3" Visible="False" DataKeyNames="EmpID">
+                                            <td><asp:ListView ID="ListView1" runat="server" OnItemUpdated="ListView1_ItemUpdated" DataSourceID="SqlDataSource3" DataKeyNames="EmpID">
                                         <AlternatingItemTemplate>
                                             <tr style="background-color:#E6D9CC;">
                                                 <td>
@@ -198,11 +197,12 @@
                                                     </asp:DropDownList>
                                                 </td>
                                             </tr>
+
                                         </EditItemTemplate>
+
                                         <EmptyDataTemplate>
-                                            <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
+                                            <table id="Table2" runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
                                                 <tr>
-                                                    <td>No data was returned.</td>
                                                 </tr>
                                             </table>
                                         </EmptyDataTemplate>
@@ -300,9 +300,11 @@
 <!--DataSource 1 For DropDownList Control-->
 <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
-          <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Employees  ORDER BY Fname ASC"></asp:SqlDataSource>
+          <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
+              SelectCommand="SELECT (Fname + ' ' + Lname)as name FROM Employees  ORDER BY Fname ASC"></asp:SqlDataSource>
                                           
-          <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" SelectCommand="SELECT * FROM [Employees] WHERE (Fname + ' ' + Lname)= @fulllnamedropdown">
+          <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
+              SelectCommand="SELECT * FROM [Employees] WHERE (Fname + ' ' + Lname)= @fulllnamedropdown">
                  <SelectParameters>
                      <asp:ControlParameter ControlID="ComboBox1" Name="fulllnamedropdown" PropertyName="SelectedValue" Type="String" />
           </SelectParameters>
@@ -328,14 +330,10 @@
                   <asp:Parameter Name="Endtime" />
               </UpdateParameters>
           </asp:SqlDataSource>
+          <br />
           <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
               SelectCommand="SELECT * FROM [times]"></asp:SqlDataSource>
         <br />
-          <br />
        </form>
  </body>
 </html>
-
-
-        
-
