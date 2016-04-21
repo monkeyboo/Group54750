@@ -59,7 +59,7 @@
     Protected Sub CustDetails_ItemUpdated(sender As Object, e As DetailsViewUpdatedEventArgs) Handles CustDetails.ItemUpdated
         'Indicate whether the update operation succeeded.
         If e.Exception IsNot Nothing Then
-            lblError.Text = "You are not currently clocked in. You must clock in before you can clock out.  " &
+            lblError.Text = "A database error has occured. " &
                 e.ExceptionHandled = True
             e.KeepInEditMode = True
         ElseIf e.AffectedRows = 0 Then
@@ -76,12 +76,9 @@
     Protected Sub CustDetails0_ItemInserted(sender As Object, e As DetailsViewInsertedEventArgs) Handles CustDetails0.ItemInserted
         'Indicate whether the update operation succeeded.
         If e.Exception IsNot Nothing Then
-            lblError.Text = "You are not currently clocked in. You must clock in before you can clock out. " &
+            lblError.Text = "A database error has occured. " &
                 e.ExceptionHandled = True
             e.KeepInInsertMode = True
-        ElseIf e.AffectedRows = 0 Then
-            lblError.Text = "Another user may have updated that item. " &
-                "Please try again."
         Else
             lblError.Text = "Insert Successful!"
           

@@ -26,7 +26,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>Main Menu</title>
+    <title>Sales Report Menu</title>
     <link href="main.css" rel="stylesheet" type="text/css" />
     
 </head>
@@ -57,31 +57,24 @@
         <table align="center" class="mainTable">
             <tr>
                 <td >
-                    <asp:Button ID="CustomersButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Customers" Width="170px" PostBackUrl="~/Customer.aspx" Font-Bold="True" />
+                    <asp:Button ID="VendorsButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Detailed Sales" Width="170px" Font-Bold="True" />
                 </td>
                 <td>
-                    <asp:Button ID="AppointmentsButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Appointments" Width="170px" Font-Bold="True" />
+                    <asp:Button ID="PriceListButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Customer Ret." Width="170px" Font-Bold="True" OnClick="Button14_Click" PostBackUrl="~/CustomerRetention.aspx" />
                 </td>
                 <td>
-                    <asp:Button ID="ManagerFButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="My Details" Width="170px" Font-Bold="True" PostBackUrl="~/EmployeeCommissionReport.aspx" />
-                </td>
-                <td>
-                    <asp:Button ID="Button26" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Manager Functions" Width="170px" PostBackUrl="~/ManagerFunctions.aspx" Font-Bold="True" />
+                    <asp:Button ID="InventoryButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Unlisted Services" Width="170px" Font-Bold="True" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <asp:Button ID="SalesTicketButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Sales Ticket" Width="170px" Font-Bold="True" />
-                </td>
-                <td >
-                    <asp:Button ID="PriceListButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Price List" Width="170px" Font-Bold="True" OnClick="Button14_Click" />
+                    <asp:Button ID="MyDetailsButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="View Sales Ticket" Width="170px" Font-Bold="True" />
                 </td>
                 <td>
-                    <asp:Button ID="TimeClockButton0" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Clock In" Width="170px" Font-Bold="True" OnClick="Button21_Click" />
+                    <asp:Button ID="MyDetailsButton0" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Products Sold" Width="170px" Font-Bold="True" />
                 </td>
                 <td>
-                    <asp:Button ID="TimeClockButton" runat="server" BackColor="#A99583" BorderStyle="Outset" Height="100px" Text="Clock Out" Width="170px" Font-Bold="True" OnClick="Button21_Click" />
-                </td>
+                    &nbsp;</td>
             </tr>
           </table>
         </div>

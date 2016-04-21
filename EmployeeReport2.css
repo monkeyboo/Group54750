@@ -238,3 +238,18 @@ table {
     text-align: left;
    
 }
+/******************************************Commissions Page*******************/
+#CommFormview {
+    text-align: right;
+    margin-left: 390px;
+}
+#table19 {
+    width: 45%;
+    margin: auto;
+}
+/*End Commissions*/
+/*********************************************Manager Payroll Report***********************************************/
+#table18 {
+    width: 80%;
+    margin: auto;
+}

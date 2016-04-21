@@ -6,13 +6,26 @@
      <siteMapNode url="~/Appointments.aspx" title="Appointments" description="Appointments" />
      <siteMapNode url="~/SalesTicket.aspx" title="Sales Ticket" description="Sales Ticket" />
      <siteMapNode url="~/PriceList.aspx" title="Price List" description="Price List" />
-     <siteMapNode url="~/MyDetails.aspx" title="My Details" description="My Details" />
-      <siteMapNode url="~/ManagerFunctions.aspx" title="Manager Functions"  description="Manager Functions" >
+     <siteMapNode url="~/EmployeeCommissionReport.aspx" title="My Details" description="My Details" />
+     <siteMapNode url="~/ManagerFunctions.aspx" title="Manager Functions"  description="Manager Functions" >
       <siteMapNode url="~/Vendors.aspx" title="Vendors" description ="Vendor Details"/>
       <siteMapNode url="~/Orders.aspx" title="Orders" description="Order Details" />
       <siteMapNode url="~/Services.aspx" title="Services" description="Services and Products" />
-      <siteMapNode url="~/Payroll.aspx" title="Payroll" description="Payroll"/>
-      <siteMapNode url="~/SalesReport.aspx" title="Sales Reports" description ="Sales Report" />
+        <siteMapNode url="~/PayrollMenu.aspx" title="Payroll Menu" description ="Payroll Menu" >
+            <siteMapNode url="~/ManagerCommissionReport.aspx" title="Employee Commissions" description ="Employee Commissions" />
+            <siteMapNode url="~/DetailedPayrollReport.aspx" title="Payroll Reports" description ="Payroll Reports" />
+            <siteMapNode url="~/QuotaReport.aspx" title="Quotas" description ="Quotas" />
+            <siteMapNode url="~/TimesheetReports.aspx" title="Timesheets" description ="Timesheets" />
+            <siteMapNode url="~/UpdateTimesheet.aspx" title="Update Timesheet" description ="Update Timesheet" />
+            <siteMapNode url="~/TipsReport.aspx" title="Tips" description ="Tips" />
+        </siteMapNode>
+        <siteMapNode url="~/SalesReportsMenu.aspx" title="Sales Report Menu" description ="Sales Report Menu" >
+           <siteMapNode url="~/CustomerRetention.aspx" title="Customer Retention" description ="Customer Retention" />
+           <siteMapNode url="~/ViewSalesTicket.aspx" title="View Sales Ticket" description ="View Sales Ticket" />
+           <siteMapNode url="~/DetailedSalesReport.aspx" title="Detailed Sales Report" description ="Detailed Sales Report" />
+           <siteMapNode url="~/ProductsSold.aspx" title="Products Sold" description ="Products Sold" />
+           <siteMapNode url="~/UnlistedServices.aspx" title="Unlisted Services" description ="Unlisted Services" />
+        </siteMapNode>
       <siteMapNode url="~/Employee.aspx" title="Employees" description="Employee's Details">
         <siteMapNode url="~/Availability.aspx" title="Availability" description ="Availability Details" />
       </siteMapNode>

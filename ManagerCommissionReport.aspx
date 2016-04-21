@@ -1,33 +1,36 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="true" %>
 
-<%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" TagPrefix="ajax" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Data.SqlClient" %>
+<%@ Import Namespace="System.Configuration" %>
+<%@ Import Namespace="System.Web.Services" %>
+<%@ Import Namespace="System.Drawing.Printing" %>
+<%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" TagPrefix="asp" %>
 
 <!DOCTYPE html>
 <script runat="server">
-
-    Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
-
-        'Session.RemoveAll()
-        ' Response.Redirect("login.aspx")
-    End Sub
-
     Protected Sub Page_Load(sender As Object, e As EventArgs)
-        'If Session("user") IsNot "manager" Then
+        ' If Session("user") IsNot "employee" Then
         'Response.Redirect("login.aspx")
-     
-            
         'End If
     End Sub
 
 
+    Protected Sub ImageButton1_Click(sender As Object, e As ImageClickEventArgs)
+        Session.RemoveAll()
+        Response.Redirect("login.aspx")
+    End Sub
   
+    Protected Sub GridView1_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
 </script>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-    <script type="text/vbscript">
+<head id="Head1" runat="server">
+    <title>Manager Commission Report</title>
+    <link href="EmployeeReport2.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -147,31 +150,38 @@
 
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div class="container1">
+    <!--Focus cursor to textbox and button-->
+    <form id="form1" runat="server" defaultfocus="ComboBox1">
 
-            <div id="logo">
-                <asp:Image ID="Image1" runat="server" ImageUrl="~/twoRiversLogo.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </div>
-            <div id="logoutbutton">
-                <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" OnClick="ImageButton1_Click" />
-            </div>
-            <div id="title">
-                <br />
-                <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Verdana" Font-Size="Large" ForeColor="Black" Font-Bold="True" Font-Italic="False">
-                    <CurrentNodeStyle ForeColor="#E6D9CC" />
-                    <NodeStyle Font-Bold="True" ForeColor="#A99583" />
-                    <PathSeparatorStyle Font-Bold="True" ForeColor="#E6D9CC" />
-                    <RootNodeStyle Font-Bold="True" ForeColor="#7A695A" />
-                </asp:SiteMapPath>
-                <br />
-            </div>
+        <!--Page Header Logo-->
+        <div class="container1">
+           <div id="logo">
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/twoRiversLogo.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
 
+            <!--Logout Button-->
+         <div id="logoutbutton">
+            <asp:ImageButton ID="ImageButton1" runat="server" Height="50px" Width="50px" ImageUrl="~/logoutbutton1.fw.png" BorderStyle="Outset" OnClick="ImageButton1_Click" />
+        </div>
+
+            <!--SiteMap-->
+        <div id="title">
+            <br />
+            <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Verdana" Font-Size="Large" ForeColor="Black" Font-Bold="True" Font-Italic="False">
+                <CurrentNodeStyle ForeColor="#E6D9CC" />
+                <NodeStyle Font-Bold="True" ForeColor="#A99583" />
+                <PathSeparatorStyle Font-Bold="True" ForeColor="#E6D9CC" />
+                <RootNodeStyle Font-Bold="True" ForeColor="#7A695A" />
+            </asp:SiteMapPath>
+        <br />
+        </div>
+   </div> 
+     
+        <div id="main" class="container2">
 
         <table style="width: 96%; text-align: center;" id="report">
 
-            <tr>
+                <tr>
                 <td colspan="4">
 
                     <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Height="50px" Text="Manager Commission Report" Width="400px"></asp:Label>
@@ -203,21 +213,17 @@
                     <asp:TextBox ID="EndTextBox" runat="server" AutoPostBack="True" AutoComplete="false" />
                 </td>
 
-                <td>
-
-                    <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server"
-                        TargetControlID="EndTextBox" PopupButtonID="EndTextBox">
-                    </ajaxToolkit:CalendarExtender>
+                    <td>
+                                    <asp:Label ID="EntNameLabel" runat="server" Font-Size="X-Large" Text="Commission Reports" Font-Bold="True" Width="350px"></asp:Label>
                 </td>
+						</tr>
 
-            </tr>
-
-        </table>
-
+         </table>
+               
         <div id="listview1">
             <table style="margin: auto;">
-                <tr>
-                    <td>
+                              <tr>
+                                  <td> 
                         <asp:ListView ID="ListView2" runat="server" DataSourceID="SqlDataSource3">
                             <AlternatingItemTemplate>
                                 <tr style="background-color: #E6D9CC;">
@@ -229,15 +235,14 @@
                                     </td>
                                 </tr>
                             </AlternatingItemTemplate>
-
-                            <EmptyDataTemplate>
-                                <table runat="server" style="">
-                                    <tr>
-                                        <td>No data was returned.</td>
-                                    </tr>
-                                </table>
-                            </EmptyDataTemplate>
-
+                         
+                        <table id="table13" style="width: 100%;">
+                                      <tr>
+                                <td>
+                                    <asp:Label ID="Label1" runat="server" Text="Start Date" Font-Bold="True"></asp:Label>
+                                    <asp:TextBox ID="StartTextBox" runat="server" AutoComplete="false" AutoPostBack="false" BackColor="#F3EDE7" />
+                                    <asp:CalendarExtender ID="StartTextBox_CalendarExtender" runat="server" BehaviorID="StartTextBox_CalendarExtender" TargetControlID="StartTextBox" PopupPosition="BottomRight" />
+                          
                             <ItemTemplate>
                                 <tr style="background-color: #A99583; color: #000000;">
                                     <td>
@@ -245,8 +250,8 @@
                                     </td>
                                     <td>
                                         <asp:Label ID="TotalLabel" runat="server" Text='<%# Eval("Total", "{0:c}")%>' />
-                                    </td>
-                                </tr>
+                                      </td>
+                                  </tr>
                             </ItemTemplate>
                             <LayoutTemplate>
                                 <table runat="server">
@@ -259,13 +264,13 @@
                                                 </tr>
                                                 <tr id="itemPlaceholder" runat="server">
                                                 </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
+                                              </table>
+                                          </td>
+                                      </tr>
                                     <tr runat="server">
                                         <td runat="server" style="text-align: center; background-color: black; font-family: Verdana, Arial, Helvetica, sans-serif; color: #000000;"></td>
                                     </tr>
-                                </table>
+                                  </table>
                             </LayoutTemplate>
                             <SelectedItemTemplate>
                                 <tr style="background-color: #A99583; font-weight: bold; color: #FFFFFF;">
@@ -297,19 +302,20 @@
                                         <asp:Label ID="QtyLabel" runat="server" Text='<%# Eval("Qty") %>' />
                                     </td>
                                     <td>
-                                        <asp:Label ID="TotalLabel" runat="server" Text='<%# Eval("Total", "{0:c}")%>' />
-                                    </td>
-                                </tr>
-                            </AlternatingItemTemplate>
-
-                            <EmptyDataTemplate>
-                                <table runat="server" style="">
+                        <table id="table6" style="width: 100%;">
                                     <tr>
-                                        <td>No data was returned.</td>
-                                    </tr>
-                                </table>
-                            </EmptyDataTemplate>
-
+                                <td>
+                                    <asp:GridView ID="GridView2" runat="server" AllowPaging="True" AllowSorting="True"
+                                        AutoGenerateColumns="False" DataSourceID="SqlDataSource3"
+                                        Width="600px" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px"
+                                        CellPadding="4" ForeColor="Black" GridLines="Vertical" Font-Size="Small" PageSize="25" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                                        <AlternatingRowStyle BackColor="#A99583" />
+                                        <Columns>
+                                            <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="True" SortExpression="Name" />
+                                            <asp:TemplateField HeaderText="Total" SortExpression="Total">
+                                                <EditItemTemplate>
+                                                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("Total", "{0:c}")%>'></asp:Label>
+                                                </EditItemTemplate>
                             <ItemTemplate>
                                 <tr style="background-color: #A99583; color: #000000;">
                                     <td>
@@ -384,30 +390,26 @@
                                     <div>
                                         <asp:Label ID="Label4" runat="server" Style="font-weight: 700" Text="Total Commission Earned"></asp:Label>
                                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("Total", "{0:c}")%>' ReadOnly="true"></asp:TextBox>
+      
+        
+    </div>
 
-
-                                    </div>
-                                </ItemTemplate>
-                            </asp:FormView>
-                        </div>
-
-                    </td>
-
+                                
                 </tr>
             </table>
             <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>"
                 SelectCommand="
 
-                                                    SELECT        
-                                                    Employees.Fname + ' ' + Employees.Lname AS Name, 
 
-                                                    sum(  (SalesTicketDetails.UnitPrice*(commissionrate/100)) * SalesTicketDetails.qty) AS Total
-                                                    FROM            Employees INNER JOIN
-                                                                                SalesTicket ON Employees.EmpID = SalesTicket.EmpID INNER JOIN
-                                                                                SalesTicketDetails ON SalesTicket.ticketID = SalesTicketDetails.ticketID INNER JOIN
-                                                                                Items ON SalesTicketDetails.itemID = Items.itemID
-                                                    where salesticket.date between @state and @end
-                                                    group by fname, lname
+        <!--DataSource 3 For GridView -->
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:4750group5ConnectionString %>" 
+            SelectCommand="SELECT Employees.Fname + ' ' + Employees.Lname AS Name, sum(  (SalesTicketDetails.UnitPrice*(commissionrate/100)) * SalesTicketDetails.qty) AS Total
+                         FROM Employees INNER JOIN
+                         SalesTicket ON Employees.EmpID = SalesTicket.EmpID INNER JOIN
+                         SalesTicketDetails ON SalesTicket.ticketID = SalesTicketDetails.ticketID INNER JOIN
+                         Items ON SalesTicketDetails.itemID = Items.itemID
+where salesticket.date between @state and @end
+group by fname, lname
                                                     order by employees.lname
 
                                                     ">
@@ -449,17 +451,19 @@ WHERE        (Employees.EmpID = @empid) and  salesticket.date between @state and
 WHERE        (Employees.EmpID = @empid) and  salesticket.date between @state and @end
 ">
             <SelectParameters>
-                <asp:SessionParameter Name="empid" SessionField="id" />
                 <asp:ControlParameter ControlID="StartTextBox" Name="state" PropertyName="Text" />
                 <asp:ControlParameter ControlID="EndTextBox" Name="end" PropertyName="Text" />
             </SelectParameters>
         </asp:SqlDataSource>
-
+               
 
         <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajax:ToolkitScriptManager>
 
 
 
     </form>
-</body>
+    </body>
 </html>
+
+
+
